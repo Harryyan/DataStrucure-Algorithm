@@ -19,7 +19,7 @@ def firstNonRepeated(str):
 
 
 start_time = datetime.datetime.now()
-result = firstNonRepeated("我们我们😺")
+result = firstNonRepeated("😂😂😊😊😜😜😙😙😝😝😺😝🤑😄🤣☺️😋😌😌🤓")
 end_time = datetime.datetime.now()
 
 time_diff = (end_time - start_time).total_seconds() * 1000
