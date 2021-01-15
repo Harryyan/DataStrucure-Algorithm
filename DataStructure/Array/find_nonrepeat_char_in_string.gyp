@@ -1,10 +1,13 @@
 import datetime
 
+# A hash table may be a better choice when str and remove are short or characters
+# have many possible values (for example, Unicode strings).
+
 
 def firstNonRepeated(str):
     charHash = {}
 
-    # Build hashmap
+    # Build hashmapg
     for char in str:
         if char in charHash:
             charHash[char] += 1
