@@ -4,6 +4,7 @@ import datetime
 def firstNonRepeated(str):
     charHash = {}
 
+    # Build hashmap
     for char in str:
         if char in charHash:
             charHash[char] += 1
