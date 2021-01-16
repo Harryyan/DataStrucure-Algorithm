@@ -1,5 +1,11 @@
 import datetime
 
+# PROBLEM:
+# Write an efficient function to find the first nonrepeated character in a string.
+# For instance, the first nonrepeated character in “total” is ‘o’ and the first nonrepeated
+# character in “teeter” is ‘r’. Discuss the efficiency of your algorithm.
+
+# Solution:
 # A hash table may be a better choice when str and remove are short or characters
 # have many possible values (for example, Unicode strings).
 
