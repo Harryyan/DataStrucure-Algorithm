@@ -1,4 +1,5 @@
 # PROBLEM:
+
 # Write an efficient function that deletes characters from a
 # mutable ASCII string. Your function should take two arguments, str and remove.
 # Any character existing in remove must be deleted from str. For example, given
