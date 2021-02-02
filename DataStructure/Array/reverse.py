@@ -13,7 +13,6 @@ print(id(str))
 print(id(str2))
 print(" ".join(str2))
 
-
 # C Implementation
 
 # void wcReverseString( wchar_t str[], int start, int end ){
