@@ -7,6 +7,7 @@ public class StrToInt {
         int len = str.length();
 
         if (len > 10) {
+            System.out.println("Out of Scope!");
             return 0;
         }
 
@@ -28,7 +29,7 @@ public class StrToInt {
     }
 
     public static void main(String[] args) {
-        int result = StrToInt.strToInt("321");
+        int result = StrToInt.strToInt("32345353453453451");
 
         System.out.println(result);
     }
