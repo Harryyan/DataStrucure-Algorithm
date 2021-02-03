@@ -1,9 +1,14 @@
 public class StrToInt {
 
+    // Assume int is 4 bytes
     public static int strToInt(String str) {
         int i = 0, num = 0;
         boolean isNeg = false;
         int len = str.length();
+
+        if (len > 10) {
+            return 0;
+        }
 
         // 判断是否为signed int
         if (str.charAt(0) == '-') {
