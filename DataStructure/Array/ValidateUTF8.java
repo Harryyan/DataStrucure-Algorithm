@@ -5,12 +5,13 @@ import java.nio.charset.CharsetEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 
-// PROBLEM A valid UTF-8 string may contain only the following four bit
-// patterns:
+// PROBLEM A valid UTF-8 string may contain only the following four bit patterns:
+
 // 0xxxxxxx
 // 110xxxxx 10xxxxxx
 // 1110xxxx 10xxxxxx 10xxxxxx
 // 11110xxx 10xxxxxx 10xxxxxx 10xxxxxx
+
 // Write a function to determine whether a string meets this necessary (but not
 // suf- ficient) criterion for UTF-8 validity.
 
