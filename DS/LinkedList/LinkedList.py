@@ -1,7 +1,7 @@
 from Node import Node
 
 
-class OneWayLinkedList:
+class SingleLinkedList:
     def __init__(self):
         self._head = None
 
@@ -13,6 +13,12 @@ class OneWayLinkedList:
         node = Node(value)
         node.next = self._head
         self._head = node
+
+    def head(self):
+        return self._head
+
+    def set_head(self, value):
+        self._head = value
 
     # 向链表尾部添加元素
     def append(self, value):
@@ -75,6 +81,21 @@ class OneWayLinkedList:
             # 指针下移
             cur = cur.next
 
+    def items_itself(self):
+        # 获取head指针
+        cur = self._head
+        # 循环遍历
+        while cur is not None:
+            yield cur
+            # 指针下移
+            cur = cur.next
+
+    def find_itself(self, value):
+        for item in self.items_itself():
+            if item.value == value:
+                print(id(item))
+                return item
+
     def find(self, value):
         return value in self.items()
 
@@ -88,22 +109,3 @@ class OneWayLinkedList:
             # 指针下移
             cur = cur.next
         return count
-
-
-if __name__ == '__main__':
-    link_list = OneWayLinkedList()
-    # 向链表尾部添加数据
-    for i in range(5):
-        link_list.append(i)
-    # 向头部添加数据
-    link_list.add(6)
-    # 遍历链表数据
-    for i in link_list.items():
-        print(i, end='\t')
-    # 链表数据插入数据
-    link_list.insert(3, 9)
-    print('\n', list(link_list.items()))
-    # 删除链表数据
-    link_list.remove(0)
-    # 查找链表数据
-    print(link_list.find(40))
