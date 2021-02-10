@@ -1,4 +1,4 @@
-from LinkedList import SingleLinkedList
+from SingleLinkedList import SingleLinkedList
 from Node import Node
 
 # 输入一个单向链表，输出逆序反转后的链表;
@@ -30,6 +30,17 @@ def reverseByRecursion(node: Node, linked_list: SingleLinkedList):
     print(id(temp))
 
     return temp.next
+
+
+def reverse_by_recursion(head: Node):
+    if head is None or head.next == None:
+        return head
+
+    new_head = reverse_by_recursion(head.next)
+    head.next.next = head
+    head.next = None
+
+    return new_head
 
 
 def reverse(linked_list: SingleLinkedList):
@@ -72,7 +83,7 @@ if __name__ == '__main__':
     # reverse(link_list)
     print_list(link_list)
 
-    new_head = reverseByLoop(link_list.head())
+    new_head = reverse_by_recursion(link_list.head())
     link_list.set_head(new_head)
 
     print_list(link_list)
