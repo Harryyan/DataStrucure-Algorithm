@@ -27,3 +27,9 @@ class DoubleLinkedList:
                 cur = cur.next
             node.prev = cur
             cur.next = node
+
+    def items(self):
+        cur = self._head
+        while cur is not None:
+            yield cur.value
+            cur = cur.next
