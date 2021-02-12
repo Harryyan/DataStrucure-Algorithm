@@ -8,9 +8,22 @@ class DoubleLinkedList:
     def add(self, item):
         node = Node(item)
         if self.is_empty():
-            # 头部结点指针修改为新结点
             self._head = node
         else:
             node.next = self._head
             self._head.prev = node
             self._head = node
+
+    def is_empty(self):
+        return self._head is None
+
+    def append(self, item):
+        node = Node(item)
+        if self.is_empty():
+            self._head = node
+        else:
+            cur = self._head
+            while cur.next is not None:
+                cur = cur.next
+            node.prev = cur
+            cur.next = node
