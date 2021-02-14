@@ -60,6 +60,22 @@ def reverse(linked_list: SingleLinkedList):
     for i in link_list.items():
         print(i, end='\t')
 
+# 给定头结点和待删除节点, 在O(1)时间删除
+
+
+def deleteNode(node, head):
+    if node == head:
+        head = head.next
+        node = None
+        return head
+    elif node.next == None:
+        node = None
+    else:
+        temp = node.next
+        node.value = temp.value
+        node.next = temp.next
+        temp = None
+
 
 def print_list(link_list):
     # 遍历链表数据
@@ -85,5 +101,14 @@ if __name__ == '__main__':
 
     new_head = reverse_by_recursion(link_list.head())
     link_list.set_head(new_head)
+
+    print_list(link_list)
+
+    head = link_list.head()
+    node = link_list.get_node(3)
+    result = deleteNode(node, head)
+
+    if result is not None:
+        link_list.set_head(result)
 
     print_list(link_list)

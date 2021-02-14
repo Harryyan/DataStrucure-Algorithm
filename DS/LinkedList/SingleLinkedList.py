@@ -49,6 +49,16 @@ class SingleLinkedList:
             node.next = cur.next
             cur.next = node
 
+    def get_node(self, index):
+        i = 0
+        cur = self._head
+
+        while cur != None and i < index:
+            cur = cur.next
+            i += 1
+
+        return cur
+
     def remove(self, value):
         cur = self._head
         pre = None
