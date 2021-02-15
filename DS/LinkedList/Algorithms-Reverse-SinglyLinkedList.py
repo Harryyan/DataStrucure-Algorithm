@@ -105,7 +105,7 @@ if __name__ == '__main__':
     print_list(link_list)
 
     head = link_list.head()
-    node = link_list.get_node(3)
+    node = link_list.get_node(0)
     result = deleteNode(node, head)
 
     if result is not None:
