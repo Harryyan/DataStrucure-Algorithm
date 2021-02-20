@@ -1,26 +1,29 @@
 class Stack:
     def __init__(self):
-        self.content = []
+        self.__content = list()
+        self.__length = 0
 
     def push(self, value):
-        self.content.insert(0, value)
+        self.__content.append(value)
+        self.__length += 1
 
     def pop(self):
         result = None
-        if len(self.content) > 0:
-            result = self.content[0]
-            self.content.pop(0)
+        if self.__length > 0:
+            result = self.__content[self.__length - 1]
+            self.__content.pop()
 
+        self.__length -= 1
         return result
 
     def peek(self):
-        if len(self.content) > 0:
-            return self.content[0]
+        if self.__length > 0:
+            return self.__content[self.__length - 1]
         else:
             return None
 
     def print(self):
-        for item in self.content:
+        for item in reversed(self.__content):
             print(item, end=" ")
         print("\n")
 
