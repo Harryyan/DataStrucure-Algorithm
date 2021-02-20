@@ -13,13 +13,16 @@ class Queue:
         #self.__content.insert(0, value)
 
     def dequeue(self):
+        if self.is_empty():
+            return None
+
         self.__content.pop(0)
         # self.__content.pop()
 
     def size(self):
         return len(self.__content)
 
-    def is_empyh(self):
+    def is_empty(self):
         return not self.__content
 
     def print(self):
