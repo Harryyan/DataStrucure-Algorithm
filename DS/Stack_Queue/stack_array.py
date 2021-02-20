@@ -1,26 +1,28 @@
 class Stack:
+    # 需要考虑时间复杂度，对于顺序表, 操作尾部是O(1)的复杂度
+    # 对于链表，则要操作头部
+    # 对于 python: 0, {}, [] 返回 false
     def __init__(self):
         self.__content = list()
-        self.__length = 0
 
     def push(self, value):
         self.__content.append(value)
-        self.__length += 1
 
     def pop(self):
         result = None
-        if self.__length > 0:
-            result = self.__content[self.__length - 1]
-            self.__content.pop()
+        if self.__content:
+            restul = self.__content.pop()
 
-        self.__length -= 1
         return result
 
     def peek(self):
-        if self.__length > 0:
-            return self.__content[self.__length - 1]
+        if self.__content:
+            return self.__content[-1]
         else:
             return None
+
+    def is_empty(self):
+        return not self.__content
 
     def print(self):
         for item in reversed(self.__content):
@@ -42,4 +44,4 @@ if __name__ == "__main__":
     stack.pop()
     stack.pop()
 
-    stack.print()
+    print(stack.peek())
