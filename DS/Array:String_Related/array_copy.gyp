@@ -26,19 +26,28 @@ list4.insert(0, "b")
 list4[-1].append("a")
 print(list4)
 print(list2)
+print(id(list2[0]))
+print(id(list4[0]))
 
 print("深拷贝 - - 完全分配新内存")
 
 # 深拷贝 - - 完全分配新内存 (但是内部元素一开始还是共享地址)
 
-list5 = [1, 2, 3, [7, 8, 9]]
+list5 = ["21", "23112", "ssdafdsf"]
 list6 = copy.deepcopy(list5)
 
 print(id(list5))
 print(id(list6))
 
-print(id(list5[0]))
-print(id(list6[0]))
+# print(id(list5[2]))
+# print(id(list6[2]))
+for ele in list5:
+    print(id(ele), end=" ")
+print("\n")
+
+for ele in list6:
+    print(id(ele), end=" ")
+print("\n")
 
 list6[-1].append("a")
 list6.insert(0, "b")
