@@ -13,12 +13,14 @@ import datetime
 def firstNonRepeated(str):
     charHash = {}
 
-    # Build hashmapg
+    # Build hashmap
     for char in str:
         if char in charHash:
             charHash[char] += 1
         else:
             charHash[char] = 1
+
+    print(charHash)
 
     # Find the 1st non-repeat character
     for key, value in charHash.items():
