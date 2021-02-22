@@ -29,7 +29,7 @@ public class StrToInt {
     }
 
     public static void main(String[] args) {
-        int result = StrToInt.strToInt("32345353453453451");
+        int result = StrToInt.strToInt("888888");
 
         System.out.println(result);
     }
