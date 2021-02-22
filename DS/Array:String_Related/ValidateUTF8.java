@@ -13,7 +13,7 @@ import java.util.Arrays;
 // 11110xxx 10xxxxxx 10xxxxxx 10xxxxxx
 
 // Write a function to determine whether a string meets this necessary (but not
-// suf- ficient) criterion for UTF-8 validity.
+// sufficient) criterion for UTF-8 validity.
 
 public class ValidateUTF8 {
     public static void main(String[] args) {
@@ -33,8 +33,10 @@ public class ValidateUTF8 {
         byte[] validUTF8Bytes1 = new byte[] { (byte) 0b11001111, (byte) 0b10111111 };
         final String converted = new String(validUTF8Bytes1, StandardCharsets.UTF_8);
         final byte[] outputBytes = converted.getBytes(StandardCharsets.UTF_8);
+        String myString = "\u0048\u0065\u006C\u006C\u006F World";
 
         System.out.println("#############");
+        System.out.println(myString);
         System.out.println(Arrays.equals(validUTF8Bytes1, outputBytes));
 
         // try {
