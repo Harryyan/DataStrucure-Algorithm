@@ -1,10 +1,9 @@
 def sort_bubble(items):
     length = len(items) - 1
     for i in range(0, length):
-        for j in range(0, length):
+        for j in range(0, length - i):
             if items[j] > items[j+1]:
                 items[j], items[j+1] = items[j+1], items[j]
-        length -= 1
 
     return items
 
