@@ -1,3 +1,5 @@
+# 不稳定排序 （考虑每次寻找最大值）
+
 def selection_sort(items):
     for i in range(0, len(items)):
         temp = i

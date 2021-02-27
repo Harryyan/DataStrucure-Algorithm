@@ -1,3 +1,4 @@
+# 稳定的排序算法
 def sort_bubble(items):
     length = len(items) - 1
     for i in range(0, length):
