@@ -5,6 +5,8 @@ def insertion_sort(items):
             if items[temp] < items[j]:
                 items[temp], items[j] = items[j], items[temp]
                 temp = j
+            else:
+                continue
     return items
 
 
@@ -15,6 +17,8 @@ def insertion_sort_1(items):
                 temp = items[i]
                 items.pop(i)
                 items.insert(j, temp)
+            else:
+                continue
     return items
 
 
