@@ -4,11 +4,9 @@ def sort_bubble(items):
         for j in range(0, length - i):
             if items[j] > items[j+1]:
                 items[j], items[j+1] = items[j+1], items[j]
-
     return items
 
 
-items = [4, 6, 1, 33, 88, 0, -4, 90]
-
+items = [88, 83, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
 
 print(sort_bubble(items))
