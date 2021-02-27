@@ -9,6 +9,7 @@ def sort_bubble(items):
     return items
 
 
-items = [4, 6, 1, 33, 88, 0]
+items = [4, 6, 1, 33, 88, 0, -4, 90]
+
 
 print(sort_bubble(items))
