@@ -1,10 +1,11 @@
 def insertion_sort(items):
     for i in range(1, len(items)):
-        for j in range(0, i):
-            if items[i] < items[j]:
-                temp = items[i]
-                items.pop(i)
-                items.insert(j, temp)
+        temp = i
+        for j in range(i - 1, -1, -1):
+            if items[temp] < items[j]:
+                items[temp], items[j] = items[j], items[temp]
+                temp = j
+            print(items)
     return items
 
 
