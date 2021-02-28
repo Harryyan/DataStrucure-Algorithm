@@ -15,3 +15,9 @@ def selection_sort(items):
 items = [88, 83, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
 
 print(selection_sort(items))
+
+# 最好情况: O(n²)
+# 最坏情况: O（n²）
+# 平均情况: O(n²)
+# 稳定性: 不稳定
+# 辅助空间: O(1)
