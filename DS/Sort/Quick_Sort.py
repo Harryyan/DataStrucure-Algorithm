@@ -15,22 +15,22 @@ def quick_sort(items, start, end):
                     j -= 1
 
             if i == j:
-                print(i)
                 items.insert(i, base)
                 items.pop(start)
-
-                print("here")
-
                 if items[i] < items[i - 1]:
                     items[i], items[i - 1] = items[i - 1], items[i]
 
-        print(items)
         quick_sort(items, start, i)
         quick_sort(items, i, end - 1)
 
 
 items = [9, 8, 7, 6, 5, 4]
-#items2 = [26, 45, 44, 6, 9, 54, 93]
+items2 = [26, 45, 44, 6, 9, 54, 93]
 
-quick_sort(items, 0, len(items))
-print(items)
+quick_sort(items2, 0, len(items2))
+
+# 最好情况: O(nlogn)
+# 最坏情况: O（n²）
+# 平均情况: O(nlogn)
+# 稳定性: 不稳定
+# 辅助空间: O(logn) - O(n)
