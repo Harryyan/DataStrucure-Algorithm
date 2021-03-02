@@ -24,10 +24,34 @@ def quick_sort(items, start, end):
         quick_sort(items, i, end - 1)
 
 
+def quick_sort2(alist, first, last):
+    if first > last:
+        return
+
+    mid_value = alist[first]
+    low = first
+    high = last
+
+    while low < high:
+        while low < high and alist[high] >= mid_value:
+            high -= 1
+        alist[low] = alist[high]
+
+        while low < high and alist[low] < mid_value:
+            low += 1
+        alist[high] = alist[low]
+
+    alist[low] = mid_value
+    quick_sort2(alist, first, low - 1)
+    quick_sort2(alist, low + 1, last)
+
+
 items = [9, 8, 7, 6, 5, 4]
 items2 = [26, 45, 44, 6, 9, 54, 93]
 
-quick_sort(items2, 0, len(items2))
+quick_sort2(items2, 0, len(items2) - 1)
+
+print(items2)
 
 # 最好情况: O(nlogn)
 # 最坏情况: O（n²）
