@@ -15,7 +15,6 @@ def quick_sort(items, start, end):
                     j -= 1
 
             if i == j:
-
                 items.insert(i, base)
                 items.pop(start)
                 if items[i] < items[i - 1]:
