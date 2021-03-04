@@ -18,20 +18,6 @@ def reverseByLoop(node: Node):
     return pre
 
 
-def reverseByRecursion(node: Node, linked_list: SingleLinkedList):
-    # 停止条件
-    if node is None or node.next == None:
-        linked_list.set_head(node)
-        return node
-
-    temp = reverseByRecursion(node.next, linked_list)
-    temp.next = node
-
-    print(id(temp))
-
-    return temp.next
-
-
 def reverse_by_recursion(head: Node):
     if head is None or head.next == None:
         return head
