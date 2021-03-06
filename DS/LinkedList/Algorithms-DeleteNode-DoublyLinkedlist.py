@@ -2,6 +2,16 @@ from DoubleLinkedList import DoubleLinkedList
 from Node import Node
 
 
+def deleteNode_singleList(node):
+    if node.next == None:
+        node = None
+        return
+    temp = node.next
+    node.value = temp.value
+    node.next = temp.next
+    temp = None
+
+
 def deleteNode(node: Node, head: Node):
     # head
     if node.pre == None:
