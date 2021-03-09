@@ -5,6 +5,9 @@ class BinaryTree:
     def __init__(self):
         self.root = None
 
+    def breadth_iterate(self):
+        pass
+
     def add(self, item):
         node = Node(item)
         if self.root is None:
