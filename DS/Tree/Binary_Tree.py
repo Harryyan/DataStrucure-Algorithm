@@ -25,6 +25,8 @@ class BinaryTree:
 
     def depth_iteration_pre(self, node):
         '''深度-先序遍历'''
+        if node is None:
+            return
         if node.left is None and node.right is None:
             return node
 
@@ -38,6 +40,10 @@ class BinaryTree:
 
         if right is not None:
             print(right.element)
+
+    def depth_iteration_middle(self, node):
+
+        pass
 
     def add(self, item):
         node = Node(item)
@@ -73,6 +79,7 @@ tree.add(4)
 tree.add(5)
 tree.add(6)
 tree.add(7)
+tree.add(8)
 
 # tree.breadth_iterate()
 tree.depth_iteration_pre(tree.root)
