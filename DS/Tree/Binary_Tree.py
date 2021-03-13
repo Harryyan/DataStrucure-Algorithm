@@ -15,7 +15,7 @@ class BinaryTree:
         while queue:
             node = queue.pop(0)
 
-            print(node.element)
+            print(node.element, end=" ")
 
             if node.left is not None:
                 queue.append(node.left)
@@ -28,7 +28,7 @@ class BinaryTree:
         if node is None:
             return
 
-        print(node.element)
+        print(node.element, end=" ")
 
         left = self.depth_iteration_pre(node.left)
         right = self.depth_iteration_pre(node.right)
@@ -39,7 +39,7 @@ class BinaryTree:
             return
 
         left = self.depth_iteration_middle(node.left)
-        print(node.element)
+        print(node.element, end=" ")
         right = self.depth_iteration_middle(node.right)
 
     def depth_iteration_post(self, node):
@@ -49,7 +49,7 @@ class BinaryTree:
         left = self.depth_iteration_post(node.left)
         right = self.depth_iteration_post(node.right)
 
-        print(node.element)
+        print(node.element, end=" ")
 
     def add(self, item):
         node = Node(item)
