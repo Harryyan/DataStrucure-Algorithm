@@ -5,19 +5,19 @@
 
 def find_missing_number(numbers):
     start = 0
-    end = len(numbers) - 1
+    end = len(numbers)
 
-    while start <= end:
+    while start < end:
         m = (start + end) // 2
-        if numbers[m] != m:
-            return m
-        else:
+        if numbers[m] == m:
             start += 1
+        else:
+            end = m
 
-    return 0
+    return start
 
 
-numbers = [1]
+numbers = [0, 2, 3]
 result = find_missing_number(numbers)
 
 print(result, end=" ")
