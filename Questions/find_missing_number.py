@@ -14,10 +14,10 @@ def find_missing_number(numbers):
         else:
             start += 1
 
-    return None
+    return 0
 
 
-numbers = [0, 1, 2, 3, 4, 5, 6, 8]
+numbers = [1]
 result = find_missing_number(numbers)
 
 print(result, end=" ")
