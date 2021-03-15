@@ -10,7 +10,7 @@ def find_missing_number(numbers):
     while start < end:
         m = (start + end) // 2
         if numbers[m] == m:
-            start += 1
+            start = m + 1
         else:
             end = m
 
