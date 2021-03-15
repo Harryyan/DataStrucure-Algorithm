@@ -11,28 +11,24 @@ def max_area(items):
 
     while start < end:
         height = 0
+        interval = end - start
 
-        move_end = False
         if items[start] > items[end]:
             height = items[end]
-            move_end = True
+            end -= 1
         else:
             height = items[start]
+            start += 1
 
-        temp = (end - start) * height
+        temp = interval * height
 
         if temp > area:
             area = temp
 
-        if move_end:
-            end -= 1
-        else:
-            start += 1
-
     return area
 
 
-items = [1, 2, 1]
+items = [1, 8, 6, 2, 5, 4, 8, 3, 7]
 result = max_area(items)
 
 print(result)

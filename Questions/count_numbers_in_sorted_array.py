@@ -1,47 +1,24 @@
 # Q2:
 # 统计一个数字在排序数组中出现的次数
 
-import time
-
-
 def count_numbers_in_sorted_array(items, target):
-    low_index = find_lower(items, target)
-    high_index = find_higher(items, target)
+    left = 0
+    right = len(items) - 1
 
-    return high_index - low_index
+    while left <= right:
+        mid = (left + right) // 2
 
-
-def find_lower(items, target):
-    start = 0
-    end = len(items) - 1
-
-    while start <= end:
-        m = (start + end) // 2
-        if items[m] < target:
-            start += 1
+        if items[mid] <= target:
+            left = mid + 1
         else:
-            end = m - 1
+            right = mid - 1
 
-    return end
-
-
-def find_higher(items, target):
-    start = 0
-    end = len(items) - 1
-
-    while start <= end:
-        m = (start + end) // 2
-
-        if items[m] <= target:
-            start += 1
-        else:
-            end = m - 1
-
-    return end
+    return left
 
 
-target = 8
-items = [1, 2, 3, 4, 4, 5, 5, 6, 6, 6, 7, 8, 8, 8, 10]
+target = 4
+items = [1, 3, 3, 3, 4]
 result = count_numbers_in_sorted_array(items, target)
+result1 = count_numbers_in_sorted_array(items, target - 1)
 
-print(result)
+print(result - result1)

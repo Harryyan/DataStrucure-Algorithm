@@ -109,6 +109,38 @@ def findFirstInterceptNode(list1: SingleLinkedList, list2: SingleLinkedList):
 
         return p1
 
+# 题目5:
+# 输入两个递增排序的链表，合并这两个链表并使新链表中的节点仍然是递增排序的。
+
+
+def mergeTwoLists(self, l1: Node, l2: Node) -> Node:
+    fakeHead = Node(0)
+    cursor = fakeHead
+
+    if l1 is None:
+        return l2
+
+    if l2 is None:
+        return l1
+
+    while l1 and l2:
+        if l1.value < l2.value:
+            cursor.next = l1
+            l1 = l1.next
+        else:
+            cursor.next = l2
+            l2 = l2.next
+
+        cursor = cursor.next
+
+        if l1 is None:
+            cursor.next = l2
+
+        if l2 is None:
+            cursor.next = l1
+
+    return fakeHead.next
+
 
 if __name__ == "__main__":
     result = isCircleLinkedList()
