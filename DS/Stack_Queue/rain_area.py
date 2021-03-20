@@ -1,3 +1,4 @@
+# 计算每行面积
 def trap(height):
     """
     :type height: List[int]
