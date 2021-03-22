@@ -23,3 +23,7 @@ class Solution:
 
 solution = Solution()
 print(solution.climbStairs(45))
+
+
+# 还可以演化成 跳 1 ... n阶台阶
+# 结果是 2的n-1次方
