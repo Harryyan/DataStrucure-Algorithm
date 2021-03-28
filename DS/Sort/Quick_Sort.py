@@ -23,6 +23,8 @@ def quick_sort(items, start, end):
         quick_sort(items, start, i)
         quick_sort(items, i, end - 1)
 
+# 原地排序算法: 空间复杂度 O(1)
+
 
 def quick_sort2_better(alist, first, last):
     if first > last:
