@@ -48,10 +48,43 @@ def quick_sort2_better(alist, first, last):
     quick_sort2_better(alist, low + 1, last)
 
 
+# 查找第K大元素
+def quick_sort_search_kth(alist, first, last, k):
+    if k > len(alist):
+        return
+
+    if first > last:
+        return
+
+    mid_value = alist[first]
+    low = first
+    high = last
+
+    while low < high:
+        while low < high and alist[high] >= mid_value:
+            high -= 1
+        alist[low] = alist[high]
+
+        while low < high and alist[low] < mid_value:
+            low += 1
+        alist[high] = alist[low]
+
+    alist[low] = mid_value
+
+    if low + 1 == k:
+        print(alist[low])
+        return
+    elif low + 1 < k:
+        quick_sort_search_kth(alist, low + 1, last, k)
+    else:
+        quick_sort_search_kth(alist, first, low - 1, k)
+
+
 items = [9, 8, 7, 6, 5, 4]
 items2 = [26, 45, 44, 6, 9, 54, 93]
 
 quick_sort2_better(items2, 0, len(items2) - 1)
+quick_sort_search_kth(items2, 0, len(items2) - 1, 6)
 
 print(items2)
 
@@ -60,3 +93,5 @@ print(items2)
 # 平均情况: O(nlogn)
 # 稳定性: 不稳定
 # 辅助空间: O(logn) - O(n)
+
+# 实现原地排序，解决了归并排序占用太多内存的问题
