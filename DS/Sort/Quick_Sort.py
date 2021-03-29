@@ -23,8 +23,6 @@ def quick_sort(items, start, end):
         quick_sort(items, start, i)
         quick_sort(items, i, end - 1)
 
-# 原地排序算法: 空间复杂度 O(1)
-
 
 def quick_sort2_better(alist, first, last):
     if first > last:
@@ -95,8 +93,6 @@ print(items2)
 # 辅助空间: O(logn) - O(n)
 
 # 最好情况：每次左右都是均匀划分，递归树的深度为：logn，其空间复杂度也就为 O(logn)，
-
 # 最坏情况：每次只能排除一个元素，要递归剩下n-1个元素，如：[1, 2, 3, 4, 5]，或[5, 4, 3, 2, 1]
-
-
+# 快排本身是原地排序算法，但是递归耗费时间多，是log(n) - 最好情况；函数返回后释放内存
 # 实现原地排序，解决了归并排序占用太多内存的问题
