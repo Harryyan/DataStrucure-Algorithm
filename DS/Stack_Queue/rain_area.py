@@ -10,7 +10,6 @@ def trap(height):
     res = 0
 
     for i in range(len(height)):
-
         # 新比较的元素比栈顶元素大 ---> 栈顶元素的右边界已找到，
         # 又因为我们维护了一个递减栈，栈顶下面的元素高度也大于他，即栈顶处形成凹陷，可计算面积
         while stack and height[i] > height[stack[-1]]:
