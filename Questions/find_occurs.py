@@ -1,24 +1,15 @@
 # leetcode 39
 
-def majorityElement(list):
-    half = len(list) // 2
-    hash_table = {}
-    i = 0
+def majorityElement(nums):
+    if not nums:
+        return None
 
-    for item in list:
-        if item in hash_table:
-            hash_table[item] += 1
-        else:
-            hash_table[item] = 1
+    nums.sort()
 
-    for key in hash_table:
-        if hash_table[key] > half:
-            return key
-
-    return list[len(list) - 1]
+    return nums[len(nums) // 2]
 
 
-list = [1, 2, 3, 3, 3, 3, 3, 8]
+list = [1, 2, 3, 4, 5, 6]
 result = majorityElement(list)
 
 print(result)
