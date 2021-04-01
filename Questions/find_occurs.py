@@ -11,7 +11,7 @@ def majorityElement(list):
     hash_table = {}
     i = 0
 
-    for item in list[1:]:
+    for item in list:
         if item not in hash_table:
             hash_table[item] = 1
         else:
