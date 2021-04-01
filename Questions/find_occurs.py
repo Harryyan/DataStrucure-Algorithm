@@ -1,6 +1,6 @@
 # leetcode 39
 
-def find_number(list):
+def majorityElement(list):
     half = len(list) // 2
     hash_table = {}
     i = 0
@@ -15,10 +15,10 @@ def find_number(list):
         if hash_table[key] > half:
             return key
 
-    return None
+    return list[len(list) - 1]
 
 
 list = [1, 2, 3, 3, 3, 3, 3, 8]
-result = find_number(list)
+result = majorityElement(list)
 
 print(result)
