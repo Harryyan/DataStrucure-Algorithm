@@ -1,41 +1,39 @@
+import heapq
+
+
 class MedianFinder:
+
     def __init__(self):
-        self.items = []
+        """
+        initialize your data structure here.
+        """
+        # 初始化大顶堆和小顶堆
+        self.max_heap = []
+        self.min_heap = []
 
     def addNum(self, num: int) -> None:
-        self.items.append(num)
+        # 先加到大顶堆，再把大堆顶元素加到小顶堆
+        if len(self.max_heap) == len(self.min_heap):
+            heapq.heappush(self.min_heap, -
+                           heapq.heappushpop(self.max_heap, -num))
+        else:
+            # 先加到小顶堆，再把小堆顶元素加到大顶堆
+            heapq.heappush(self.max_heap, -
+                           heapq.heappushpop(self.min_heap, num))
 
     def findMedian(self) -> float:
-        if self.items is None:
-            return 0.0
-
-        if len(self.items) == 1:
-            return self.items[0]
-
-        if len(self.items) == 2:
-            return (self.items[0] + self.items[1]) / 2
-
-        self.items.sort()
-
-        if len(self.items) % 2 == 0:
-            first = len(self.items) // 2 - 1
-            end = first + 1
-
-            return (self.items[first] + self.items[end]) / 2
+        if len(self.min_heap) == len(self.max_heap):
+            return (-self.max_heap[0] + self.min_heap[0]) / 2
         else:
-            index = len(self.items) // 2
-            return self.items[index]
+            return self.min_heap[0]
 
 
-median = MedianFinder()
-median.addNum(1)
-median.addNum(3)
-median.addNum(7)
-print(median.findMedian())
-median.addNum(4)
-median.addNum(3)
-median.addNum(2)
-median.addNum(1)
-median.addNum(33)
+test = MedianFinder()
+test.addNum(1)
+test.addNum(4)
+test.addNum(2)
+test.addNum(8)
+test.addNum(7)
+test.addNum(5)
 
-print(median.findMedian())
+print(test.findMedian())
