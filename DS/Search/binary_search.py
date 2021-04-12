@@ -4,6 +4,8 @@
 # 二分查找只针对有序数据，最好是静态数据，不会频繁插入和删除
 # 数据量太大，太小都不适合二分查找；但是如果是复杂比较，例如比较长度为300
 # 的字符串，使用二分查找能降低比较次数，提升性能
+import time
+
 
 def binary_Search(items, start, end, target):
     if start >= end:
@@ -58,14 +60,38 @@ def find_last_value(items, start, end, target):
     if target < items[mid]:
         return find_last_value(items, 0, mid - 1, target)
     else:
-        # 关键 mid + 1
+        # 关键 mid
         return find_last_value(items, mid, end, target)
 
 
-test = [1, 1, 1, 1, 3, 4, 11]
-# result = binary_Search(test, 0, len(test) - 1, 2)
+# 变体问题3: 查找第一个大于或等于给定值的元素
+def find_1st_greaterOrEqualValue(items, target):
+    low = 0
+    high = len(items) - 1
 
-# print(result)
-target = 1
-index = find_last_value(test, 0, len(test) - 1, target)
+    while low < high:
+        mid = low + ((high - low) >> 1)
+        # time.sleep(1)
+
+        if items[mid] < target:
+            low = mid + 1
+        elif items[mid] > target:
+            high = mid
+        else:
+            if mid > 1 and items[mid - 1] < target:
+                low = mid
+                break
+            else:
+                high = max(0, mid - 1)
+
+    if items[low] >= target:
+        return low
+    else:
+        return -1
+
+
+# main
+sample = [1, 3, 4, 5, 6, 8, 8, 8, 11, 18]
+target = 2
+index = find_1st_greaterOrEqualValue(sample, target)
 print(index)
