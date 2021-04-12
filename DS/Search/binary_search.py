@@ -22,22 +22,50 @@ def binary_Search(items, start, end, target):
 
 
 # 变体问题1: 查找第一个等于给定值的元素
-def find_1st_value(items, target):
-    left = 0
-    right = len(items) - 1
 
-    while left <= right:
-        mid = (left + right) // 2
 
-        if items[mid] <= target:
-            left = mid + 1
+def find_1st_value(items, start, end, target):
+    if start == end:
+        if items[start] == target:
+            return start
         else:
-            right = mid - 1
+            return None
 
-    return left
+    mid = start + ((end - start) >> 1)
+
+    # 关键: 只要是小于或者等于，就一直往前找
+    if target <= items[mid]:
+        # 关键 mid
+        return find_1st_value(items, 0, mid, target)
+    else:
+        return find_1st_value(items, mid + 1, end, target)
+
+# 变体问题2: 查找最后一个等于给定值的元素
 
 
-test = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-result = binary_Search(test, 0, len(test) - 1, 2)
+def find_last_value(items, start, end, target):
+    if end - start <= 1:
+        if items[end] == target:
+            return end
+        elif items[start] == target:
+            return start
+        else:
+            return None
 
-print(result)
+    mid = start + ((end - start) >> 1)
+
+    # 关键
+    if target < items[mid]:
+        return find_last_value(items, 0, mid - 1, target)
+    else:
+        # 关键 mid + 1
+        return find_last_value(items, mid, end, target)
+
+
+test = [1, 1, 1, 1, 3, 4, 11]
+# result = binary_Search(test, 0, len(test) - 1, 2)
+
+# print(result)
+target = 1
+index = find_last_value(test, 0, len(test) - 1, target)
+print(index)
