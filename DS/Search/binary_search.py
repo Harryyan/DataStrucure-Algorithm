@@ -21,6 +21,22 @@ def binary_Search(items, start, end, target):
         return binary_Search(items, mid + 1, end, target)
 
 
+# 变体问题1: 查找第一个等于给定值的元素
+def find_1st_value(items, target):
+    left = 0
+    right = len(items) - 1
+
+    while left <= right:
+        mid = (left + right) // 2
+
+        if items[mid] <= target:
+            left = mid + 1
+        else:
+            right = mid - 1
+
+    return left
+
+
 test = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 result = binary_Search(test, 0, len(test) - 1, 2)
 
