@@ -65,7 +65,7 @@ def find_last_value(items, start, end, target):
 
 
 # 变体问题3: 查找第一个大于或等于给定值的元素
-def find_1st_greaterOrEqualValue(items, target):
+def find_1st_equal_or_greater(items, target):
     low = 0
     high = len(items) - 1
 
@@ -93,5 +93,5 @@ def find_1st_greaterOrEqualValue(items, target):
 # main
 sample = [1, 3, 4, 5, 6, 8, 8, 8, 11, 18]
 target = 2
-index = find_1st_greaterOrEqualValue(sample, target)
+index = find_1st_equal_or_greater(sample, target)
 print(index)
