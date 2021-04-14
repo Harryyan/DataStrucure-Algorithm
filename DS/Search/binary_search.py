@@ -84,6 +84,7 @@ def find_1st_equal_or_greater(items, target):
 
 
 # 变体问题4: 查找最后一个小于或等于给定值的元素
+# 变体问题4.5: 查找某个IP归属地: 取出起始IP排序，然后查找最后一个小于或等于给定IP的起始IP
 def find_last_equal_or_less(items, target):
     low = 0
     high = len(items) - 1
