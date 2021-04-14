@@ -94,24 +94,16 @@ def find_last_equal_or_less(items, target):
     low = 0
     high = len(items) - 1
 
-    while low < high:
+    while low <= high:
         mid = low + ((high - low) >> 1)
 
-        if items[mid] < target:
-            low = mid
-        elif items[mid] > target:
+        if items[mid] > target:
             high = mid - 1
         else:
-            if mid + 1 <= high and items[mid + 1] == target:
+            if mid + 1 == len(items) - 1 or items[mid + 1] > target:
+                return mid
+            else:
                 low = mid + 1
-            else:
-                high = mid
-
-        if low == high - 1:
-            if items[high] <= target:
-                low = high
-            else:
-                break
 
     if items[low] <= target:
         return low
@@ -120,7 +112,7 @@ def find_last_equal_or_less(items, target):
 
 
 # main
-sample = [1, 3, 4, 5, 7, 8, 8, 8, 11, 18]
-target = 16
+sample = [1, 3, 5, 7, 8, 8, 8, 9, 13]
+target = 6
 index = find_last_equal_or_less(sample, target)
 print(index)
