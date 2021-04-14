@@ -69,24 +69,18 @@ def find_1st_equal_or_greater(items, target):
     low = 0
     high = len(items) - 1
 
-    while low < high:
+    while low <= high:
         mid = low + ((high - low) >> 1)
 
         if items[mid] < target:
             low = mid + 1
-        elif items[mid] > target:
-            high = mid
         else:
-            if mid > 1 and items[mid - 1] < target:
-                low = mid
-                break
+            if mid - 1 >= 0 and items[mid - 1] < target:
+                return mid
             else:
-                high = max(0, mid - 1)
+                high = mid - 1
 
-    if items[low] >= target:
-        return low
-    else:
-        return -1
+    return -1
 
 
 # 变体问题4: 查找最后一个小于或等于给定值的元素
@@ -105,14 +99,11 @@ def find_last_equal_or_less(items, target):
             else:
                 low = mid + 1
 
-    if items[low] <= target:
-        return low
-    else:
-        return -1
+    return -1
 
 
 # main
 sample = [1, 3, 5, 7, 8, 8, 8, 9, 13]
-target = 6
-index = find_last_equal_or_less(sample, target)
+target = 2
+index = find_1st_equal_or_greater(sample, target)
 print(index)
