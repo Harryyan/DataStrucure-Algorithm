@@ -4,6 +4,8 @@
 # 二分查找只针对有序数据，最好是静态数据，不会频繁插入和删除
 # 数据量太大，太小都不适合二分查找；但是如果是复杂比较，例如比较长度为300
 # 的字符串，使用二分查找能降低比较次数，提升性能
+# 二分查找适用于 近似 查找问题
+# 容易出bug的地方： 终止条件、区间上下界更新方法、返回值选择
 import time
 
 
@@ -18,7 +20,7 @@ def binary_Search(items, start, end, target):
     mid = start + ((end - start) >> 1)
 
     if target <= items[mid]:
-        return binary_Search(items, 0, mid, target)
+        return binary_Search(items, start, mid, target)
     else:
         return binary_Search(items, mid + 1, end, target)
 
