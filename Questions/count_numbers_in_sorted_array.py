@@ -1,4 +1,4 @@
-# Q2:
+# Q1:
 # 统计一个数字在排序数组中出现的次数
 
 def count_numbers_in_sorted_array(items, target):
