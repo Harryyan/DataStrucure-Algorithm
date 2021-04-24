@@ -1,4 +1,6 @@
 # leetcode 39
+# 数组中出现次数超过一半的数字
+
 
 def majorityElement(list):
     if not list:

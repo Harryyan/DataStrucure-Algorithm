@@ -34,17 +34,18 @@ def reverse(linked_list: SingleLinkedList):
 
     # 遍历链表数据
     for i in link_list.items():
-        print(i, end='\t')
+        print(i, end="\t")
 
     print("\n")
-    result = reverseByRecursion(head, link_list)
+    result = reverse_by_recursion(head, link_list)
     result.next = None
 
     print(id(result))
 
     # 遍历链表数据
     for i in link_list.items():
-        print(i, end='\t')
+        print(i, end="\t")
+
 
 # 给定头结点和待删除节点, 在O(1)时间删除
 
@@ -66,12 +67,12 @@ def deleteNode(node, head):
 def print_list(link_list):
     # 遍历链表数据
     for i in link_list.items():
-        print(i, end='\t')
+        print(i, end="\t")
 
-    print('\n')
+    print("\n")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     link_list = SingleLinkedList()
     # 向链表尾部添加数据
     for i in range(6):

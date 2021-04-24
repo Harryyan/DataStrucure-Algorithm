@@ -9,9 +9,9 @@ from Node import Node
 def print_list(link_list):
     # 遍历链表数据
     for i in link_list.items():
-        print(i, end='\t')
+        print(i, end="\t")
 
-    print('\n')
+    print("\n")
 
 
 def getKthNodeBackforward(list: SingleLinkedList, k: int):
@@ -27,7 +27,7 @@ def getKthNodeBackforward(list: SingleLinkedList, k: int):
     else:
         while p2.next is not None:
             p1 = p1.next
-            p2 = p2. next
+            p2 = p2.next
 
         return p1
 
