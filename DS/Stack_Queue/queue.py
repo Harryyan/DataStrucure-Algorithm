@@ -1,16 +1,14 @@
-
 # 对于队列来说，入队和出队总有一个时间复杂度是O(n)
 # 这时候就要看你的操作，是出队操作多还是入队操作多
 # 优化选择
 
-class Queue:
 
+class Queue:
     def __init__(self):
         self.__content = []
 
     def enqueue(self, value):
         self.__content.append(value)
-        #self.__content.insert(0, value)
 
     def dequeue(self):
         if self.is_empty():
