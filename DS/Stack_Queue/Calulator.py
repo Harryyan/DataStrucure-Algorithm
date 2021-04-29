@@ -72,7 +72,6 @@ class Solution(object):
         numbers.append(num)
         num = 0
 
-        []
         while operators:
             o = operators.pop()
             n = numbers.pop()
@@ -119,5 +118,5 @@ str = "123-(-13+2) + 13 - 2 + (9 + 4)"
 print(test.calculate(str))
 
 print("######################")
-str_basic = "3 + 4 - 99"
+str_basic = "+3 + 4 - 9"
 print(test.calculator_basic(str_basic))
