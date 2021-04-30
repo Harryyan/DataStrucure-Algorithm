@@ -51,12 +51,12 @@ class Solution(object):
             result = n0 // n
             numbers.append(result)
 
-    def test(self, s, operators, numbers):
+    def recursive_cal(self, s, operators, numbers):
         if not operators or self.shouldAppend(s, operators[-1]):
             operators.append(s)
         else:
             self._cal(operators, numbers)
-            self.test(s, operators, numbers)
+            self.recursive_cal(s, operators, numbers)
 
     def calculator_basic(self, str: str):
         numbers = []
@@ -73,7 +73,7 @@ class Solution(object):
                 if not operators:
                     operators.append(s)
                 else:
-                    self.test(s, operators, numbers)
+                    self.recursive_cal(s, operators, numbers)
 
         numbers.append(num)
         num = 0
@@ -98,5 +98,5 @@ str = "123-(-13+2) + 13 - 2 + (9 + 4)"
 print(test.calculate(str))
 
 print("######################")
-str_basic = "3/2"
+str_basic = "1+2*3-4*5+3"
 print(test.calculator_basic(str_basic))
