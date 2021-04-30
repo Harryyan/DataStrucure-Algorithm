@@ -22,6 +22,42 @@ class Solution(object):
         res += sign * num
         return res
 
+    def _cal(self, operators, numbers):
+        o = operators.pop()
+        n = numbers.pop()
+        n0 = 0
+
+        if o == "+":
+            if numbers:
+                n0 = numbers.pop()
+            result = n0 + n
+            numbers.append(result)
+
+        if o == "-":
+            if numbers:
+                n0 = numbers.pop()
+            result = n0 - n
+            numbers.append(result)
+
+        if o == "*":
+            if numbers:
+                n0 = numbers.pop()
+            result = n0 * n
+            numbers.append(result)
+
+        if o == "/":
+            if numbers:
+                n0 = numbers.pop()
+            result = n0 // n
+            numbers.append(result)
+
+    def test(self, s, operators, numbers):
+        if not operators or self.shouldAppend(s, operators[-1]):
+            operators.append(s)
+        else:
+            self._cal(operators, numbers)
+            self.test(s, operators, numbers)
+
     def calculator_basic(self, str: str):
         numbers = []
         operators = []
@@ -37,69 +73,13 @@ class Solution(object):
                 if not operators:
                     operators.append(s)
                 else:
-                    if self.shouldAppend(s, operators[-1]):
-                        operators.append(s)
-                    else:
-                        o = operators.pop()
-                        n = numbers.pop()
-                        n0 = 0
-
-                        if o == "+":
-                            if numbers:
-                                n0 = numbers.pop()
-                            result = n0 + n
-                            numbers.append(result)
-
-                        if o == "-":
-                            if numbers:
-                                n0 = numbers.pop()
-                            result = n0 - n
-                            numbers.append(result)
-
-                        if o == "*":
-                            if numbers:
-                                n0 = numbers.pop()
-                            result = n0 * n
-                            numbers.append(result)
-
-                        if o == "/":
-                            if numbers:
-                                n0 = numbers.pop()
-                            result = n0 / n
-                            numbers.append(result)
-                        operators.append(s)
+                    self.test(s, operators, numbers)
 
         numbers.append(num)
         num = 0
 
         while operators:
-            o = operators.pop()
-            n = numbers.pop()
-            n0 = 0
-
-            if o == "+":
-                if numbers:
-                    n0 = numbers.pop()
-                result = n0 + n
-                numbers.append(result)
-
-            if o == "-":
-                if numbers:
-                    n0 = numbers.pop()
-                result = n0 - n
-                numbers.append(result)
-
-            if o == "*":
-                if numbers:
-                    n0 = numbers.pop()
-                result = n0 * n
-                numbers.append(result)
-
-            if o == "/":
-                if numbers:
-                    n0 = numbers.pop()
-                result = n0 / n
-                numbers.append(result)
+            self._cal(operators, numbers)
 
         return numbers.pop()
 
@@ -118,5 +98,5 @@ str = "123-(-13+2) + 13 - 2 + (9 + 4)"
 print(test.calculate(str))
 
 print("######################")
-str_basic = "+3 + 4 - 9"
+str_basic = "3/2"
 print(test.calculator_basic(str_basic))
