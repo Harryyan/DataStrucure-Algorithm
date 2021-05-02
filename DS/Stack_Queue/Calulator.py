@@ -84,19 +84,49 @@ class Solution(object):
         return numbers.pop()
 
     def shouldAppend(self, current, pre):
-        if current == "*" and (pre == "+" or pre == "-"):
+        if current == "*" and (pre in "+-"):
             return True
 
-        if current == "/" and (pre == "+" or pre == "-"):
+        if current == "/" and (pre in "+-"):
             return True
 
         return False
 
 
+class Solution2:
+    def calculate(self, s):
+        stack = []
+        pre_op = "+"
+        num = 0
+        for i, each in enumerate(s):
+            print(each)
+            if each.isdigit():
+                num = 10 * num + int(each)
+
+            if i == len(s) - 1 or each in "+-*/":
+                if pre_op == "+":
+                    stack.append(num)
+                elif pre_op == "-":
+                    stack.append(-num)
+                elif pre_op == "*":
+                    stack.append(stack.pop() * num)
+                elif pre_op == "/":
+                    top = stack.pop()
+                    if top < 0:
+                        stack.append(int(top / num))
+                    else:
+                        stack.append(top // num)
+
+                pre_op = each
+                num = 0
+        return sum(stack)
+
+
 test = Solution()
+test2 = Solution2()
 str = "123-(-13+2) + 13 - 2 + (9 + 4)"
-print(test.calculate(str))
+# print(test.calculate(str))
 
 print("######################")
-str_basic = "1+2*3-4*5+3"
-print(test.calculator_basic(str_basic))
+str_basic = "3+2*2"
+print(test2.calculate(str_basic))
