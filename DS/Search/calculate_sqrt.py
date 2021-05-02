@@ -32,4 +32,4 @@ def sqrt_0(x):
     return left
 
 
-print(sqrt_0(16))
+print(sqrt_0(3))
