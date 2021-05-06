@@ -9,12 +9,14 @@ class Solution:
 
     def _permute(self, n, k, nums):
         if k == 1:
-            self._result.append(nums)
+            self._result.append(nums[:])
 
         i = 0
         while i < k:
             nums[i], nums[k - 1] = nums[k - 1], nums[i]
+
             self._permute(n, k - 1, nums)
+
             nums[i], nums[k - 1] = nums[k - 1], nums[i]
 
             i += 1
@@ -23,4 +25,16 @@ class Solution:
         k = len(nums)
         n = k
 
-        return result
+        self._permute(n, k, nums)
+
+        return self._result
+
+    def pprint(self):
+        print(self._result)
+
+
+test = Solution()
+data = [0, 1]
+test.permute(data)
+
+test.pprint()
