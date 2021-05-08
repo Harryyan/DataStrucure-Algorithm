@@ -1,4 +1,5 @@
 from typing import List
+from itertools import permutations
 
 # 给定一个没有重复数字的序列，返回其所有可能的全排列。
 
@@ -29,12 +30,20 @@ class Solution:
 
         return self._result
 
+    def system_permutation(self, nums):
+        return permutations(nums)
+
     def pprint(self):
         print(self._result)
 
 
 test = Solution()
-data = [0, 1]
+data = [1, 2, 3, 4, 5]
 test.permute(data)
 
-test.pprint()
+result = test.system_permutation(data)
+
+for i in result:
+    print(i)
+
+# test.pprint()
