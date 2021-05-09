@@ -10,6 +10,7 @@ class MedianFinder:
         self.max_heap = []
         self.min_heap = []
 
+    # Python 默认提供小顶堆实现
     def addNum(self, num: int) -> None:
         # 先加到小顶堆，再把小堆顶元素加到大顶堆
         if len(self.max_heap) == len(self.min_heap):
