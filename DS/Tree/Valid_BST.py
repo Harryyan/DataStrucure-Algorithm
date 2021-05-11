@@ -39,6 +39,8 @@ class Solution2:
 
             x += 1
 
+            print(x)
+
             l_m = find_max(node.left, x)
 
             x -= 1
@@ -53,9 +55,13 @@ class Solution2:
 
 
 node_9 = TreeNode(9, None, None)
-node_15 = TreeNode(15, None, None)
+node_10 = TreeNode(10, None, None)
+node_5 = TreeNode(5, None, None)
 node_7 = TreeNode(7, None, None)
-node_20 = TreeNode(20, node_15, node_7)
+node_6 = TreeNode(6, None, node_7)
+node_11 = TreeNode(11, node_5, node_6)
+node_30 = TreeNode(30, None, node_11)
+node_20 = TreeNode(20, node_10, node_30)
 node_3 = TreeNode(3, node_9, node_20)
 
 test = Solution2()
