@@ -31,7 +31,7 @@ class Solution:
 
 class Solution2:
     def maxDepth(self, root: TreeNode) -> int:
-        x = 1
+        x = 0
 
         def find_max(node, x) -> int:
             if not node:
@@ -39,15 +39,8 @@ class Solution2:
 
             x += 1
 
-            print(x)
-
             l_m = find_max(node.left, x)
-
-            x -= 1
-
             l_r = find_max(node.right, x)
-
-            x -= 1
 
             return max(l_m, l_r)
 
