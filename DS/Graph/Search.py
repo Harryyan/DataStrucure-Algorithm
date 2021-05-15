@@ -4,6 +4,34 @@ from DS.Graph.Vertex import Vertex
 
 from Graph import Graph
 
+found = False
+
+# 图： 深度优先(走迷宫)
+def dfs(g: Graph, s: Vertex, t: Vertex):
+    visited = [False] * g.get_vertex_num()
+    visited[s] = True
+    pre = [-1] * g.get_vertex_num()
+
+    recursive_dfs(s, t, visited, pre)
+    pprint(g, pre, s, t)
+
+
+def recursive_dfs(g: Graph, s, t, visited, pre):
+    if found:
+        return
+
+    visited[s] = True
+
+    if s == t:
+        found = True
+        return
+
+    for item in g.get_vertex(s):
+        if not visited[item]:
+            pre[item] = s
+            recursive_dfs(g, item, t, visited, pre)
+
+
 # 图 - 广度优先搜索
 # 时间复杂度：O(V + E)
 # 空间复杂度: O(V)
