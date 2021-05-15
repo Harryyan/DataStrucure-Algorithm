@@ -5,6 +5,10 @@ from DS.Graph.Vertex import Vertex
 from Graph import Graph
 
 # 图 - 广度优先搜索
+# 时间复杂度：O(V + E)
+# 空间复杂度: O(V)
+
+
 def bfs(g: Graph, s: Vertex, t: Vertex):
     if s == t:
         return
