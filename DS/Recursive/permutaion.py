@@ -1,5 +1,6 @@
 from typing import List
 from itertools import permutations
+import collections
 
 # 给定一个没有重复数字的序列，返回其所有可能的全排列。
 
@@ -43,7 +44,11 @@ test.permute(data)
 
 result = test.system_permutation(data)
 
-for i in result:
-    print(i)
+# for i in result:
+#     print(i)
 
 # test.pprint()
+a = collections.defaultdict(int) 
+a['f'] = 3
+
+print(a['hh'])
