@@ -8,7 +8,23 @@ from Node import TreeNode
 #         self.right = right
 class Solution:
     
-    def isSymmetric(self, root):
+    def isSymetric(self, root):
+        if not root: return False
+        if not root.left and not root.right: return True
+        if not root.left or not root.right: return False
+        if root.left.val != root.right.val: return False
+        
+        self.recursive(root.left, root.right)
+        
+        
+    def recursive(self, left, right) -> bool:
+        if not left and not right: return True
+        if not left or not right: return False
+        if left.val != right.val: return False
+        
+        self.recursive(left.left, right.right) and self.recursive(left.right, right.left)
+    
+    def isSymmetric_loop(self, root):
         ret = True
         
         if not root.left and not root.right:
