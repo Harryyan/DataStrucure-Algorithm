@@ -54,23 +54,3 @@ class Solution:
                 break
 
         return ret
-        
-        
-        
-    
-node_3 = TreeNode(3, None, None)
-node_33 = TreeNode(3, None, None)
-node_4 = TreeNode(4, None, None)
-node_44 = TreeNode(4, None, None)
-
-node_2 = TreeNode(2, node_3, node_4)
-node_22 = TreeNode(2, node_44, node_33)
-node_1 = TreeNode(1, node_2, node_22)
-
-test = Solution()
-
-a = [None] * 10
-
-print(a is None)
-
-
