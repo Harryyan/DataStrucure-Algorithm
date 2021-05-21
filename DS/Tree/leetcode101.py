@@ -7,40 +7,53 @@ from Node import TreeNode
 #         self.left = left
 #         self.right = right
 class Solution:
-    result = True
-
-    def isSymmetric(self, root: TreeNode) -> bool:
-        queue = [root]
+    
+    def isSymmetric(self, root):
+        ret = True
         
-        self.test1(queue)
-
-        return self.result
+        if not root.left and not root.right:
+            return ret
         
-    def test1(self, items: list):
-        if all(x is None for x in items):
-            return
+        if not root.left or not root.right:
+            return False
 
-        queue = []
-
-        for item in items:
-            l = item.left if item else None
-            r = item.right if item else None
+        if root.left.val != root.right.val:
+            return False
+        
+        queue = [root.left, root.right]
+        while queue:
+            a = queue.pop(0)
+            b = queue.pop(0)
             
-            queue.append(l)
-            queue.append(r)  
-        
-        test = []
-        
-        for i in range(0,len(queue)):
-            test.append(queue[i].val if queue[i] else 0)
-        
-        for i in range(0, len(test)):
-            if test[i] != test[len(test)-1-i]:
-                self.result = False
+            if not a and not b:
+                continue
+            
+            if not a or not b:
+                ret = False
                 break
             
-        if self.result:
-            self.test1(queue)
+            l1 = a.left
+            r1 = b.right
+            l2 = b.left
+            r2 = a.right
+            
+            if l1 and r1 and l1.val == r1.val:
+                queue.append(l1)
+                queue.append(r1)
+            elif not l1 and not r1: pass
+            else:
+                ret = False
+                break
+            
+            if l2 and r2 and l2.val == r2.val:
+                queue.append(l2)
+                queue.append(r2)
+            elif not l2 and not r2: pass
+            else:
+                ret = False
+                break
+
+        return ret
         
         
         
