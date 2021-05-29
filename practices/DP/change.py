@@ -3,6 +3,19 @@
 # 返回 -1。
 
 from typing import List
+import math
+
+class Solution_Advanced:
+    def coinChange(self, coins: List[int], amount: int) -> int:
+        if amount == 0: return 0
+        
+        dp = [math.inf for _ in range(0, amount + 1)]
+        dp[0] = 0
+        
+        
+        
+        
+        return -1
     
 class Solution:
     def coinChange(self, coins: List[int], amount: int) -> int:
