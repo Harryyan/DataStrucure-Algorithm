@@ -4,7 +4,7 @@
 
 from typing import List
     
-class Solution_DP:
+class Solution:
     def coinChange(self, coins: List[int], amount: int) -> int:
         if amount <= 0:
             return 0
@@ -33,9 +33,9 @@ class Solution_DP:
         return -1
                     
                     
-test = Solution_DP()
-coins = [2,4,5]
-amount = 3
+test = Solution()
+coins = [1,3,5]
+amount = 11
 
 result = test.coinChange(coins, amount)
 
