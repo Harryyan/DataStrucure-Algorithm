@@ -8,14 +8,18 @@ import math
 class Solution_Advanced:
     def coinChange(self, coins: List[int], amount: int) -> int:
         if amount == 0: return 0
+        coins.sort()
+        if amount < coins[0]: return -1
         
         dp = [math.inf for _ in range(0, amount + 1)]
         dp[0] = 0
         
-        
-        
-        
-        return -1
+        for i in range(1, amount + 1):
+            for coin in coins:
+                if i - coin >= 0:
+                    dp[i] = min(dp[i-coin] + 1, dp[i])
+                    
+        return dp[-1] if dp[-1] != math.inf else -1
     
 class Solution:
     def coinChange(self, coins: List[int], amount: int) -> int:
