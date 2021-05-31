@@ -37,11 +37,37 @@ class Solution_Loop:
 # dp(i, j) = max(dp(i+1,j-1), dp(i+1,j), dp(i, j-1))   
 class Solution_DP:
     def longestPalindrome(self, s: str) -> str:
+        if not s: return 0
         
-        pass
+        n = len(s)
+        
+        if n == 1: return s
+        
+        start = 0
+        maxLeng = 1
+        
+        dp = [[0 for _ in range(0, n)] for _ in range(0,n)]
+        
+        for i in range(0, n):
+            dp[i][i] = 1
+        
+        for i in range(1, n):
+            for j in range(0, i+1):
+                if s[i] == s[j]:
+                    if i -j < 2:
+                        dp[j][i] = True
+                    else:
+                        dp[j][i] = dp[j+1][i-1]
+                else:
+                    dp[j][i] = False
+                    
+                if dp[j][i] and i-j + 1 > maxLeng:
+                    maxLeng = i - j + 1
+                    start = j
+        return s[start:start+maxLeng]
     
     
-s = Solution_Loop()
-sample = "ac"
+s = Solution_DP()
+sample = "babad"
 
 print(s.longestPalindrome(sample))   
