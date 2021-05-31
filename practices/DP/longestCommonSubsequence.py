@@ -10,7 +10,7 @@ class Solution:
         if not nums: return 0
         
         n = len(nums)
-        if n == 1: return nums[0]
+        if n == 1: return 1
         
         dp = [1] * n
         dp[0] = 1
@@ -19,10 +19,11 @@ class Solution:
             for j in range(0, i):
                 if nums[j] < nums[i]:
                     dp[i] = max(dp[i], dp[j] + 1)
+        dp.sort()
         
-        return dp
+        return dp[-1]
     
     
 s = Solution()
-sample = [7,7,7,7,7,7,7]
+sample = [9,2,3,4,5,6,7,10,4]
 print(s.lengthOfLIS(sample))

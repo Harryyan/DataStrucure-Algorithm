@@ -6,7 +6,7 @@
 
 class Solution:
     def longestPalindrome(self, s: str) -> str:
-        if len(s) == 1: return str
+        if len(s) == 1: return s
         
         n = len(s)
         dp = [0] * n
@@ -15,8 +15,12 @@ class Solution:
         for i in range(0, n):
             for j in range(0, i):
                 dp[i] = max(self.palindrome(j,i,s), dp[i])
-                
-        return dp
+        
+        print(dp)
+        endIndex = dp.index(max(dp))
+        startIndex = endIndex - max(dp) + 1
+             
+        return s[startIndex:endIndex+1]
     
     
     def palindrome(self, i, j, s: str) -> int:
@@ -33,6 +37,6 @@ class Solution:
     
     
 s = Solution()
-sample = "abcdcba"
+sample = "ac"
 
 print(s.longestPalindrome(sample))    
