@@ -1,11 +1,38 @@
 
 
 # 给你一个字符串 s，找到 s 中最长的回文子串。
-
+# abacd: reutrn aba
  
 
 class Solution:
     def longestPalindrome(self, s: str) -> str:
-        if len(str) == 1: return str
+        if len(s) == 1: return str
         
-        pass
+        n = len(s)
+        dp = [0] * n
+        dp[0] = 1
+        
+        for i in range(0, n):
+            for j in range(0, i):
+                dp[i] = max(self.palindrome(j,i,s), dp[i])
+                
+        return dp
+    
+    
+    def palindrome(self, i, j, s: str) -> int:
+        x = j - i + 1
+        
+        while i <= j:
+            if s[i] == s[j]:
+                i += 1
+                j -= 1
+            else:
+                return 0 
+              
+        return x
+    
+    
+s = Solution()
+sample = "abcdcba"
+
+print(s.longestPalindrome(sample))    
