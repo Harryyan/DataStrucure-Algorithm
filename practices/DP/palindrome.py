@@ -3,8 +3,8 @@
 # 给你一个字符串 s，找到 s 中最长的回文子串。
 # abacd: reutrn aba
  
-
-class Solution:
+# 暴力解法 - 最坏情况时间复杂度退化严重 aaaaaaaaaaaaaaaaaaaaaaaaa
+class Solution_Loop:
     def longestPalindrome(self, s: str) -> str:
         if len(s) == 1: return s
         
@@ -16,7 +16,6 @@ class Solution:
             for j in range(0, i):
                 dp[i] = max(self.palindrome(j,i,s), dp[i])
         
-        print(dp)
         endIndex = dp.index(max(dp))
         startIndex = endIndex - max(dp) + 1
              
@@ -34,9 +33,15 @@ class Solution:
                 return 0 
               
         return x
+ 
+# dp(i, j) = max(dp(i+1,j-1), dp(i+1,j), dp(i, j-1))   
+class Solution_DP:
+    def longestPalindrome(self, s: str) -> str:
+        
+        pass
     
     
-s = Solution()
+s = Solution_Loop()
 sample = "ac"
 
-print(s.longestPalindrome(sample))    
+print(s.longestPalindrome(sample))   
