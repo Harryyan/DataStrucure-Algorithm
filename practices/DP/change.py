@@ -51,7 +51,7 @@ class Solution:
                     
                     
 test = Solution()
-coins = [1,3,5]
+coins = [1,11,5]
 amount = 11
 
 result = test.coinChange(coins, amount)
