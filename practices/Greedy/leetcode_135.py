@@ -21,50 +21,44 @@ class Solution:
             
         if indexes[-1] < len(ratings)-1:
             indexes.append(len(ratings)-1)
-
-        try:
-            candies.index(0)
-        except ValueError:
-            return sum(candies)
-        else:
-            # 分区间计算
-            # [0, 1st], [1st, 2nd], ..., [n-1,n]
             
-            for i, index in enumerate(indexes):
-                pre = indexes[i-1] if i > 0 else 0
-                end = index
-                
-                for j in range(end, pre-1, -1):
-                    if pre == 0:
-                        if ratings[j-1] > ratings[j]:
-                            candies[j-1] = candies[j] + 1
-                        else:
-                            candies[j - 1] = candies[j]
+        if indexes[0] != 0:
+            start = 0
+            end = indexes[0]
+            
+            for j in range(end-1, start-1, -1):
+                if ratings[j] > ratings[j+1]:
+                    candies[j] = candies[j+1]+1    
+                else:
+                    if ratings[j] < ratings[j+1] and ratings[j+1]==1:
+                        candies[j] = 1
+                        for i in range(j, end):
+                            if ratings[j+1]>ratings[j] and candies[j+1]<=candies[j]:
+                                candies[j+1] = candies[j]+1
                     else:
-                        if end - pre == 1:
-                            if ratings[end] > ratings[pre]:
-                                candies[end] = candies[pre] + 1
-                            else:
-                                candies[end] = candies[pre]
-                        
-                        if end - pre > 2:
-                            if ratings[pre+1] <= ratings[end - 1]:
-                                x = j + 1 if j < len(ratings)-1 else len(ratings)-1
-                                if ratings[x] > ratings[j]:
-                                    candies[x] = candies[j] + 1
-                                else:
-                                    candies[x] = candies[j]
-                            else:
-                                 if ratings[j-1] > ratings[j]:
-                                    candies[j-1] = candies[j] + 1
-                                 else:
-                                    candies[j - 1] = candies[j]
-                        else:
-                            x = j + 1 if j < len(ratings)-1 else len(ratings)-1
-                            if ratings[x] > ratings[j]:
-                                candies[x] = candies[j] + 1
-                            else:
-                                candies[x] = candies[j]
+                        candies[j] = candies[j+1]
+
+        for i, index in enumerate(indexes):
+            start = index
+            end = indexes[i+1] if i < len(indexes) - 1 else len(indexes) - 1
+            
+            if start == end:
+                break
+            
+            for j in range(start, end):
+                x = j + 1 if j <= end - 1 else end
+                
+                if ratings[x] > ratings[j]:
+                    candies[x] = candies[j]+1
+                else:
+                    if ratings[x] < ratings[j] and ratings[j] == 1:
+                        ratings[x] = 1
+                        for y in range(x-1,start,-1):
+                            if ratings[y] > ratings[y+1] and candies[y] <= candies[y+1]:
+                                candies[y] = candies[y+1]+1     
+                    else:
+                        candies[x]=1
+
         print(candies)
         return sum(candies)
         
