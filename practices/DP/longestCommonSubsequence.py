@@ -13,7 +13,6 @@ class Solution:
         if n == 1: return 1
         
         dp = [1] * n
-        dp[0] = 1
         
         for i in range(0, n):
             for j in range(0, i):
