@@ -16,26 +16,24 @@ class Solution:
         
         for i in range(1, n + 1):
             left_up = 0 # 对角线
-            dp[0] = 0
-            
+             
             for j in range(1, m + 1):
-                left = dp[j-1]
                 up = dp[j]
                 
                 if text1[i-1] == text2[j-1]:
                     dp[j] = left_up + 1
                 else:
-                    dp[j] = max([left, up])
+                    dp[j] = max(dp[j-1], dp[j])
                 
                 left_up = up 
         
         return dp[-1]
     
-    
+      
     
 s = Solution()
 a = "aaa"
-b = "new zelaand"
+b = "aaaaa"
 
 result = s.longestCommonSubsequence(a,b)
 print(result)
