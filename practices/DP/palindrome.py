@@ -54,7 +54,7 @@ class Solution_DP:
         for i in range(1, n):
             for j in range(0, i+1):
                 if s[i] == s[j]:
-                    if i -j < 2:
+                    if i-j < 2:
                         dp[j][i] = True
                     else:
                         dp[j][i] = dp[j+1][i-1]

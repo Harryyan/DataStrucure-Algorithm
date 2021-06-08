@@ -64,7 +64,7 @@ class Solution:
         
     
     
-sample = [1,3,2]
+sample = [1,3,1]
 s = Solution()
 
 print(s.candy(sample))

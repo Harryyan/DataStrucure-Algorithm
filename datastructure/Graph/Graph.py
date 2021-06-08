@@ -25,6 +25,7 @@ class Graph:
             self.add_vertex(key)
         if nbr not in self.vertlist:
             self.add_vertex(nbr)
+            
         self.vertlist[key].add_neignbor(self.vertlist[nbr], weight)
 
     def get_vertex_num(self):
