@@ -13,3 +13,9 @@ class Vertex:
     def get_connects(self):
         # 返回顶点所连接的其他点
         return [[i.id, v] for i, v in self.connect.items()]
+    
+    
+    
+tet = 14 >> 1
+
+print(tet)
