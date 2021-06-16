@@ -21,7 +21,7 @@ class Solution:
             
         if indexes[-1] < len(ratings)-1:
             indexes.append(len(ratings)-1)
-            
+
         if indexes[0] != 0:
             start = 0
             end = indexes[0]
@@ -30,19 +30,22 @@ class Solution:
                 if ratings[j] > ratings[j+1]:
                     candies[j] = candies[j+1]+1    
                 else:
-                    if ratings[j] < ratings[j+1] and ratings[j+1]==1:
-                        candies[j] = 1
-                        for i in range(j, end):
-                            if ratings[j+1]>ratings[j] and candies[j+1]<=candies[j]:
-                                candies[j+1] = candies[j]+1
+                    if ratings[j] < ratings[j+1]:
+                        if candies[j+1] == 1:                              
+                            candies[j] = 1
+                            for i in range(j, end):
+                                if ratings[i+1]>ratings[i] and candies[i+1]<=candies[i]:
+                                    candies[i+1] = candies[i]+1
+                        else:
+                            candies[j] = 1
                     else:
-                        candies[j] = candies[j+1]
-
+                        candies[j] = 1
+        
         for i, index in enumerate(indexes):
             start = index
             end = indexes[i+1] if i < len(indexes) - 1 else len(indexes) - 1
-            
-            if start == end:
+
+            if start >= end:
                 break
             
             for j in range(start, end):
@@ -51,19 +54,18 @@ class Solution:
                 if ratings[x] > ratings[j]:
                     candies[x] = candies[j]+1
                 else:
-                    if ratings[x] < ratings[j] and ratings[j] == 1:
-                        ratings[x] = 1
+                    if ratings[x] < ratings[j] and candies[j] == 1:
+                        candies[x] = 1
                         for y in range(x-1,start,-1):
                             if ratings[y] > ratings[y+1] and candies[y] <= candies[y+1]:
                                 candies[y] = candies[y+1]+1     
                     else:
-                        candies[x]=1
-
+                        candies[x] = 1
         return sum(candies)
         
     
     
-sample = [1,3,1]
+sample = [2,3,6,6,4,1]
 s = Solution()
 
 print(s.candy(sample))
