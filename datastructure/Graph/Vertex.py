@@ -1,6 +1,6 @@
 class Vertex:
     """顶点类，包含顶点信息及连接边"""
-
+    
     def __init__(self, key):
         self.id = key
         self.connect = {}
@@ -13,9 +13,3 @@ class Vertex:
     def get_connects(self):
         # 返回顶点所连接的其他点
         return [[i.id, v] for i, v in self.connect.items()]
-    
-    
-    
-tet = 14 >> 1
-
-print(tet)

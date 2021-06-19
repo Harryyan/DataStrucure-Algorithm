@@ -1,10 +1,13 @@
 #  邻接表实现图
-from typing import List
+from typing import DefaultDict, List, NoReturn
 from Vertex import Vertex
 
 
 class Graph:
     """实现图"""
+    
+    # in-degree of each node
+    inDegree = DefaultDict(int)
 
     def __init__(self):
         self.vertlist = {}
@@ -23,6 +26,7 @@ class Graph:
         """添加边"""
         if key not in self.vertlist:
             self.add_vertex(key)
+            
         if nbr not in self.vertlist:
             self.add_vertex(nbr)
             
@@ -31,6 +35,18 @@ class Graph:
     def get_vertex_num(self):
         """返回所有顶点数量"""
         return self.count_vertex
+    
+    def buildInDegree(self):
+        for id, value in self.vertlist.items():
+            for item in self.vertlist[id].connect:
+                self.inDegree[item.id] += 1
+                    
+    
+    def pprint(self):
+        for id, value in self.vertlist.items():
+            print(id, end="\t")
+            children = self.get_vertex(id)
+            print(children)
 
 
 graph = Graph()
@@ -41,5 +57,6 @@ graph.add_edge("b", "a", 10)
 graph.add_edge("a", "c", 12)
 graph.add_edge("b", "c", 15)
 
-print(graph.get_vertex_num())
-print(graph.get_vertex("a"))
+graph.buildInDegree()
+
+print(graph.inDegree)
