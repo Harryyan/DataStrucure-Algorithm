@@ -38,25 +38,14 @@ class Graph:
     
     def buildInDegree(self):
         for id, value in self.vertlist.items():
+            self.inDegree[id] = 0 
+        
+        for id, value in self.vertlist.items():
             for item in self.vertlist[id].connect:
                 self.inDegree[item.id] += 1
                     
-    
     def pprint(self):
         for id, value in self.vertlist.items():
             print(id, end="\t")
             children = self.get_vertex(id)
             print(children)
-
-
-graph = Graph()
-graph.add_vertex("a")
-graph.add_vertex("b")
-graph.add_edge("a", "b", 10)
-graph.add_edge("b", "a", 10)
-graph.add_edge("a", "c", 12)
-graph.add_edge("b", "c", 15)
-
-graph.buildInDegree()
-
-print(graph.inDegree)
