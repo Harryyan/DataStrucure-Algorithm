@@ -11,6 +11,8 @@ from typing import DefaultDict, List
 
 class Solution:
     def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+        if not prerequisites: return True
+        
         finalNumbers = 0
 
         # 我依赖谁
@@ -21,16 +23,17 @@ class Solution:
         for item in prerequisites:
             inDeg[item[0]].append(item[1])
             outDeg[item[1]].append(item[0])
-
+        
         queue = []
         for item in range(0, numCourses):
             if len(inDeg[item]) == 0:
                 queue.append(item)
-
+        
+        finalNumbers += len(queue)
+        
         if len(queue) == 0:
             return False
-
-        print(queue)
+        
         while queue:
             item = queue.pop(0)
             outs = outDeg[item]
@@ -41,11 +44,11 @@ class Solution:
                     finalNumbers += 1
                 elif len(inDeg[out]) > 1:
                     inDeg[out].remove(item)
-
-        return finalNumbers == numCourses - 1
+                  
+        return finalNumbers == numCourses
 
 
 so = Solution()
 
-result = so.canFinish(3, [[0, 1], [2, 1]])
+result = so.canFinish(8, [[1,0]])
 print(result)
