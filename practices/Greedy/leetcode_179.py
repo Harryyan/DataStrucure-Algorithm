@@ -30,10 +30,6 @@ class Solution:
                 high -= 1
             alist[low] = alist[high]
             
-            
-            print(low, end="\t")
-            print(high)
-            
             while low < high and self.isGreater(str(alist[low]), str(mid_value)) == False:
                 low += 1
             alist[high] = alist[low]
