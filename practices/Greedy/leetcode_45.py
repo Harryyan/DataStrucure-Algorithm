@@ -1,40 +1,29 @@
 # 给定一个非负整数数组，你最初位于数组的第一个位置。
 # 数组中的每个元素代表你在该位置可以跳跃的最大长度。
 # 你的目标是使用最少的跳跃次数到达数组的最后一个位置。
+
 # 假设你总是可以到达数组的最后一个位置。
 
+from typing import DefaultDict, List
+
 class Solution:
-    min_jump = float('inf')
-    count = 0
-    
-    def canJump(self, nums) :
-        for i, jump in enumerate(nums):   
-            s = self.forwards(i, jump, nums) + i
-            self.min_jump = min(self.min_jump, s)
-            
-            if i >= self.min_jump:
-                break
-            
-            self.count = 0
-            
-        return self.min_jump
-    
-    def forwards(self, start, jump, nums) -> int:
-        n = len(nums) - 1
-        newStart = start+jump
-        
-        if start > n or newStart == start: self.count = float('inf'); return self.count
-        
-        if newStart == n:
-            self.count += 1
-        
-        if newStart < n:
-            self.count += 1
-            self.forwards(newStart, nums[newStart], nums)
-        
-        return self.count
+    def jump(self, nums: List[int]) -> int:
+        n = len(nums)
+        maxPos = start = end = step = 0
+        while end < n - 1 :
+            # end >= n-1时，已可以到达终点
+            while start <= end :
+                maxPos = max(maxPos , start + nums[start])
+                start += 1
+            # 查找最远的可达点
+            print(maxPos)
+            end = maxPos
+            step += 1
+            # 准备下一次跳跃，次数加一
+        return step
+
     
 s = Solution()
-nums = [2,3,1,1,4]
-result = s.canJump(nums)
+nums = [4,1,1,3,1,1,1,2]
+result = s.jump(nums)
 print(result)
