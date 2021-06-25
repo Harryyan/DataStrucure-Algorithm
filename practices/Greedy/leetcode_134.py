@@ -42,8 +42,6 @@ class Solution:
                 else:
                     result = -1
                   
-                print(temp)
-                  
                 if result != -1:
                     for x in range(0, start):
                         gas_1 = gas[x]
@@ -51,7 +49,7 @@ class Solution:
                         # if j == start - 1: gas_2 = 0
                     
                         cost_1 = cost[x]
-                        # cost_2 = cost[x+1 if x < start-1 else start-1]
+                        # cost_2 = cost[x+1 if x < start-1 else start-1
                         # if j == start - 1: cost_2 = 0
                     
                         temp += gas_1 - cost_1 
