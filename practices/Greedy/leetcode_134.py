@@ -16,55 +16,22 @@ from typing import DefaultDict, List
 class Solution:
     def canCompleteCircuit(self, gas: List[int], cost: List[int]) -> int:
         n = len(gas)
-        m = len(cost)
-        result = -1
-        start = -1
+        square = 0
+        minS = float("inf")
+        minIndex = 0
         
         for i in range(0, n):
-            if gas[i] >= cost[i]: 
-                start = i
-                temp = 0
-                result = start
-                
-                for j in range(start, n): 
-                    gas_1 = gas[j]
-                    gas_2 = gas[j+1 if j < n-1 else n-1] 
-                    if j == n - 1: gas_2 = 0
-                    
-                    cost_1 = cost[j]
-                    cost_2 = cost[j+1 if j < n-1 else n-1] 
-                    if j == n - 1: cost_2 = 0
-
-                    temp += gas_1 + gas_2 - cost_1 - cost_2
-
-                    if temp >= 0: result = i; break
-                    else: result = -1; temp = 0; break
-                else:
-                    result = -1
-                  
-                if result != -1:
-                    for x in range(0, start):
-                        gas_1 = gas[x]
-                        # gas_2 = gas[x+1 if start-1 else start-1]
-                        # if j == start - 1: gas_2 = 0
-                    
-                        cost_1 = cost[x]
-                        # cost_2 = cost[x+1 if x < start-1 else start-1
-                        # if j == start - 1: cost_2 = 0
-                    
-                        temp += gas_1 - cost_1 
-                        
-                        if temp < 0: break
-                        
-                if result != -1:
-                    break
-            else:
-                temp = 0        
+            square += gas[i] - cost[i]
+            if square < minS:
+                minS = square
+                minIndex = i
         
-        return result
+        if square < 0: return -1
+        
+        return (minIndex + 1) % n    
     
-gas  = [1,2,3,4,5]
-cost = [3,4,5,1,2]
+gas = [30,30,30,30,10]
+cost = [1,1,1,115,1]
 
 s = Solution()
 

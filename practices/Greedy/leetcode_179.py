@@ -16,7 +16,7 @@ class Solution:
         
             
 s = Solution()
-sample = [3,30,34,5,9]
+sample = [3,30,321214,5,9]
 result = s.largestNumber(sample)
 
 print(result)
