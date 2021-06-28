@@ -14,7 +14,6 @@ class Solution:
     pattern = ""
     
     def isMatch(self, s: str, p: str) -> bool:
-        if not s and p: return False
         if not p and s: return False
         if not p and not s: return True
         
@@ -27,11 +26,11 @@ class Solution:
     def rMatch(self, ti, pj, s, tlen):
         if self.matched: return
         if pj == len(self.pattern):
-            if ti == tlen-1: self.matched = True
+            if ti == tlen: self.matched = True
             return
         
         if self.pattern[pj] == "*":
-            for k in range(0, tlen-ti):
+            for k in range(0, tlen-ti+1):
                 self.rMatch(ti+k, pj+1, s, tlen)
             
         elif ti < tlen and self.pattern[pj] == s[ti] or self.pattern[pj] == "?":
@@ -39,7 +38,7 @@ class Solution:
             
         
 s = Solution()
-text = "a"
-pattern = "***"
+text = "aaabbbaabaaaaababaabaaabbabbbbbbbbaabababbabbbaaaaba"
+pattern = "a*******b"
 
 print(s.isMatch(text,pattern))
