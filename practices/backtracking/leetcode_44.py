@@ -10,10 +10,36 @@
 
 
 class Solution:
+    matched = False
+    pattern = ""
+    
     def isMatch(self, s: str, p: str) -> bool:
         if not s and p: return False
         if not p and s: return False
         if not p and not s: return True
         
+        self.pattern = p
         
-        return False
+        self.rMatch(0,0,s,len(s))
+        
+        return self.matched
+    
+    def rMatch(self, ti, pj, s, tlen):
+        if self.matched: return
+        if pj == len(self.pattern):
+            if ti == tlen-1: self.matched = True
+            return
+        
+        if self.pattern[pj] == "*":
+            for k in range(0, tlen-ti):
+                self.rMatch(ti+k, pj+1, s, tlen)
+            
+        elif ti < tlen and self.pattern[pj] == s[ti] or self.pattern[pj] == "?":
+            self.rMatch(ti+1,pj+1,s,tlen)
+            
+        
+s = Solution()
+text = "a"
+pattern = "***"
+
+print(s.isMatch(text,pattern))
