@@ -20,7 +20,8 @@ from typing import List
 class Solution:
     def monotoneIncreasingDigits(self, n: int) -> int:
         if n < 10: return n
-        if 11 < n < 20 or n == 10: return 9
+        if n == 10: return 9
+        if 11 < n < 20 : return n
         if n == 11: return 11
         
         nums_str = str(n)
@@ -45,5 +46,5 @@ class Solution:
         return int("".join(nums_str))
     
 s = Solution()
-r = s.monotoneIncreasingDigits(12345)
+r = s.monotoneIncreasingDigits(0)
 print(r)
