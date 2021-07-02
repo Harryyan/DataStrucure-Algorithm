@@ -51,11 +51,8 @@ class Solution2:
             self.result = min(self.result, count)
             return 1
 
-        if not root.left and root.right:
+        if not root.left or not root.right:
             return 1 + self.test(root.right, count)
-
-        if not root.right and root.left:
-            return 1 + self.test(root.left, count)
 
         l = self.test(root.left, count)
         r = self.test(root.right, count)
