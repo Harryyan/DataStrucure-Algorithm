@@ -8,7 +8,7 @@ class Solution:
         
         dp = [0,nums[0]]
         
-        for i in range(1, len(nums)):
+        for i in range(0, len(nums)-2):
             temp = dp[0]
             dp[0] = max(temp,dp[1])
             dp[1] = temp+nums[i]
@@ -17,7 +17,7 @@ class Solution:
     
     
 s = Solution()
-sample = [2,1,1,2]
+sample = [2,3,2]
 r = s.rob(sample)
 
 print(r)
