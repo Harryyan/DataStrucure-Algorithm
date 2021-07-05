@@ -22,7 +22,7 @@ class Solution:
             temp = dp1[0]
             dp1[0] = max(temp,dp1[1])
             dp1[1] = temp+nums[i]
-        
+
         return max(max(dp1[0], dp1[1]),max(dp0[0], dp0[1]))
     
     
