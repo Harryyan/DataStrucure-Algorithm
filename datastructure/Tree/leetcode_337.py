@@ -7,6 +7,22 @@ import collections
 # 如果两个直接相连的房子在同一天晚上被打劫，房屋将自动报警。
 # 计算在不触动警报的情况下，小偷一晚能够盗取的最高金额。
 
+
+
+# 动态规划解决方案
+# class Solution:
+#     def rob(self, root: TreeNode) -> int:
+#         # DP二叉树
+#         def robTree(cur: TreeNode):
+#             if not cur: return [0, 0]
+#             left = robTree(cur.left)
+#             right = robTree(cur.right)
+#             val1 = cur.val + left[0] + right[0]
+#             val2 = max(left[0], left[1]) + max(right[0], right[1])
+#             return [val2, val1]
+#         res = robTree(root)
+#         return max(res[0], res[1])
+
 class Solution:
     
     visited = collections.defaultdict(int)
