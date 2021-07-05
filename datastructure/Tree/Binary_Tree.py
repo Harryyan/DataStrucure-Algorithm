@@ -23,7 +23,7 @@ class BinaryTree:
             if node.right is not None:
                 queue.append(node.right)
 
-    def depth_iteration_pre(self, node):
+    def preorder_traversal(self, node):
         '''深度-先序遍历'''
         if node is None:
             return
@@ -33,7 +33,7 @@ class BinaryTree:
         left = self.depth_iteration_pre(node.left)
         right = self.depth_iteration_pre(node.right)
 
-    def depth_iteration_middle(self, node):
+    def inorder_traversal(self, node):
         '''深度-中序遍历'''
         if node is None:
             return
@@ -42,7 +42,7 @@ class BinaryTree:
         print(node.element, end=" ")
         right = self.depth_iteration_middle(node.right)
 
-    def depth_iteration_post(self, node):
+    def postorder_traversal(self, node):
         '''深度-后序遍历'''
         if node is None:
             return
