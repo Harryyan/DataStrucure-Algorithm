@@ -9,16 +9,13 @@ class Solution:
     def trimBST(self, root: TreeNode, low: int, high: int) -> TreeNode:
         if not root: return None
         
-        if root.val < low: root = root.right
-        elif root.val > high: root = root.left
+        if root.val < low: return self.trimBST(root.right, low, high)
+        if root.val > high: return self.trimBST(root.left, low, high)
         
-        l = None
-        r = None
-
-        if root: l = self.trimBST(root.left, low, high)
-        if root: r = self.trimBST(root.right, low, high)
-            
-        if root: root.left = l
-        if root: root.right = r       
+        l = self.trimBST(root.left, low, high)
+        r = self.trimBST(root.right, low, high)
+        
+        root.left = l
+        root.right = r
         
         return root
