@@ -30,24 +30,24 @@ class BinaryTree:
 
         print(node.element, end=" ")
 
-        left = self.depth_iteration_pre(node.left)
-        right = self.depth_iteration_pre(node.right)
+        left = self.preorder_traversal(node.left)
+        right = self.preorder_traversal(node.right)
 
     def inorder_traversal(self, node):
         '''深度-中序遍历'''
         if node is None:
             return
 
-        left = self.depth_iteration_middle(node.left)
+        left = self.inorder_traversal(node.left)
         print(node.element, end=" ")
-        right = self.depth_iteration_middle(node.right)
+        right = self.inorder_traversal(node.right)
 
     def postorder_traversal(self, node):
         '''深度-后序遍历'''
         if node is None:
             return
-        left = self.depth_iteration_post(node.left)
-        right = self.depth_iteration_post(node.right)
+        left = self.postorder_traversal(node.left)
+        right = self.postorder_traversal(node.right)
 
         print(node.element, end=" ")
 
