@@ -1,4 +1,5 @@
 from typing import List
+import collections
 
 # 给你一个包含 n 个整数的数组 nums，判断 nums 中是否存在三个元素 
 # a，b，c ，使得 a + b + c = 0 ？请你找出所有和为 0 且不重复的三元组。
@@ -7,8 +8,6 @@ from typing import List
 
 
 # 解题思路1：排序 + 双指针
-
-
 class Solution:
     def threeSum(self, nums: List[int]) -> List[List[int]]:
         
@@ -44,7 +43,35 @@ class Solution:
                 else:
                     L=L+1
         return res
-    
+
+# 解题思路2： 字典 + 剪枝
+class Solution2:
+    def threeSum(self, nums: List[int]) -> List[List[int]]:
+        cnt = collections.defaultdict(int)
+        for n in nums:
+            cnt[n] += 1
+
+
+
+        keys = sorted(cnt.keys())
+
+        print(keys)
+
+        res = []
+        for i, a in enumerate(keys):
+            # 处理相等的情况, cnt[a]-1是为了保证下面的b和c如果和a相等的话其cnt至少也需要为1
+            cnt[a] -= 1
+            for b in keys[i:]:
+                if cnt[b] >= 1:
+                    # 这里需要保证cnt[b]至少为1, 因为有可能a和b相等, 但是cnt[a]=1, 此时就不可以用b了
+                    c = -a-b
+                    if c < b:
+                        # 剪枝优化, 后面的b更大, 意味着c更不满足c>=b了, 直接break即可
+                        break
+                    if c > b and cnt[c] >= 1 or c == b and cnt[b] >= 2:
+                        # 去重考虑, 添加的三个数必须是非递减的关系
+                        res.append([a, b, c])
+        return res
     
 nums = [-1,0,1,2,-1,-4]
 s = Solution()
