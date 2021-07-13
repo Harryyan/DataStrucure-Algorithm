@@ -10,7 +10,6 @@ import collections
 # 解题思路1：排序 + 双指针
 class Solution:
     def threeSum(self, nums: List[int]) -> List[List[int]]:
-        
         n=len(nums)
         res=[]
         if(not nums or n<3):
@@ -51,12 +50,7 @@ class Solution2:
         for n in nums:
             cnt[n] += 1
 
-
-
         keys = sorted(cnt.keys())
-
-        print(keys)
-
         res = []
         for i, a in enumerate(keys):
             # 处理相等的情况, cnt[a]-1是为了保证下面的b和c如果和a相等的话其cnt至少也需要为1
