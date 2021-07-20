@@ -1,5 +1,4 @@
 from typing import List
-import time
 
 class Solution:
     def searchInsert(self, nums: List[int], target: int) -> int:
