@@ -7,7 +7,7 @@ class Solution:
         
     def eraseOverlapIntervals(self, intervals: List[List[int]]) -> int:
         if not intervals: return 0
-        if len(intervals) == 1: return 1
+        if len(intervals) == 1: return 0
         
         n = len(intervals)
         intervals.sort(key=lambda x: x[0])
