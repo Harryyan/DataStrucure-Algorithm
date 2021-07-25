@@ -16,8 +16,6 @@ class Solution:
         grid[i][j] = -1
         grid[j][i] = -1
         
-        if i == j: return
-        
         for x in range(len(grid)):
             if grid[j][x] == 1:
                 self.dfs(grid, j, x)
