@@ -3,7 +3,6 @@ from typing import List
 class Solution:
     
     def dfs(self, grid, i, j):
-        
         if not ( 0 <= i < len(grid) and 0 <= j < len(grid[i])):
             return
         
