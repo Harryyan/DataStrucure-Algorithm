@@ -27,6 +27,6 @@ class MedianFinder:
 
 
 test = MedianFinder()
-test.addNum(1
+test.addNum(1)
 
 print(test.findMedian())
