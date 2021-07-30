@@ -37,10 +37,33 @@ class Solution:
 
     def pprint(self):
         print(self._result)
+        
+class Solution2:
+    def permute(self, nums: List[int]) -> List[List[int]]:
+        self.res = []
+        
+        check = [0 for i in range(len(nums))]
+        self.backtrack([], nums, check)
+        
+        return self.res
+    
+    def backtrack(self, sol, nums, check):
+        if len(sol) == len(nums):
+            self.res.append(sol)
+            return
+        
+        for i in range(len(nums)):
+            if check[i] == 1:
+                continue
+            check[i] = 1
+            self.backtrack(sol+[nums[i]], nums, check)
+            print(sol, end='\t')
+            print(i)
+            check[i] = 0
 
 
-test = Solution()
-data = [1,2,3,4]
+test = Solution2()
+data = [1,2,3]
 r = test.permute(data)
 
 

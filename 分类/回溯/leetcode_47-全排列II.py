@@ -24,3 +24,6 @@ class Solution:
             check[i] = 1
             self.backtrack(sol+[nums[i]], nums, check)
             check[i] = 0
+            
+            
+print([] + [1])
