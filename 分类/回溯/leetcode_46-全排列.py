@@ -9,15 +9,16 @@ class Solution:
 
     _result = []
 
-    def _permute(self, n, k, nums):
+    def _permute(self, k, nums):
         if k == 1:
+            print(nums)
             self._result.append(nums[:])
 
         i = 0
         while i < k:
             nums[i], nums[k - 1] = nums[k - 1], nums[i]
 
-            self._permute(n, k - 1, nums)
+            self._permute(k - 1, nums)
 
             nums[i], nums[k - 1] = nums[k - 1], nums[i]
 
@@ -27,7 +28,7 @@ class Solution:
         k = len(nums)
         n = k
 
-        self._permute(n, k, nums)
+        self._permute(k, nums)
 
         return self._result
 
@@ -39,16 +40,7 @@ class Solution:
 
 
 test = Solution()
-data = [1, 2, 3, 4, 5]
-test.permute(data)
+data = [1,2,3,4]
+r = test.permute(data)
 
-result = test.system_permutation(data)
 
-# for i in result:
-#     print(i)
-
-# test.pprint()
-a = collections.defaultdict(int) 
-a['f'] = 3
-
-print(a['hh'])
