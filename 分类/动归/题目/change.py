@@ -50,9 +50,9 @@ class Solution:
         return -1
                     
                     
-test = Solution()
-coins = [1,11,5]
-amount = 11
+test = Solution_Advanced()
+coins = [2,3,6,7]
+amount = 7
 
 result = test.coinChange(coins, amount)
 
