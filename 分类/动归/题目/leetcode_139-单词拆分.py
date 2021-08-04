@@ -1,5 +1,4 @@
 from typing import List
-from Trie import Trie
 
 # 给定一个非空字符串 s 和一个包含非空单词的列表 wordDict，判定 s 是否可以被空格拆分为一个或多个在字典中出现的单词。
 
@@ -11,20 +10,13 @@ from Trie import Trie
 
 class Solution:
     def wordBreak(self, s: str, wordDict: List[str]) -> bool:
-        tree = Trie()
-        for word in wordDict:
-            tree.insert(word)
-                
-        result = tree.search(s)
-        print(result)
+        dp=[False for i in range(len(s)+1)]
+        dp[0]=True
+
+        for i in range(len(s)):
+            if dp[i]==True:
+                for j in range(i+1,len(s)+1):
+                    if s[i:j] in wordDict:
+                        dp[j]=True
         
-        return result
-
-
-
-s = "applepenapple"
-wordDict = ["apple", "pen"]
-
-result = Solution()
-
-result.wordBreak(s, wordDict)
+        return dp[-1]

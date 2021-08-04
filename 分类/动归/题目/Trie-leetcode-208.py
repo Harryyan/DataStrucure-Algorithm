@@ -13,11 +13,6 @@ class Trie:
             if not node.children[x]:
                 return None
             node = node.children[x]
-            
-            if node.isEnd and i < n - 1:
-                node = self
-                
-            i += 1
                 
         return node
 
