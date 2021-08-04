@@ -18,7 +18,7 @@ class Solution:
         result = tree.search(s)
         print(result)
         
-        return False
+        return result
 
 
 
