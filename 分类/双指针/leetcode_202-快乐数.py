@@ -10,7 +10,7 @@
 
 # 关键在于判断重复，类似链表，判断是否有环
 
-class Solution:
+class Solution1:
     def isHappy(self, n: int) -> bool:
         def get_next(n):
             total_sum = 0
@@ -27,7 +27,7 @@ class Solution:
         return n == 1
 
 # 双指针
-class Solution:
+class Solution2:
     def isHappy(self, n: int) -> bool:
         def get_next(number):
             total_sum = 0
