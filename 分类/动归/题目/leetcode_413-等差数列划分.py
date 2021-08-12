@@ -23,7 +23,7 @@ class Solution:
         return sum(dp)
     
     
-nums = [1,2,3,5,6,7]
+nums = [1,2,3,4]
 s = Solution()
 
 r = s.numberOfArithmeticSlices(nums)
