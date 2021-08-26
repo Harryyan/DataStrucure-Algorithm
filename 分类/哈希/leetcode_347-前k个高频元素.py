@@ -1,7 +1,30 @@
 from typing import List, DefaultDict
 
-
 class Solution:
+    def topKFrequent(self, nums: List[int], k: int) -> List[int]:
+        dict = DefaultDict(int)
+        result = []
+
+        for num in nums:
+            if num in dict:
+                dict[num] += 1
+            else:
+                dict[num] = 1
+
+        x = {k: v for k, v in sorted(dict.items(), key=lambda item: item[1], reverse=True)}
+
+        i = 0
+
+        for key in x:
+            if i < k:
+                i += 1
+                result.append(key)
+
+        return result
+
+        
+
+class Solution2:
     def topKFrequent(self, nums: List[int], k: int) -> List[int]:
         dict = DefaultDict(int)
         bucket = {k:[] for k in range(1, len(nums)+1)}
