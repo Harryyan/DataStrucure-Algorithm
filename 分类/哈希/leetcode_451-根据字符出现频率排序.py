@@ -4,17 +4,14 @@ from typing import Counter
 
 class Solution:
     def frequencySort(self, s: str) -> str:
-        dict = Counter(s).most_common(len(s))
-        result = ""
-
-        for item in dict:
-            for i in range(0, item[1]):
-                result += item[0]
-
+        dict = Counter(s).most_common()
+        result = ''.join(c*x for x,c in dict)
         return result
 
 
 s = Solution()
 str = "cccaaa"
 
-s.frequencySort(str)
+r = s.frequencySort(str)
+
+print(r)
