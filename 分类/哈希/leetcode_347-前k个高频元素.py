@@ -1,8 +1,11 @@
 from typing import List, Counter
+import collections
+import heapq
+
 
 class Solution:
     def topKFrequent(self, nums: List[int], k: int) -> List[int]:
-        dict = Counter(nums)
+        dict = Counter(nums) # most common 可以返回前K个
         result = []
 
         x = {k: v for k, v in sorted(dict.items(), key=lambda item: item[1], reverse=True)}
@@ -43,6 +46,13 @@ class Solution2:
             else: continue
 
         return result[0:k]
+
+# 堆排序，使用小顶堆; 堆内元素不超过K个；如果到了K个，频率大于堆顶元素的，才能更新堆
+class Solution:
+    def topKFrequent(self, nums: List[int], k: int) -> List[int]:
+        count = collections.Counter(nums)
+        heap = [(val, key) for key, val in count.items()]
+        return [item[1] for item in heapq.nlargest(k, heap)]
 
 s = Solution()
 nums = [5,1,-1,-8,-7,8,-5,0,1,10,8,0,-4,3,-1,-1,4,-5,4,-3,0,2,2,2,4,-2,-4,8,-7,-7,2,-8,0,-8,10,8,-8,-2,-9,4,-7,6,6,-1,4,2,8,-3,5,-9,-3,6,-8,-5,5,10,2,-5,-1,-5,1,-3,7,0,8,-2,-3,-1,-5,4,7,-9,0,2,10,4,4,-4,-1,-1,6,-8,-9,-1,9,-9,3,5,1,6,-1,-2,4,2,4,-6,4,4,5,-5]
