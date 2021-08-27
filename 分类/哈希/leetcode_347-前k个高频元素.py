@@ -1,8 +1,8 @@
-from typing import List, DefaultDict
+from typing import List
 
 class Solution:
     def topKFrequent(self, nums: List[int], k: int) -> List[int]:
-        dict = DefaultDict(int)
+        dict = {}
         result = []
 
         for num in nums:
