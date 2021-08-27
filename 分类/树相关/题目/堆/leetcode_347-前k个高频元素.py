@@ -3,6 +3,8 @@ import collections
 import heapq
 
 
+# 给你一个整数数组 nums 和一个整数 k ，请你返回其中出现频率前 k 高的元素。你可以按 任意顺序 返回答案。
+
 class Solution:
     def topKFrequent(self, nums: List[int], k: int) -> List[int]:
         dict = Counter(nums) # most common 可以返回前K个
