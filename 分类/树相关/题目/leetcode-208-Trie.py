@@ -32,3 +32,5 @@ class Trie:
 
     def startsWith(self, prefix: str) -> bool:
         return self.searchPrefix(prefix) is not None
+
+
