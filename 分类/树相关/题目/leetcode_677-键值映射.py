@@ -4,6 +4,10 @@
 # void insert(String key, int val) 插入 key-val 键值对，字符串表示键 key ，整数表示值 val 。如果键 key 已经存在，那么原来的键值对将被替代成新的键值对。
 # int sum(string prefix) 返回所有以该前缀 prefix 开头的键 key 的值的总和。
 
+
+# 可以使用前缀树来做
+# 最简单的还是使用dict的find函数, 无需操心在插入时构建trie树
+
 class MapSum:
 
     def __init__(self):
@@ -57,3 +61,20 @@ test.insert("apple", 2)
 r = test.sum("ba")
 
 print(r)
+
+
+
+
+# class MapSum:
+#     def __init__(self):
+#         """
+#         Initialize your data structure here.
+#         """
+#         self.map={}
+#     def insert(self, key: str, val: int) -> None:
+#         self.map[key]=val
+#     def sum(self, prefix: str) -> int:
+#         ans=0
+#         for key in self.map.keys():
+#             if key.find(prefix)==0:ans+=self.map[key]
+#         return ans
