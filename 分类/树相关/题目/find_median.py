@@ -1,6 +1,6 @@
 import heapq
 
-
+# 如果是前40%的数据，则要保证大顶堆凑够前40%的数据，直接pop出来
 class MedianFinder:
     def __init__(self):
         """
