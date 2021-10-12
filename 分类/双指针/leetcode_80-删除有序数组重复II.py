@@ -51,9 +51,30 @@ class Solution:
                 temp += 1
                 i += 1
                 nums[i] = nums[j]
-
+        print(nums)
         return i + 1
 
+# 优化解法
+# 允许每一个元素出现至多K次
+
+class Solution_ACE:
+
+    def removeDuplicates(self, nums: List[int], K: int) -> int:
+        left = K - 1
+
+        for right in range(K, len(nums)):
+            tag = True
+
+            for i in range(K):
+                tag *= nums[right] == nums[left - i]
+
+            if tag:
+                continue
+
+            left += 1
+            nums[left] = nums[right]
+            
+        return left + 1
       
 nums = [1,1,1,2,2,2,4,4,4,5,5,6]
 s = Solution()
