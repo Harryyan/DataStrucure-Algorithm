@@ -51,7 +51,7 @@ class Solution:
                 temp += 1
                 i += 1
                 nums[i] = nums[j]
-        print(nums)
+                
         return i + 1
 
 # 优化解法
@@ -73,7 +73,7 @@ class Solution_ACE:
 
             left += 1
             nums[left] = nums[right]
-            
+
         return left + 1
       
 nums = [1,1,1,2,2,2,4,4,4,5,5,6]
