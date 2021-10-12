@@ -4,7 +4,7 @@ from Node import TreeNode
 
 # 两数之和变体问题
 # 中序遍历之后
-# 双指针求两数之和\
+# 双指针求两数之和
 class Solution:
     def findTarget(self, root: TreeNode, k: int) -> bool:
         nums = []

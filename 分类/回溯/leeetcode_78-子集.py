@@ -13,6 +13,7 @@ class Solution:
         # 迭代
         res = [[]]
         for i in nums:
+            print(res)
             res += [ n + [i] for n in res]
         print(res)
         return res
