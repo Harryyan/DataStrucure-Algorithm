@@ -3,7 +3,7 @@ from typing import List
 # 给定一个非负整数 numRows，生成「杨辉三角」的前 numRows行,
 # 在「杨辉三角」中，每个数是它左上方和右上方的数的和
 
-
+# leetcode 118
 class Solution:
     # 时间复杂度: O(n²)
     # 空间复杂度: O(1)
@@ -17,7 +17,14 @@ class Solution:
 
         return res
 
-numRows = 18
+numRows = 5
 s = Solution()
 
 print(s.generate(numRows))
+
+
+x = [a+b for a, b in zip([0,1], [1,0])]
+
+for a,b in zip([0,1], [1,0]):
+    print(a, end="\t")
+    print(b)
