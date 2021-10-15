@@ -21,3 +21,11 @@ class Solution:
                     count += 1
         
         return count
+
+# def dfs(self, grid, i, j):    
+#         grid[i][j] = -1
+#         grid[j][i] = -1
+        
+#         for x in range(len(grid)):
+#             if grid[j][x] == 1:
+#                 self.dfs(grid, j, x)
