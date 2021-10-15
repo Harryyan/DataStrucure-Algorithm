@@ -7,19 +7,19 @@ class Solution:
     def minPathSum(self, grid: List[List[int]]) -> int:
         if not grid: return 0
 
-        # 列
-        m = len(grid[0])
         # 行
-        n = len(grid)  
+        m = len(grid)
+        # 列
+        n = len(grid[0])  
 
-        min_dist = [[0] * m for _ in range(n)]
+        min_dist = [[0] * n for _ in range(m)]
         
         min_dist[0][0] = grid[0][0]
 
-        for j in range(1, m):
+        for j in range(1, n):
             min_dist[0][j] = grid[0][j] + min_dist[0][j-1]
 
-        for i in range(1, n):
+        for i in range(1, m):
             min_dist[i][0] = grid[i][0] + min_dist[i-1][0]
 
         for i in range(1, m):
@@ -28,7 +28,8 @@ class Solution:
         
         return min_dist[-1][-1]
 
-grid = [[1,2,3],[4,5,6]]
+grid = [[1,3,1],[1,5,1],[4,2,1]]
 s = Solution()
 
 r = s.minPathSum(grid)
+print(r)
