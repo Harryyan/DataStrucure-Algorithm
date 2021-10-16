@@ -57,6 +57,7 @@ class Solution_Ace:
                
         return min_dis[-1]
 
+# 第三种: 直接原地，每次更新grid[i][j]值
 
 grid = [[1]]
 s = Solution_Ace()
