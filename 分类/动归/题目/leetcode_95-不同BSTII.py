@@ -11,5 +11,12 @@ class TreeNode:
 
 class Solution:
     def generateTrees(self, n: int) -> List[TreeNode]:
-
-        return None
+        def gen(num):
+            if not num: yield None
+            
+            for i, n in enumerate(num):
+                for l in gen(num[:i]):
+                    for r in gen(num[i + 1:]):
+                        yield TreeNode(n, l, r)
+        
+        return bool(n) * [*gen([*range(1, 1 + n)])]
