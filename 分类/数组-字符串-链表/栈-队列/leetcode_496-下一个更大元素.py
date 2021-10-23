@@ -7,6 +7,8 @@ from typing import List
 # nums1 中数字 x 的下一个更大元素是指 x 在 nums2 中对应位置的右边的第一个比 x 大的元素。如果不存在，对应位置输出 -1 。
 
 class Solution:
+    # 时间复杂度: O(mn)
+    # 空间复杂度: O(n)
     def nextGreaterElement(self, nums1: List[int], nums2: List[int]) -> List[int]:
         m = len(nums1)
         n = len(nums2)
@@ -34,8 +36,25 @@ class Solution:
 
         return ans
 
-num1 = [2,4]
-nums2 = [1,2,3,4]
+class Solution_ACE:
+    # 时间复杂度: O(mn) - 我觉得不是官方说的O(m+n), while循环中，得循环pop出旧的元素；
+    # 空间复杂度: O(n)
+    def nextGreaterElement(self, nums1, nums2):
+        dic, stack = {}, []
 
-s = Solution()
+        for i in range(len(nums2) - 1, -1, -1):
+            while stack and stack[-1] <= nums2[i]:
+                stack.pop()
+                
+            if stack: 
+                dic[nums2[i]] = stack[-1]
+
+            stack.append(nums2[i])
+
+        return [dic.get(x, -1) for x in nums1]
+
+num1 = [2,4]
+nums2 = [3,4,2,1]
+
+s = Solution_ACE()
 s.nextGreaterElement(num1, nums2)
