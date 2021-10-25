@@ -43,6 +43,20 @@ class Solution:
 
         return max(dp[length-1][0][1],dp[length-1][0][2],0)
 
+class Solution_Ace:
+    # 时间复杂度: O(n)
+    # 空间复杂度: O(1)
+    # 官方题解
+    def maxProfit(self, prices: List[int]) -> int:
+        n = len(prices)
+        buy1 = buy2 = -prices[0]
+        sell1 = sell2 = 0
+        for i in range(1, n):
+            buy1 = max(buy1, -prices[i])
+            sell1 = max(sell1, buy1 + prices[i])
+            buy2 = max(buy2, sell1 - prices[i])
+            sell2 = max(sell2, buy2 + prices[i])
+        return sell2
 
 prices = [3,3,5,0,0,3,1,4]
 s = Solution()
