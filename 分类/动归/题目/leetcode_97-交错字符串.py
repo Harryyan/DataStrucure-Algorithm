@@ -10,6 +10,8 @@
 # leetcode - 97
 class Solution:
 
+    # 时间复杂度: O(mn)
+    # 空间复杂度: O(mn)
     def isInterleave(self, s1: str, s2: str, s3: str) -> bool:
         len1=len(s1)
         len2=len(s2)
