@@ -38,3 +38,13 @@ class Solution:
                 dp[i][j] = (dp[i][j-1] and s2[j-1]==s3[i+j-1]) or (dp[i-1][j] and s1[i-1]==s3[i+j-1])
         
         return dp[-1][-1]
+
+
+s = Solution()
+s1 = "aabcc"
+s2 = "dbbca" 
+s3 = "aadbbcbcac"
+
+r = s.isInterleave(s1,s2,s3)
+
+print(r)
