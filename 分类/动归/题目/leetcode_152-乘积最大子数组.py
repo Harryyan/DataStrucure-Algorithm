@@ -41,11 +41,11 @@ class Solution_Cool:
             nums[i] *= nums[i - 1] or 1
             # 防止 0 的出现，出现了就从当前元素重新开始
             reverse_nums[i] *= reverse_nums[i - 1] or 1
-            print(reverse_nums[i])
 
+        # 合并数组，求最大值
         return max(nums + reverse_nums)
 
-nums = [3,-2,-2,0,3]
+nums = [3,-2,-2,4,-3]
 s = Solution_Cool()
 
 r = s.maxProduct(nums)
