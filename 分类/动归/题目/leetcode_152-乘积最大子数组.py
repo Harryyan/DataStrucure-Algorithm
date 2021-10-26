@@ -35,6 +35,8 @@ class Solution_Cool:
     # 时间复杂度：O(n)
     # 空间复杂度：O(n)
     def maxProduct(self, nums: List[int]) -> int:
+        # 有序列表除左边的第一个负数外，负数的个数为偶数，这个我们可以从右往左累乘计算得到；
+        # 有序列表除右边的第一个负数外，负数的个数为偶数，这个我们可以从左往右计算得到。
         reverse_nums = nums[::-1]
 
         for i in range(1, len(nums)):
