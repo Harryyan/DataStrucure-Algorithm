@@ -46,7 +46,7 @@ class Solution_Cool:
         return max(nums + reverse_nums)
 
 nums = [3,-2,-2,0,3]
-s = Solution_2()
+s = Solution_Cool()
 
 r = s.maxProduct(nums)
 
