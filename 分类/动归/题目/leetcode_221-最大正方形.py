@@ -5,7 +5,7 @@ from typing import List
 import math
 
 class Solution:
-    def maximalSquare(self, matrix: List[List[str]]) -> int:
+    def maximalSquare(self, matrix: List[List[int]]) -> int:
         if not matrix: return 0
         maxSum = 0
 
@@ -45,5 +45,3 @@ s = Solution()
 
 r = s.maximalSquare(matrix)
 print(r)
-
-print('1' + 3)
