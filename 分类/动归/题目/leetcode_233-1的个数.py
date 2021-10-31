@@ -32,36 +32,27 @@ class Solution_OverTime:
 
         return dp[n % 10]
 
+# 将 1 ~ n 的个位、十位、百位、...的 1 出现次数相加，即为 1 出现的总次数。
 
 class Solution:
     def countDigitOne(self, n: int) -> int:
-        if n==0: return 0
-        if n<10: return 1
+        digit, res = 1, 0
+        high, cur, low = n // 10, n % 10, 0
 
-        m=len(str(n))  
+        while high != 0 or cur != 0: # 当 high 和 cur 同时为 0 时，说明已经越过最高位，因此跳出
+            low += cur * digit # 将 cur 加入 low ，组成下轮 low
+            cur = high % 10 # 下轮 cur 是本轮 high 的最低位
+            high //= 10 # 将本轮 high 最低位删除，得到下轮 high
+            digit *= 10 # 位因子每轮 × 10
 
-        # dp[i] 小于等于i位数字的包含1的个数 (注意是1的个数 不是数字个数)
-        dp=[0]*(m+1)
-        for j in range(1,m+1):
-            # 10**(j-1)对应第j位是1 剩余位置不包含1 dp[j-1]对应剩余的j-1位包含1 
-            dp[j]=10**(j-1)+10*dp[j-1]
-        # 计算
-        total=0
-        n_list=[int(c) for c in str(n)]
-        # 小于n的数字: 最高位比n小 最高位相等第二位小 前两位相等第三位小...
-        for j in range(m):
-            for lower in range(n_list[j]):
-                cnt_1_pre=sum([d==1 for d in n_list[0:j]])+int(lower==1)
-                if cnt_1_pre!=0:
-                    total+=cnt_1_pre*10**(m-(j+1))+dp[m-(j+1)] # 如果前序有1后面什么数字都可
-                else:
-                    total+=dp[m-(j+1)]
-        
-        # 加上等于n的情况
-        total+=sum([d==1 for d in n_list])
-        return total
+            low += cur * digit
+            cur = high % 10
+            high //= 10
+            digit *= 10
 
-n = 1000
+        return res
+
+n = 1453
 s = Solution()
 
 r = s.countDigitOne(n)
