@@ -35,6 +35,8 @@ class Solution_OverTime:
 # 将 1 ~ n 的个位、十位、百位、...的 1 出现次数相加，即为 1 出现的总次数。
 
 class Solution:
+    # 时间复杂度 O(logn) 
+    # 空间复杂度 O(1)
     def countDigitOne(self, n: int) -> int:
         digit, res = 1, 0
         high, cur, low = n // 10, n % 10, 0
