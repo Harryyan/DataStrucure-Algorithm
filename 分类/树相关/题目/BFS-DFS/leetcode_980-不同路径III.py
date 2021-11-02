@@ -12,7 +12,7 @@
 from typing import List
 
 class Solution:
-    # 时间复杂度: O(row * col)
+    # 时间复杂度: O(4^(row * col))
     # 空间复杂度: O(1)
     def uniquePathsIII(self, grid: List[List[int]]) -> int:
         rows, cols = len(grid), len(grid[0])  # 计算行数和列数
