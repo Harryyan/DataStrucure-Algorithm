@@ -41,7 +41,6 @@ class Solution:
         for i in range(1, amount+1):
             for j in range(1, amount+1):
                 if state[i-1][j]:
-                    
                     for coin in coins:
                         if j + coin == amount:
                             return i + 1
@@ -52,10 +51,10 @@ class Solution:
         return -1
                     
                     
-test = Solution_Advanced()
+s = Solution_Advanced()
 coins = [2,3,6,7]
 amount = 7
 
-result = test.coinChange(coins, amount)
+result = s.coinChange(coins, amount)
 
 print(result)
