@@ -6,20 +6,33 @@ from typing import List
 # 题目数据保证结果符合 32 位带符号整数。
 
 class Solution:
+    # 时间复杂度: O(mn)
+    # 空间复杂度: O(mn)
     def change(self, amount: int, coins: List[int]) -> int:
-        # dp 含义，前i种零钱可以凑出j种金额的方法数
         dp = [[0 for i in range(amount+1)] for j in range(len(coins)+1)]
-        # 初始化，前0种（没有钱）可以凑出金额为0的方法数位1种。就是啥都不凑就行
         dp[0][0] = 1
-        for i in range(1, len(coins)+1):
-            for j in range(amount+1):
+
+        row = len(coins)
+
+        for i in range(1, row + 1):
+            for j in range(amount + 1):
                 if j - coins[i-1] >= 0:
-                    dp[i][j] = dp[i-1][j]+ dp[i][j-coins[i-1]]     # 注意！！这里为完全背包问题写法
-                    # dp[i][j] = dp[i-1][j]+ dp[i-1][j-coins[i-1]]  # 若为0-1背包问题，应该如何写
+                    dp[i][j] = dp[i-1][j] + dp[i][j-coins[i-1]]
                 else:
                     dp[i][j] = dp[i-1][j]
-            #print(dp)
+
         return dp[-1][-1]
+
+class Solution_Ace:
+    # 时间复杂度: O(mn) - 但有优化
+    # 空间复杂度: O(n)
+    def change(self, amount: int, coins: List[int]) -> int:
+        dp = [1] + [0] * amount
+        for coin in coins:
+            for j in range(coin, amount + 1):
+                dp[j] += dp[j - coin]
+        return dp[-1]
+
 
 s = Solution()
 coins = [3]
