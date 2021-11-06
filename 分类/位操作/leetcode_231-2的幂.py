@@ -5,6 +5,7 @@
 
 # lowbit 运算
 # lowbit(n) = n & -n
+# 证明：计算机知识，反码，补码
 class Solution:
     def isPowerOfTwo(self, n: int) -> bool:
         return n > 0 and (n & -n) == n
