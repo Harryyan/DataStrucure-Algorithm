@@ -14,7 +14,7 @@ class Dijkstra:
         
         shortest_dis= matrix[start]
         
-        while len(non_visited):
+        while non_visited:
             idx = non_visited[0]
 
             for i in non_visited:
