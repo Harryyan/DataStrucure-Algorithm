@@ -3,7 +3,7 @@
 class Dijkstra:
     def startwith(self, start: int, matrix: list) -> list:
         '''
-        单元最短路径实现
+        单源最短路径实现
 
         Args:
             start: 起点
