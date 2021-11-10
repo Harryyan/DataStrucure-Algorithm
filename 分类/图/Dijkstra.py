@@ -1,4 +1,5 @@
-import heapq
+import heapq, collections
+from typing import List
 
 # 单源最短路径
 
@@ -52,7 +53,6 @@ class Dijkstra:
         dis = dict((key,INF) for key in G)    # start到每个点的距离
         dis[start] = 0
         vis = dict((key,False) for key in G)    #是否访问过，1位访问过，0为未访问
-        ###堆优化
         pq = []    #存放排序后的值
         heapq.heappush(pq,[dis[start],start])
     
@@ -71,6 +71,25 @@ class Dijkstra:
                     heapq.heappush(pq,[dis[node],node])
                     temp = p.copy()
                     temp.append(node)    #更新node的路径
+
+    # 平均tc: O(edge * vertex)
+    # sc: O(v)
+    def networkDelayTime(self, times: List[List[int]], N: int, K: int) -> int:
+        dist = [float("inf") for _ in range(N)]
+        K -= 1
+        dist[K] = 0
+        weight = collections.defaultdict(dict)
+        for u, v, w in times:
+            weight[u-1][v-1] = w
+        queue = collections.deque([K])
+        while queue:
+            u = queue.popleft()
+            for v in weight[u]:
+                if dist[u] + weight[u][v] < dist[v]:
+                    dist[v] = dist[u] + weight[u][v]
+                    queue.append(v)
+        return max(dist) if max(dist) < float("inf") else -1
+   
 
     
 
