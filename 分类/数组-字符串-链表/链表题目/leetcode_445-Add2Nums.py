@@ -14,7 +14,7 @@ class ListNode:
 # You may assume the two numbers do not contain any leading zero, except the number 0 itself.
 
 # leetcode 445
-# 使用栈实现不改变原链表的 follow up
+# 使用栈实现不翻转原链表 - follow up
 class Solution:
     # tc: O(n) 
     # sc: O(n)
