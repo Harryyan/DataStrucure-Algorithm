@@ -36,6 +36,7 @@ class _UnionFind:
             self.parent[i] = i
     
     # 查询root parent
+    # 路径压缩
     def find(self, x):
         r = x
 
@@ -50,7 +51,6 @@ class _UnionFind:
         root_u = self.find(u)
         root_v = self.find(v)
 
-        # 路径压缩
         self.parent[root_v] = root_u
 
     def is_connected(self, u, v):
