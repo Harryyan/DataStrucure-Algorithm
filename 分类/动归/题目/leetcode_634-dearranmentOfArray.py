@@ -3,6 +3,7 @@
 # return the number of derangements it can generate. Since the answer may be huge, return it modulo 109 + 7.
 
 # leetcode 634
+# 斐波那契数列变种
 
 class Solution:
     # tc: O(n)
