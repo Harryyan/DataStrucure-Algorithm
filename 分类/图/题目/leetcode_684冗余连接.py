@@ -10,11 +10,11 @@ from typing import List
 # leetcode - 684
 
 class Solution:
-    # tc: O(n^2)
+    # tc: O(nlogn)
     # sc: O(n)
     def findRedundantConnection(self, edges: List[List[int]]) -> List[int]:
         n = len(edges)
-        uf = _UnionFind(n)
+        uf = _UnionFind(n+1)
 
         for edge in edges:
             u = edge[0]
@@ -28,24 +28,30 @@ class Solution:
         return [0,0]
 
 class _UnionFind:
-    parent = []
-
+    # 初始化并查集
     def __init__(self, n):
-        self.parent = [i for i in range(n)]
+        self.parent = {}
+
+        for i in range(n):
+            self.parent[i] = i
+    
+    # 查询root parent
+    def find(self, x):
+        r = x
+
+        while self.parent[r] != r:
+            r = self.parent[r]
+
+        return r
 
     def union(self, u, v):
-        parent_u = self.find(u)
-        parent_v = self.find(v)
+        if self.is_connected(u,v): return
 
-        if parent_u == parent_v:
-            return
+        root_u = self.find(u)
+        root_v = self.find(v)
 
-        for i in range(0, len(self.parent)):
-            if self.parent[i] == parent_v:
-                self.parent[i] = parent_u
-
-    def find(self, x):
-        return self.parent[x-1]
+        # 路径压缩
+        self.parent[root_v] = root_u
 
     def is_connected(self, u, v):
         return self.find(u) == self.find(v)
