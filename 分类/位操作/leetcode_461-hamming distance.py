@@ -1,5 +1,5 @@
-# 两个整数之间的 汉明距离 指的是这两个数字对应二进制位不同的位置的数目。
-# 给你两个整数 x 和 y，计算并返回它们之间的汉明距离。
+# The Hamming distance between two integers is the number of positions at which the corresponding bits are different.
+# Given two integers x and y, return the Hamming distance between them.
 
 # leetcode - 461
 
