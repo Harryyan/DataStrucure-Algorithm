@@ -4,6 +4,8 @@
 # leetcode - 461
 
 class Solution:
+    # tc: O(logI) - I is scope of numbers
+    # sc: O(1)
     def hammingDistance(self, x: int, y: int) -> int:
         z = x ^ y
         count = 0
