@@ -5,9 +5,9 @@ from typing import List
 # 注意：你不能同时参与多笔交易（你必须在再次购买前出售掉之前的股票）。
 
 # 通用状态转移方程
+
 # T[i][k][0] = max(T[i - 1][k][0], T[i - 1][k][1] + prices[i])
 # T[i][k][1] = max(T[i - 1][k][1], T[i - 1][k - 1][0] - prices[i])
-
 
 class Solution:
 
