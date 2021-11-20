@@ -21,8 +21,7 @@ class Solution:
         
         for i in range(1, n):
             for j in range(i):
-                if nums[i] > nums[j]:
-                    
+                if nums[i] > nums[j]:  
                     if dp[j] + 1 > dp[i]:
                         dp[i] = dp[j] + 1
                         count[i] = count[j]
