@@ -2,34 +2,22 @@
 # leetcode - 633
 
 class Solution:
-
-    def sqrt(self, x):
-        if x <= 1:
-            return x
-
-        left = 1
-        right = x >> 1
-        while left < right:
-            mid = (left + right + 1) >> 1
-            if mid * mid > x:
-                right = mid - 1
-            else:
-                left = mid
-
-        return left
-
+    # tc: O(n ** 0.5)
+    # sc: O(1)
     def judgeSquareSum(self, c: int) -> bool:
-        if c == 0 or c == 1: return True
+        left = 0
+        right = int(c ** 0.5) + 1
+        
+        # 双指针
+        while left <= right:
+            total = left ** 2 + right ** 2
 
-        temp = self.sqrt(c)
-        if temp ** 2 == c: return True
-
-        for i in range(temp, 0, -1):
-            print(i)
-            temp2 = c - i ** 2
-            temp3 = self.sqrt(temp2)
-
-            if temp3 ** 2 == temp2: return True
+            if total == c:
+                return True
+            elif total > c:
+                right -= 1
+            else:
+                left += 1
 
         return False
 
