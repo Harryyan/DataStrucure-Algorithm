@@ -16,20 +16,14 @@ class Solution(object):
         """
         :type n: int
         :rtype: int
-        """
-        # 我们先初始化候选人为第一个人        
+        """      
         candidate = 0
 
-        # 观察图可知，每个节点，最多只有一个箭头
-        # 另一个规律是，假如说有一个名人，那么所有的箭头都指向他
-        # 所以，假如说真有一个名人，那么我们任意找到一个箭头的指向，都会指向那个名人
         for j in range(1, n):
             # 假如 candidate认识j
             if knows(candidate, j): 
                 candidate = j
 
-        
-        # 判断是否符合条件
         for j in range(n):
             # 名人只认识自己，跳过
             if candidate == j:
