@@ -4,6 +4,8 @@ from typing import List
 # return the shortest distance between these two words in the list.
 
 class Solution:
+    # tc: O(n)
+    # sc: O(1)
     def shortestDistance(self, wordsDict: List[str], word1: str, word2: str) -> int:
         n = len(wordsDict)
         dict = {}
