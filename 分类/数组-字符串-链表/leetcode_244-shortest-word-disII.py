@@ -35,7 +35,7 @@ class WordDistance:
 
 wordsDict = ["practice", "makes", "perfect", "coding", "makes"]
 word1 = "makes"
-word2 = "coding"
+word2 = "makes"
 obj = WordDistance(wordsDict)
 r = obj.shortest(word1,word2)
 
