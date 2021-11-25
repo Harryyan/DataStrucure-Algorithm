@@ -6,6 +6,8 @@ from typing import List
 # leetcode - 334
 
 class Solution:
+    # tc: O(n ^ 2)
+    # sc: O(n)
     def increasingTriplet(self, nums: List[int]) -> bool:
         set_num = set(nums)
         n = len(set_num)
@@ -29,6 +31,18 @@ class Solution:
             if dp[i] == 3:
                 return True
 
+        return False
+
+class Solution:
+    # tc: O(n)
+    # sc: O(1)
+    def increasingTriplet(self, nums: List[int]) -> bool:
+        r1, r2 = float('inf'), float('inf')
+
+        for n in nums :
+            if n <= r1 : r1 = n
+            elif n <= r2 : r2 = n
+            else : return True
         return False
 
 nums = [1,2,1,2,1,2]
