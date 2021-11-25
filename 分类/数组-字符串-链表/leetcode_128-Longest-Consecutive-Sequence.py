@@ -4,6 +4,8 @@ from typing import List
 # You must write an algorithm that runs in O(n) time.
 
 class Solution:
+    # tc: O(n)
+    # sc: O(n)
     def longestConsecutive(self, nums: List[int]) -> int:
         nums = set(nums)
         res = 0
@@ -15,7 +17,7 @@ class Solution:
                 # 计算每个片段长度
                 while j in nums:
                     j += 1
-                    
+
                 res = max(res,j-i)
 
         return res
