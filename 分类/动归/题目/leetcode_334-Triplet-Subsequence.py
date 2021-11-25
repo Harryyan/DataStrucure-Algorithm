@@ -7,8 +7,11 @@ from typing import List
 
 class Solution:
     def increasingTriplet(self, nums: List[int]) -> bool:
-        n = len(nums)
+        set_num = set(nums)
+        n = len(set_num)
         if n < 3: return False
+
+        n = len(nums)
 
         dp = [1] * n
         count = [1] * n
@@ -28,7 +31,7 @@ class Solution:
 
         return False
 
-nums = [2,1,5,0,4,6]
+nums = [1,2,1,2,1,2]
 s = Solution()
 
 r = s.increasingTriplet(nums)
