@@ -25,6 +25,8 @@ class Solution:
         for i in range(len(nums)):
             loc = (nums[i] - min_) // each_bucket_len
             buckets[loc].append(nums[i])
+
+        print(buckets)
         
         # 遍历桶更新答案
         prev_max = float('inf')
@@ -37,7 +39,7 @@ class Solution:
                 
         return max_gap
         
-nums = [1,2,3,4,5,6]
+nums = [6,7,1,2,4,10,90]
 s = Solution()
 
 r = s.maximumGap(nums)
