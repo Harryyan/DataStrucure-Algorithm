@@ -25,6 +25,24 @@ class Solution:
                 left = mid + 1
         return left
 
+# 双指针，找环
+class Solution:
+    # tc: O(n)
+    # sc: O(1)
+    def findDuplicate(self, nums: List[int]) -> int:
+        slow = nums[0]
+        fast = nums[nums[0]]
+        while slow != fast:
+            # print(slow, fast)
+            slow = nums[slow]
+            fast = nums[nums[fast]]
+        slow = 0
+        while slow != fast:
+            slow = nums[slow]
+            fast = nums[fast]
+        return slow
+
+
 nums = [1,3,4,2,2]
 s = Solution()
 
