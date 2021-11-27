@@ -47,5 +47,6 @@ class Solution {
 }
 
 let s = Solution()
+let result = s.sortArray([6,7,5,4,2,9])
 
-s.sortArray([6,7,5,4,2,9])
+print(result)
