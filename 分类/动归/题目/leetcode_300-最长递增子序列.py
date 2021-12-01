@@ -14,7 +14,7 @@ class Solution:
         
         dp = [1] * n
         
-        for i in range(0, n):
+        for i in range(n):
             for j in range(i):
                 if nums[j] < nums[i]:
                     dp[i] = max(dp[i], dp[j] + 1)
