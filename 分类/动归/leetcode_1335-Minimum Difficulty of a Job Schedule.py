@@ -6,6 +6,8 @@
 from typing import List
 
 class Solution:
+    # tc: O(nd)
+    # sc: O(nd)
     def minDifficulty(self, jobDifficulty: List[int], d: int) -> int:
         jc = len(jobDifficulty)
         if d > jc: return -1
