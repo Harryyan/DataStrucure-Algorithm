@@ -8,8 +8,10 @@
 # List<Integer> getNewsFeed(int userId) Retrieves the 10 most recent tweet IDs in the user's news feed. Each item in the news feed must be posted by users who the user followed or by the user themself. Tweets must be ordered from most recent to least recent.
 # void follow(int followerId, int followeeId) The user with ID followerId started following the user with ID followeeId.
 # void unfollow(int followerId, int followeeId) The user with ID followerId started unfollowing the user with ID followeeId.
+
 from typing import defaultdict, list
 
+# 考察链表，链表合并，优先队列
 class Twitter:
     def __init__(self):
         """
