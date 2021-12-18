@@ -71,7 +71,7 @@ class Solution2:
 
         
         
-isConnected = [[1,0,0,1],[0,1,1,0],[0,1,1,1],[1,0,1,1]]
+isConnected = [[1,1,0],[1,1,0],[0,0,1]]
 s = Solution()
 
 r = s.findCircleNum(isConnected)
