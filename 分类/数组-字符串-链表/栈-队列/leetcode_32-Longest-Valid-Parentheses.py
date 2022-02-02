@@ -5,6 +5,7 @@ class Solution:
         stack = [-1]
         ret = 0
         lg = len(s)
+        
         for i in range(lg):
             if s[i] == '(':
                 stack.append(i)
@@ -16,3 +17,8 @@ class Solution:
                     ret = max(ret, i - stack[-1])
                     print(ret)
         return ret
+
+
+item = "()"
+s = Solution()
+r = s.longestValidParentheses(item)
