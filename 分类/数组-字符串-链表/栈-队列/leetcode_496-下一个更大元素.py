@@ -37,7 +37,7 @@ class Solution:
         return ans
 
 class Solution_ACE:
-    # 时间复杂度: O(mn) - 我觉得不是官方说的O(m+n), while循环中，得循环pop出旧的元素；
+    # 时间复杂度: O(m+n)
     # 空间复杂度: O(n)
     def nextGreaterElement(self, nums1, nums2):
         dic, stack = {}, []
