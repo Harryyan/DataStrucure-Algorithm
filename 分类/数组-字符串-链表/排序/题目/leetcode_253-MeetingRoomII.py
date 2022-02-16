@@ -24,6 +24,35 @@ class Solution:
                 heapq.heappush(end_list, intervals[i][1])
         return ans   
 
+class Solution2:
+    # tc: O(nlogn)
+    # sc: O(n)
+    # use heap
+    def minMeetingRooms(self,intervals):
+        begins = []
+        ends = []
+
+        for interval in intervals:
+            begins.append(intervals[0][0])
+            ends.append(intervals[0][1])
+
+        idx1 = 0
+        idx2 = 0
+        count = 0
+        res = 1
+
+        while idx1 < len(intervals) and idx2 < len(intervals):
+            if begins[idx1] < ends[idx2]:
+                idx1 += 1
+                count += 1
+            else:
+                idx2 += 1
+                count -= 1
+            
+            res = max(res, count)
+
+        return res
+
 
 intervals = [[0,30],[5,10],[15,20]]
 s = Solution()
