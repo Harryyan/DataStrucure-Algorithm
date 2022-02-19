@@ -33,3 +33,39 @@ def sqrt_0(x):
 
 
 print(sqrt_0(3))
+
+
+def deletion_distance(str1, str2):
+    if str1 == str2: 
+     return 0
+  
+    m = len(str1)
+    n = len(str2)
+  
+    if n == 0 and m != 0:
+        return m
+
+    if m == 0 and n != 0:
+        return n
+  
+    # Sentinel
+    dp =[[0 for i in range(n + 1)] for _ in range(m + 1)] 
+    
+    # tc: O(mn)
+    # sc: O(mn)
+    for i in range(m+1):
+        for j in range(n+1):
+            if i == 0:
+                dp[i][j] = j
+            elif j == 0:
+                dp[i][j] = i
+            elif str1[i-1] == str2[j-1]:
+                dp[i][j] = dp[i-1][j-1]
+            else:
+                dp[i][j] = min(dp[i-1][j], dp[i][j-1]) + 1
+    
+    print(dp)
+    return dp[-1][-1]
+
+r = deletion_distance('abc','aef')
+print(r)
