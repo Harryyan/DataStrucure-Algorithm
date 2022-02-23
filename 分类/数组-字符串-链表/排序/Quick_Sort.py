@@ -45,7 +45,6 @@ def quick_sort2_better(alist, first, last):
     quick_sort2_better(alist, first, low - 1)
     quick_sort2_better(alist, low + 1, last)
 
-
 # 查找第K大元素
 def quick_sort_search_kth(alist, first, last, k):
     if k > len(alist):
@@ -90,7 +89,7 @@ print(items2)
 # 最坏情况: O（n²）
 # 平均情况: O(nlogn)
 # 稳定性: 不稳定
-# 辅助空间: O(1)
+# 辅助空间: O(logn)
 
 # 最好情况：每次左右都是均匀划分，递归树的深度为：logn，其空间复杂度也就为 O(logn)，
 # 最坏情况：每次只能排除一个元素，要递归剩下n-1个元素，如：[1, 2, 3, 4, 5]，或[5, 4, 3, 2, 1]

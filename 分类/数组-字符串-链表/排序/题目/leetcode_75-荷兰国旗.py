@@ -24,17 +24,16 @@ class Solution_3:
         right= len(nums)
 
         while cursor < right:
-            if nums[cursor] == 2:
+            if nums[cursor] == 0:
                 left += 1
                 nums[cursor], nums[left] = nums[left], nums[cursor]
                 cursor += 1
-            elif nums[cursor] == 0:
+            elif nums[cursor] == 2:
                 right -= 1
                 nums[cursor], nums[right] = nums[right], nums[cursor]
             else:
                 cursor += 1
 
-        print(nums)
 
 colors = [2,0,2,1,1,0]
 
