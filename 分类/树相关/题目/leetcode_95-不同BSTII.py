@@ -19,7 +19,7 @@ class Solution:
     def generateTrees(self, n: int) -> List[TreeNode]:
         def generateTrees(start, end):
             if start > end:
-                return [None,]
+                return [None]
             
             allTrees = []
             for i in range(start, end + 1):  # 枚举可行根节点
