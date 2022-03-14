@@ -1,5 +1,0 @@
-{
-    "python.formatting.provider": "black",
-    "editor.quickSuggestions": false,
-    "sde.buildOnSave": true
-}
