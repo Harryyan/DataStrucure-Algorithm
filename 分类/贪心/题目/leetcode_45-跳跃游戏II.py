@@ -16,7 +16,6 @@ class Solution:
                 maxPos = max(maxPos , start + nums[start])
                 start += 1
             # 查找最远的可达点
-            print(maxPos)
             end = maxPos
             step += 1
             # 准备下一次跳跃，次数加一
