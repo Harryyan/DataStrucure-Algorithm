@@ -39,3 +39,14 @@
  选择文件下载作为深入点:
  
  ![](https://res.cloudinary.com/dwpjzbyux/image/upload/v1649187948/SystemDesign/DropBox/detail_lmzuuo.png)
+ 
+**FileDownloader:** 提供下载入口, 线程调度.
+ 
+**FileDownloadTask:**  具体下载任务。
+  
+**FileDownloadRequest:**  下载请求，包含参数.
+
+**FileDownloaderConfig:**  Downloader配置.
+
+**FileStore:** 存储文件到本地. 
+  
