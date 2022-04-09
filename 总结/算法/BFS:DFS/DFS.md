@@ -1,238 +1,98 @@
-# 其他
+# DFS总结
 
-## 回文字串 (Leetcode-647)
-区间dp问题，我们要记录每对区间的字符串是否为回文，等遇到新的字符时，判断和头字符是否相等以及内部区间是否为回文即可. 还有一种方法是：中心扩展，时间复杂度为O(nlogn)
+深度优先搜索, 常用来解决可达性问题.
+
+1. 用递归栈存节点信息，按需pop
+2. 类似BFS，做标记
+
+## 递归栈
+
+以下代码片段是递归删除某文件夹下所有文件实现; 使用递归栈存取文件夹指针，直到为空再popLast.
+
+```objc
+while([stack count] > 0) {
+    NSEnumerator *top = stack.lastObject;
+    NSString *fileName = [top nextObject];
+    
+    if (fileName) {
+        NSDictionary *attributesDictionary = [self attributesOfItemAtPath:[currentPath stringByAppendingPathComponent:fileName] error:nil];
+        
+        if ([attributesDictionary objectForKey:NSFileType] == NSFileTypeDirectory) {
+            currentPath = [currentPath stringByAppendingPathComponent:fileName];
+            NSArray *contents = [self contentsOfDirectoryAtPath: currentPath error:nil];
+            NSEnumerator *enumerator = [contents objectEnumerator];
+            
+            if (enumerator) {
+                [stack addObject:enumerator];
+            }
+        } else {
+            if ([fileName.pathExtension.lowercaseString isEqualToString:itemsExtension]) {
+                [self mnz_removeItemAtPath:[currentPath stringByAppendingPathComponent:fileName]];
+            }
+        }
+    } else {
+        NSArray *contents = [self contentsOfDirectoryAtPath:currentPath error:nil];
+        
+        if (contents.count == 0 && currentPath != folderPath) {
+            [self mnz_removeItemAtPath:currentPath];
+        }
+        
+        currentPath = [currentPath stringByDeletingLastPathComponent];
+        [stack removeLastObject];
+    }
+}
+```
+
+## 标记
+
+### 岛屿的最大面积 (leetcode-695)
+类似题目还有130, 200, 547， 417
+
+伪代码模板:
 
 ```swift
-func countSubstrings(_ s: String) -> Int {
-    var dp = Array(repeating: Array(repeating: false, count: s.count), count: s.count)
-    let list = Array(s)
+forLoop:
+   dfs()
+```
+
+```swift
+class Solution {
+    var area = 0
     var result = 0
-    
-    for i in 0..<list.count {
-        for j in 0...i {
-            if String(list[i]) == String(list[j]) && (i - j <= 1 || dp[i-1][j+1]){
-                dp[i][j] = true
-                result += 1
-            } 
-        }
-    }
 
-    return result
-}
-```
+    func maxAreaOfIsland(_ grid: [[Int]]) -> Int {
+        var grid = grid
 
-## 最长回文子串 (Leetcode-5)
-中心扩展法:
+        let m = grid.count
+        let n = grid[0].count
 
-```swift
-func longestPalindrome(_ s: String) -> String {
-    var list = Array(s)
-    var result = ""
-    var start = 0
-    var end = 0
-
-    for i in 0..<list.count {
-        let (left1, right1) = spread(i, i, list)
-        let (left2, right2) = spread(i, i+1, list)
-
-        if right1 - left1 > end - start {
-            start = left1
-            end = right1
+        for i in 0..<m {
+            for j in 0..<n {
+                if grid[i][j] == 1 {
+                    area = 0
+                    dfs(i,j, &grid)
+                    result = max(result, area)
+                }
+            }
         }
 
-        if right2 - left2 > end - start {
-            start = left2
-            end = right2
-        }
+        return result
     }
 
-    for i in start...end {
-        result.append(list[i])
-    }
+    private func dfs(_ i: Int, _ j: Int, _ grid: inout [[Int]]) {
+        let directions = [[0,-1],[0,1],[1,0],[-1,0]]
 
-    return result
-}
+        grid[i][j] = 0
+        area += 1
 
-private func spread(_ left: Int, _ right: Int, _ list: [Character]) -> (Int, Int) {
-    var left = left
-    var right = right
+        for direction in directions {
+            let x = i + direction[0]
+            let y = j + direction[1]
 
-    while left >= 0 && right < list.count && list[left] == list[right] {
-        left -= 1
-        right += 1
-    }
-
-    return (left+1, right-1)
-}
-```
-
-## 最长递增子序列 (Leetcode-300)
-经典动态规划；可以用二分降低时间复杂度：
-
-```swift
-func lengthOfLIS(_ nums: [Int]) -> Int {
-    if nums.count == 1 { return 1 }
-
-    var cell: [Int] = []
-
-    for i in 0..<nums.count {
-        if cell.isEmpty || nums[i] > cell.last! {
-            cell.append(nums[i])
-        } else {
-            binarySearch(&cell, nums[i])
-        }
-    }
-
-    return cell.count
-}
-
-func binarySearch(_ cell: inout [Int], _ target: Int) {
-    var l = 0
-    var r = cell.count
-
-    while l < r {
-        let mid = l + (r - l) / 2
-
-        if cell[mid] < target {
-            l += 1
-        } else {
-            r -= 1
-        }
-    }
-
-    cell[l] = target
-}
-```
-
-## 编辑字符串相关
-对比两个字符串，求某些最优解；
-
-### 最长公共子序列 (Leetcode-1143)
-也可改成求最长subarray
-
-```swift
-func longestCommonSubsequence(_ text1: String, _ text2: String) -> Int {
-    var list1 = Array(text1)
-    var list2 = Array(text2)
-
-    var dp = Array(repeating: Array(repeating: 0, count: list2.count+1), count: list1.count+1)
-
-    for i in 1...list1.count {
-        for j in 1...list2.count {
-            if list1[i-1] == list2[j-1] {
-                dp[i][j] = dp[i-1][j-1] + 1
-            } else {
-                dp[i][j] = max(dp[i-1][j], dp[i][j-1])
+            if x >= 0 && x < grid.count && y >= 0 && y < grid[0].count && grid[x][y] == 1 {
+                dfs(x,y,&grid)
             }
         }
     }
-
-    return dp[list1.count][list2.count]
-}
-```
-
-### 编辑距离 (Leetcode-72)
-
-```swift
-func minDistance(_ word1: String, _ word2: String) -> Int {
-    guard word1.count > 0, word2.count > 0 else {
-        if word1.count > 0 && word2.count == 0 {
-            return word1.count 
-        } else if word2.count > 0 && word1.count == 0 {
-            return word2.count 
-        } else {
-            return 0
-        }
-    }
-
-    let len1 = word1.count
-    let len2 = word2.count
-    
-    let word1_list = Array(word1)
-    let word2_list = Array(word2)
-    
-    // Add sentinel
-    var dp = Array(repeating: Array(repeating: 0, count: len2+1), count: len1+1)
-    
-    // Init first row and column
-    for i in 1...len1 {
-        dp[i][0] = i
-    }
-    
-    for j in 1...len2 {
-        dp[0][j] = j
-    }
-    
-    for i in 1...len1 {
-        for j in 1...len2 {
-            if word1_list[i-1] == word2_list[j-1] {
-                dp[i][j] = dp[i-1][j-1]
-            } else {
-                // min(dp[i-1][j], dp[i][j-1], dp[i-1][j-1])+1
-                let temp = min(dp[i-1][j], dp[i][j-1])
-                dp[i][j] = min(temp, dp[i-1][j-1]) + 1
-            }
-        }
-    }
-
-    return dp[len1][len2]
-}
-```
-
-## 序列DP
-这类题目以区间作为动态规划二维数组的行和列，比较难抽象
-
-### 三个无重叠子数组的最大和 (Leetcode-689)
-行：子数组个数
-<br />
-列：数组下标
-
-```swift
-func maxSumOfThreeSubarrays(_ nums: [Int], _ k: Int) -> [Int] {
-    let rows = (nums.count / k) + 1
-    let cols = nums.count
-    var result: [Int] = []
-
-    var dp = Array(repeating: Array(repeating: 0, count: cols), count: rows)
-
-    // 初始化每行第k个值
-    for i in 1..<rows {
-        dp[i][k-1]=nums[0...k-1].reduce(.zero,+)
-    }
-
-    for i in 1..<rows {
-        for j in k..<cols {
-            // 选择第j个和不选择第j个
-            dp[i][j] = max(dp[i][j-1], dp[i-1][j-k] + sumBetween(j, j-k, nums))
-        }
-    }
-
-    var count = 0
-    var end = 3
-    var max = dp[end].max() ?? 0
-
-    // 求索引
-    // 找3，2，1行最大值的第一个出现位置
-    while count < 3 {
-        let endIndex = dp[end].firstIndex(where: { $0 == max}) ?? -1
-        let startIndex = endIndex - k + 1
-        result.append(startIndex)
-
-        max -= nums[startIndex...endIndex].reduce(.zero,+)
-        count += 1
-        end -= 1
-    }
-
-    result = result.reversed()
-
-    return result
-}
-
-func sumBetween(_ end: Int, _ start: Int, _ nums: [Int]) -> Int {
-    let a = nums[0...end].reduce(.zero,+)
-    let b = nums[0...start].reduce(.zero,+)
-
-    return a - b
 }
 ```
