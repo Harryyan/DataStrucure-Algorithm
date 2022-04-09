@@ -25,7 +25,7 @@ return ...
 
 BFS有个特性就是按层次遍历所连接的节点，由于是从原点出发，那自然最先遍历到符合条件的节点，故而可求最短路径. 最短路径题不一定非得是 树形，或者图，网格结构也很常见.
 
-<!--![](https://res.cloudinary.com/dwpjzbyux/image/upload/v1649454303/algorithm/BFS/BFS_oufmr3.jpg)-->
+![](https://res.cloudinary.com/dwpjzbyux/image/upload/v1649454303/algorithm/BFS/BFS_oufmr3.jpg)
 
 ### 被围绕的区域 (leetcode-130)
 
