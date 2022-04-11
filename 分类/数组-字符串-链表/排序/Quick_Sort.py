@@ -37,11 +37,16 @@ def quick_sort2_better(alist, first, last):
             high -= 1
         alist[low] = alist[high]
 
+        print(alist)
+
         while low < high and alist[low] < mid_value:
             low += 1
         alist[high] = alist[low]
 
+        print(alist)
+
     alist[low] = mid_value
+
     quick_sort2_better(alist, first, low - 1)
     quick_sort2_better(alist, low + 1, last)
 
@@ -78,10 +83,10 @@ def quick_sort_search_kth(alist, first, last, k):
 
 
 items = [9, 8, 7, 6, 5, 4]
-items2 = [26, 45, 44, 6, 9, 54, 93]
+items2 = [5,2,3,9,5,3,6,4,6,7,8]
 
 quick_sort2_better(items2, 0, len(items2) - 1)
-quick_sort_search_kth(items2, 0, len(items2) - 1, 6)
+# quick_sort_search_kth(items2, 0, len(items2) - 1, 6)
 
 print(items2)
 

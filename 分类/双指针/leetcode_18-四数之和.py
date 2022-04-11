@@ -129,6 +129,7 @@ class Solution_NSum:
                         for j in range(len(sub_res)):
                             res.append([nums[i]]+sub_res[j])
                     return res
+                    
             nums.sort()
             res = nSum(nums, 4, target)
             return res 
