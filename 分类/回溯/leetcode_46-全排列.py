@@ -50,6 +50,7 @@ class Solution2:
     def backtrack(self, sol, nums, check):
         if len(sol) == len(nums):
             self.res.append(sol)
+            print(sol, end='\n')
             return
         
         for i in range(len(nums)):
@@ -57,8 +58,7 @@ class Solution2:
                 continue
             check[i] = 1
             self.backtrack(sol+[nums[i]], nums, check)
-            print(sol, end='\t')
-            print(i)
+            print(sol, end='\n')
             check[i] = 0
 
 
