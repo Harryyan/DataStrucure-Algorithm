@@ -20,7 +20,22 @@
 2. Secure item storage.
 3. Cross-platform support.
 
+## High-Level Diagram
 
+<!--![](https://res.cloudinary.com/dwpjzbyux/image/upload/v1650713366/SystemDesign/Cache-Lib/cache-high_mhgj03.png)-->
 
-<!--![](https://res.cloudinary.com/dwpjzbyux/image/upload/v1649187948/SystemDesign/DropBox/high-level_r1hvxn.png)
--->
+**Dispatcher:** 外界负责协调异步调用Cachelib的代码，例如 Task{}, 或者是GroupTask
+
+**CacheLib:** 缓存主类
+
+**Journal:** 缓存数据的metadata，例如访问次数，时间戳，大小等等
+
+**in-memory cache:** 支持快速访问的内存缓存，单一访问为串行
+
+**disk cache:** 本地磁盘缓存，访问较慢
+
+**Eviction:** 当缓存满了，需要执行删除操作（基于策略LRU, LFU等）
+
+实线箭头表示单一访问串行调用，虚线是回函数，回归dispatch上下文(类似await后面的内容，回到主线程)
+
+## Deep Dive
