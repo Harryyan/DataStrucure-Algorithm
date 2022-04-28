@@ -23,7 +23,7 @@
 
 ## High-Level Diagram
 
-<!--![](https://res.cloudinary.com/dwpjzbyux/image/upload/v1650713366/SystemDesign/Cache-Lib/cache-high_mhgj03.png)-->
+![](https://res.cloudinary.com/dwpjzbyux/image/upload/v1650713366/SystemDesign/Cache-Lib/cache-high_mhgj03.png)
 
 **Dispatcher:** 外界负责协调异步调用Cachelib做读写的代码，例如 Task{}, 或者是GroupTask
 
