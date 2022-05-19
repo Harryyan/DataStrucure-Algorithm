@@ -56,7 +56,7 @@
 
 每当我们操作缓存时，需要维护每个缓存项的meta data，以便日后更新；可以使用多种方式存储：**text/binary, property list, relational data base(ORM)**
 
-meta data里path存储了数据路径， state代表cacheitem当前转态，例如CLEAN, DIRTY, REMOVE; 这是为了确保数据和meta data一致性(并发状态下)；当创建或者更新cache item时，数据状态是DIRTY，等到结束时，才mark为CLEAN或者REMOVE.
+meta data里path存储了数据路径， state代表cache item当前状态，例如CLEAN, DIRTY, REMOVE; 这是为了确保数据和meta data一致性(并发状态下)；当创建或者更新cache item时，数据状态是DIRTY，等到结束时，才mark为CLEAN或者REMOVE.
 
 或者使用Journal直接存储BLOB类型数据，这样就避免了同步journal和file system:
 
