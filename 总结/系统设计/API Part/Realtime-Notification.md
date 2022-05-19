@@ -42,7 +42,7 @@
 3. 持有长链接(keeps a persistent connection.)
 
 ## Server-Sent Events(SSE)
-客户端和服务端建立一条长链接，服务端通过HTTP链接下发消息，客户端健听:
+客户端和服务端建立一条长链接，服务端通过HTTP链接下发消息，客户端监听:
 https://nickarner.com/notes/working-with-server-sent-events-in-swift-november-16-2021/
 
 **优点：**
