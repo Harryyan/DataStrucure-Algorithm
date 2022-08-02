@@ -95,4 +95,55 @@ class Solution {
         }
     }
 }
+
+```
+### 被围绕的区域 (leetcode-130)
+
+```swift
+class Solution {
+    func solve(_ board: inout [[Character]]) {
+        guard board.count > 0 else {
+            return 
+        }
+
+        for i in 0..<board.count {
+            for j in 0..<board[0].count {
+                var isEdge = i == 0 || j == 0 || i == board.count - 1 || j == board[0].count - 1 
+                if isEdge && board[i][j] == "O" {
+                    dfs(&board, i, j)
+                }
+            }
+        }
+
+        for i in 0..<board.count {
+            for j in 0..<board[0].count {
+
+                if board[i][j] == "O" {
+                    board[i][j] = "X"
+                }
+
+                if board[i][j] == "#" {
+                    board[i][j] = "O"
+                }
+            }
+        }
+    }
+
+    func dfs(_ board: inout [[Character]], _ i: Int, _ j: Int) {
+
+        if i >= board.count || j >= board[0].count || i < 0 || j < 0 {
+            return
+        }
+
+        if board[i][j] == "X" || board[i][j] == "#" {
+            return
+        }
+
+        board[i][j] = "#"
+        dfs(&board, i + 1, j)
+        dfs(&board, i - 1, j)
+        dfs(&board, i, j + 1)
+        dfs(&board, i, j - 1)
+    }
+}
 ```

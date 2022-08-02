@@ -27,57 +27,6 @@ BFS有个特性就是按层次遍历所连接的节点，由于是从原点出�
 
 ![](https://res.cloudinary.com/dwpjzbyux/image/upload/v1649454303/algorithm/BFS/BFS_oufmr3.jpg)
 
-### 被围绕的区域 (leetcode-130)
-
-```swift
-class Solution {
-    func solve(_ board: inout [[Character]]) {
-        guard board.count > 0 else {
-            return 
-        }
-
-        for i in 0..<board.count {
-            for j in 0..<board[0].count {
-                var isEdge = i == 0 || j == 0 || i == board.count - 1 || j == board[0].count - 1 
-                if isEdge && board[i][j] == "O" {
-                    dfs(&board, i, j)
-                }
-            }
-        }
-
-        for i in 0..<board.count {
-            for j in 0..<board[0].count {
-
-                if board[i][j] == "O" {
-                    board[i][j] = "X"
-                }
-
-                if board[i][j] == "#" {
-                    board[i][j] = "O"
-                }
-            }
-        }
-    }
-
-    func bfs(_ board: inout [[Character]], _ i: Int, _ j: Int) {
-
-        if i >= board.count || j >= board[0].count || i < 0 || j < 0 {
-            return
-        }
-
-        if board[i][j] == "X" || board[i][j] == "#" {
-            return
-        }
-
-        board[i][j] = "#"
-        bfs(&board, i + 1, j)
-        bfs(&board, i - 1, j)
-        bfs(&board, i, j + 1)
-        bfs(&board, i, j - 1)
-    }
-}
-```
-
 ### K 站中转内最便宜的航班 (leetcode-787)
 
 无负数，无环，可用BFS.
