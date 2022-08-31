@@ -2,7 +2,6 @@
 
 BFS, 广度优先搜索，常用于层序遍历和最短路径问题.
 
-## 层序遍历
 伪代码模板:
 
 ```swift
@@ -21,6 +20,51 @@ procedure BFS(g,v):
        if v is not visited:
          mark v
          enqueue v into Q
+```
+
+## 二叉树最小深度(leetcode-111)
+层序遍历，while循环里套for循环，是上边伪代码的直接应用。注意，这种二叉树求最小值的题目，要遍历每一层，遍历完后，才能将层数加一:
+
+```swift
+class Solution {
+    func minDepth(_ root: TreeNode?) -> Int {
+        guard let node = root else { return 0 }
+
+        var depth = 1
+        var queue: [TreeNode] = []
+        queue.append(node)
+
+        while !queue.isEmpty {
+            let size = queue.count
+
+            for i in 0..<size {
+                let curr = queue.removeFirst()
+
+                if curr.left == nil && curr.right == nil { return depth}
+                if curr.left != nil { queue.append(curr.left!) }
+                if curr.right != nil { queue.append(curr.right!)}
+            }
+
+            depth += 1
+        }
+
+        return depth
+    }
+}
+```
+
+DFS版本: 空间使用度比BFS更优, 个人感觉是Swift编译器针对尾递归的优化，以及没有额外堆内存的开销(BFS额外声明了queue数组，在堆上)
+
+```swift
+class Solution {
+    func minDepth(_ root: TreeNode?) -> Int {
+        guard let node = root else { return 0 }
+
+        if node.left == nil { return minDepth(node.right) + 1 }
+        if node.right == nil { return minDepth(node.left) + 1 }
+        return min(minDepth(node.left), minDepth(node.right)) + 1
+    }
+}
 ```
 
 ## 最短路径
