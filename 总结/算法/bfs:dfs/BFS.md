@@ -15,12 +15,12 @@ procedure BFS(g,v):
      t <- dequque Q(pop first)
      
      if t is what we are looking for:
-     		return t
+       return t
      
      for all vertext v in G.adjcentVertext(t):
-     		if v is not visited:
-     			mark v
-     			enqueue v into Q
+       if v is not visited:
+         mark v
+     	  enqueue v into Q
 ```
 
 ## 最短路径
