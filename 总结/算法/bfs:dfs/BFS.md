@@ -6,19 +6,21 @@ BFS, 广度优先搜索，常用于层序遍历和最短路径问题.
 伪代码模板:
 
 ```swift
-queue = Queue()
-queue.append(n)
-
-while !queue.isEmpty() {
-     let node = queue.pop()
+procedure BFS(g,v):
+  create a queue Q
+  enqueue V to Q
+  mark v as visited
+  
+  while Q is not empty:
+     t <- dequque Q(pop first)
      
-     // do something...
-     // need visited array if necessary
+     if t is what we are looking for:
+     		return t
      
-     queue.append(x)
-}
-
-return ...
+     for all vertext v in G.adjcentVertext(t):
+     		if v is not visited:
+     			mark v
+     			enqueue v into Q
 ```
 
 ## 最短路径
