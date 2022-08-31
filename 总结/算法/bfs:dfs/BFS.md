@@ -20,7 +20,7 @@ procedure BFS(g,v):
      for all vertext v in G.adjcentVertext(t):
        if v is not visited:
          mark v
-     	  enqueue v into Q
+         enqueue v into Q
 ```
 
 ## 最短路径
