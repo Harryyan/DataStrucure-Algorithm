@@ -2,6 +2,10 @@
 
 BFS, 广度优先搜索，常用于层序遍历和最短路径问题.
 
+BFS有个特性就是按层次遍历所连接的节点，由于是从原点出发，那自然最先遍历到符合条件的节点，故而可求最短路径. 最短路径题不一定非得是 树形，或者图，网格结构也很常见.
+
+![](https://res.cloudinary.com/dwpjzbyux/image/upload/v1649454303/algorithm/BFS/BFS_oufmr3.jpg)
+
 伪代码模板:
 
 ```swift
@@ -67,13 +71,149 @@ class Solution {
 }
 ```
 
-## 最短路径
+## 二叉树的层序遍历 (leetcode-102)
+基本模板题，需要熟练掌握.
+其变种问题有：zig-zag遍历； 树的left order view 和 right order view； 还有顺时针，逆时针打印.(先求left和right order view，然后找到没有访问过的leaf节点，打印); 纵向打印.
 
-BFS有个特性就是按层次遍历所连接的节点，由于是从原点出发，那自然最先遍历到符合条件的节点，故而可求最短路径. 最短路径题不一定非得是 树形，或者图，网格结构也很常见.
+```swift
+class Solution {
+    func levelOrder(_ root: TreeNode?) -> [[Int]] {
+        guard let root = root else { return [] }
+        
+        var queue = [TreeNode]()
+        var result: [[Int]] = []
+        
+        queue.append(root)
+        
+        while !queue.isEmpty {
+            var values: [Int] = []
+            let size = queue.count
 
-![](https://res.cloudinary.com/dwpjzbyux/image/upload/v1649454303/algorithm/BFS/BFS_oufmr3.jpg)
+            for i in 0..<size {
+                let node = queue.removeFirst()
+                values.append(node.val)
 
-### K 站中转内最便宜的航班 (leetcode-787)
+                if node.left != nil {
+                    queue.append(node.left!)
+                }
+
+                if node.right != nil {
+                    queue.append(node.right!)
+                }
+            }
+
+            result.append(values)
+        }
+        
+        return result
+    }
+}
+```
+
+## 单词接龙 (leetcode-127)
+普通BFS: 将begin word入队，依次使用26个字母替换beginword的每个位置，看看字典中是否有同样字母；若有，则返回层数；使用BFS能最快返回结果, 最差结果就是没有，则返回0.
+
+```swift
+class Solution {
+    func ladderLength(_ beginWord: String, _ endWord: String, _ wordList: [String]) -> Int {
+        var seen = Set(wordList)
+        var steps = 1
+        var queue: [String] = []
+        let wordLen = beginWord.count
+        let charList = "abcdefghijklmnopqrstuvwxyz"
+
+        queue.append(beginWord)
+
+        // tc: O(m * n) 
+        // 普通BFS
+        while !queue.isEmpty {
+            let size = queue.count
+
+            for i in 0..<size {
+                let cur = queue.removeFirst()
+                
+                if cur == endWord {
+                    return steps
+                }
+
+                for j in 0..<wordLen {
+                    for ch in charList {
+                        var next = cur
+                        next[j] = ch
+
+                        if seen.contains(next) {
+                            seen.remove(next)
+                            queue.append(next)
+                        }
+                    }
+                }
+            }
+
+            steps += 1
+        }
+        
+        return 0
+    }
+}
+```
+
+双向BFS：
+![](https://res.cloudinary.com/dwpjzbyux/image/upload/v1662351986/algorithm/BFS/bfs_wrjm4y.png)
+从begin和end两边同时宽搜，额外创建nextSet存储中间符合条件的节点；每次求出nextSet后，对比next和end set大小，选择小的那个为新的beginSet. 多源BFS是常见的宽搜优化方式.
+
+```swift
+class Solution {
+    func ladderLength(_ beginWord: String, _ endWord: String, _ wordList: [String]) -> Int {
+        var beginSet = Set<String>()
+        var endSet = Set<String>()
+        var seen = Set<String>()
+        var words = Set(wordList)
+        var steps = 1
+        let len = beginWord.count
+        let charList = "abcdefghijklmnopqrstuvwxyz"
+
+        guard words.contains(endWord) else { return 0 }
+
+        beginSet.insert(beginWord)
+        endSet.insert(endWord)
+
+        // tc: O(mn)
+        // 双向 BFS： 效率更高
+        while !beginSet.isEmpty && !endSet.isEmpty {
+            var nextSet = Set<String>()
+
+            for word in beginSet {
+                for i in 0..<len {
+                    for ch in charList {
+                        var nextWord = word
+                        nextWord[i] = ch
+
+                        if endSet.contains(nextWord) { return steps + 1}
+                        if words.contains(nextWord) && !seen.contains(nextWord) {
+                            nextSet.insert(nextWord)
+                            seen.insert(nextWord)
+                        }
+                    }
+                }
+            }
+
+            // beginSet和endSet的交替；属于核心优化
+            if endSet.count < nextSet.count {
+                beginSet = endSet
+                endSet = nextSet
+            } else {
+                beginSet = nextSet
+            }
+
+            steps += 1
+        }
+
+        return 0
+    }
+}
+```
+
+## K 站中转内最便宜的航班 (leetcode-787)
 
 无负数，无环，可用BFS.
 
