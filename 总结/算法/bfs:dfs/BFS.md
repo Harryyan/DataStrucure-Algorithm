@@ -1,3 +1,14 @@
+- [BFS总结](#bfs%E6%80%BB%E7%BB%93)
+  - [二叉树最小深度(leetcode-111)](#%E4%BA%8C%E5%8F%89%E6%A0%91%E6%9C%80%E5%B0%8F%E6%B7%B1%E5%BA%A6leetcode-111)
+  - [二叉树的层序遍历 (leetcode-102)](#%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%B1%82%E5%BA%8F%E9%81%8D%E5%8E%86-leetcode-102)
+  - [单词接龙 (leetcode-127)](#%E5%8D%95%E8%AF%8D%E6%8E%A5%E9%BE%99-leetcode-127)
+  - [迷宫 (leetcode-490)](#%E8%BF%B7%E5%AE%AB-leetcode-490)
+  - [迷宫II (leetcode-505)](#%E8%BF%B7%E5%AE%ABii-leetcode-505)
+  - [K 站中转内最便宜的航班 (leetcode-787)](#k-%E7%AB%99%E4%B8%AD%E8%BD%AC%E5%86%85%E6%9C%80%E4%BE%BF%E5%AE%9C%E7%9A%84%E8%88%AA%E7%8F%AD-leetcode-787)
+    - [网格中的最短路径 (leetcode-1293)](#%E7%BD%91%E6%A0%BC%E4%B8%AD%E7%9A%84%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84-leetcode-1293)
+    - [地图分析 (leetcode-1162)](#%E5%9C%B0%E5%9B%BE%E5%88%86%E6%9E%90-leetcode-1162)
+
+
 # BFS总结
 
 BFS, 广度优先搜索，常用于层序遍历和最短路径问题.
@@ -214,6 +225,102 @@ class Solution {
     }
 }
 ```
+
+## 迷宫 (leetcode-490)
+巧用direction数组: 根据题意，小球遇到墙壁才能停下，添加visited数组，避免重复访问.
+
+```swift
+class Solution {
+    // tc: O(mn)
+    // sc: O(mn)
+    // BFS
+    func hasPath(_ maze: [[Int]], _ start: [Int], _ destination: [Int]) -> Bool {
+        let directions: [(x: Int, y: Int)] = [(0, 1), (0, -1), (-1, 0), (1, 0)]
+
+        var visited = [[Bool]](repeating: [Bool](repeating: false, count: maze[0].count), count: maze.count)
+        var queue = [(x: Int, y: Int)]()
+        queue.append((start[0], start[1]))
+
+        let destination = (x: destination[0], y: destination[1])
+        visited[start[0]][start[1]] = true
+
+        while !queue.isEmpty {
+            let curr = queue.removeFirst()
+
+            guard curr.x != destination.x || curr.y != destination.y else {
+                return true
+            }
+
+            for direction in directions {
+                var x = curr.x + direction.x
+                var y = curr.y + direction.y
+
+                while x >= 0, y >= 0, x < maze.count, y < maze[x].count, maze[x][y] == 0 {
+                    x += direction.x
+                    y += direction.y
+                }
+
+                guard !visited[x - direction.x][y - direction.y] else { continue }
+                queue.append((x - direction.x, y - direction.y))
+                visited[x - direction.x][y - direction.y] = true
+            }
+
+        }
+
+        return false
+    }
+}
+```
+
+## 迷宫II (leetcode-505)
+
+490变体，需要求最短路径长度，典型的单源最短路径，可使用堆优化的dijkstra；以下算法使用普通BFS+distance数组，关键在于: 后访问的路径长度可能小于先访问的,所以不设seen数组.
+
+```swift
+class Solution {
+    func shortestDistance(_ maze: [[Int]], _ start: [Int], _ destination: [Int]) -> Int {
+        let directions: [(x: Int, y: Int)] = [(0, 1), (0, -1), (-1, 0), (1, 0)]
+        let destination = (x: destination[0], y: destination[1])
+        var distance = Array(repeating: Array(repeating: Int.max, count: maze[0].count), count: maze.count)
+        var queue = [(x: Int, y: Int, z: Int)]()
+        var result = Int.max
+
+        distance[start[0]][start[1]] = 0
+        queue.append((start[0], start[1], 0))
+
+        // tc: O(mn*max(m,n))
+        while !queue.isEmpty {
+            let size = queue.count
+
+            for i in 0..<size {
+                let curr = queue.removeFirst()
+                let value = curr.z
+
+                for direction in directions {
+                    var count = 0
+                    var x = curr.x + direction.x
+                    var y = curr.y + direction.y
+
+                    while x >= 0, y >= 0, x < maze.count, y < maze[x].count, maze[x][y] == 0 {
+                        x += direction.x
+                        y += direction.y
+                        count += 1
+                    } 
+
+                    // 存在重入
+                    if distance[x - direction.x][y - direction.y] > value + count {
+                        queue.append((x - direction.x, y - direction.y, value+count))
+                        distance[x - direction.x][y - direction.y] = value+count
+                    }
+                }
+            }
+        }
+
+        return distance[destination.x][destination.y] == Int.max ? -1 : distance[destination.x][destination.y]
+    }
+}
+```
+
 
 ## K 站中转内最便宜的航班 (leetcode-787)
 
