@@ -4,10 +4,12 @@
   - [单词接龙 (leetcode-127)](#%E5%8D%95%E8%AF%8D%E6%8E%A5%E9%BE%99-leetcode-127)
   - [迷宫 (leetcode-490)](#%E8%BF%B7%E5%AE%AB-leetcode-490)
   - [迷宫II (leetcode-505)](#%E8%BF%B7%E5%AE%ABii-leetcode-505)
-  - [K 站中转内最便宜的航班 (leetcode-787)](#k-%E7%AB%99%E4%B8%AD%E8%BD%AC%E5%86%85%E6%9C%80%E4%BE%BF%E5%AE%9C%E7%9A%84%E8%88%AA%E7%8F%AD-leetcode-787)
+  - [最短路径](#%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84)
+    - [K 站中转内最便宜的航班 (leetcode-787)](#k-%E7%AB%99%E4%B8%AD%E8%BD%AC%E5%86%85%E6%9C%80%E4%BE%BF%E5%AE%9C%E7%9A%84%E8%88%AA%E7%8F%AD-leetcode-787)
     - [网格中的最短路径 (leetcode-1293)](#%E7%BD%91%E6%A0%BC%E4%B8%AD%E7%9A%84%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84-leetcode-1293)
-    - [地图分析 (leetcode-1162)](#%E5%9C%B0%E5%9B%BE%E5%88%86%E6%9E%90-leetcode-1162)
+  - [地图分析 (leetcode-1162)](#%E5%9C%B0%E5%9B%BE%E5%88%86%E6%9E%90-leetcode-1162)
 
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 # BFS总结
 
@@ -321,8 +323,9 @@ class Solution {
 }
 ```
 
+## 最短路径
 
-## K 站中转内最便宜的航班 (leetcode-787)
+### K 站中转内最便宜的航班 (leetcode-787)
 
 无负数，无环，可用BFS.
 
@@ -441,7 +444,7 @@ class Solution {
  }
 ```
 
-### 地图分析 (leetcode-1162)
+## 地图分析 (leetcode-1162)
 
 多源BFS
 
