@@ -157,8 +157,10 @@ class Solution {
 }
 ```
 
-双向BFS：
 ![](https://res.cloudinary.com/dwpjzbyux/image/upload/v1662351986/algorithm/BFS/bfs_wrjm4y.png)
+
+双向BFS：
+
 从begin和end两边同时宽搜，额外创建nextSet存储中间符合条件的节点；每次求出nextSet后，对比next和end set大小，选择小的那个为新的beginSet. 多源BFS是常见的宽搜优化方式.
 
 ```swift
