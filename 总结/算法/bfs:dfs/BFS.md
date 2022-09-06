@@ -3,13 +3,13 @@
   - [二叉树的层序遍历 (leetcode-102)](#%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%B1%82%E5%BA%8F%E9%81%8D%E5%8E%86-leetcode-102)
   - [单词接龙 (leetcode-127)](#%E5%8D%95%E8%AF%8D%E6%8E%A5%E9%BE%99-leetcode-127)
   - [迷宫 (leetcode-490)](#%E8%BF%B7%E5%AE%AB-leetcode-490)
-  - [迷宫II (leetcode-505)](#%E8%BF%B7%E5%AE%ABii-leetcode-505)
   - [最短路径](#%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84)
+    - [迷宫II (leetcode-505)](#%E8%BF%B7%E5%AE%ABii-leetcode-505)
     - [K 站中转内最便宜的航班 (leetcode-787)](#k-%E7%AB%99%E4%B8%AD%E8%BD%AC%E5%86%85%E6%9C%80%E4%BE%BF%E5%AE%9C%E7%9A%84%E8%88%AA%E7%8F%AD-leetcode-787)
     - [网格中的最短路径 (leetcode-1293)](#%E7%BD%91%E6%A0%BC%E4%B8%AD%E7%9A%84%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84-leetcode-1293)
   - [地图分析 (leetcode-1162)](#%E5%9C%B0%E5%9B%BE%E5%88%86%E6%9E%90-leetcode-1162)
-
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+  - [BFS在拓扑排序中的使用](#bfs%E5%9C%A8%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F%E4%B8%AD%E7%9A%84%E4%BD%BF%E7%94%A8)
+    - [课程表 (leetcode-207)](#%E8%AF%BE%E7%A8%8B%E8%A1%A8-leetcode-207)
 
 # BFS总结
 
@@ -18,6 +18,19 @@ BFS, 广度优先搜索，常用于层序遍历和最短路径问题.
 BFS有个特性就是按层次遍历所连接的节点，由于是从原点出发，那自然最先遍历到符合条件的节点，故而可求最短路径. 最短路径题不一定非得是 树形，或者图，网格结构也很常见.
 
 ![](https://res.cloudinary.com/dwpjzbyux/image/upload/v1649454303/algorithm/BFS/BFS_oufmr3.jpg)
+
+bfs最擅长解决哪一类问题？bfs与dfs的效率哪个更好？
+
+首先，bfs最擅长解决哪一类问题？**BFS是用来搜索最短径路的解是比较合适的**。
+
+1. 比如求最少步数的解，最少交换次数的解，因为BFS搜索过程中遇到的解一定是离根最近的，所以遇到一个解，一定就是最优解，此时搜索算法可以终止。这个时候不适宜使用DFS，因为DFS搜索到的解不一定是离根最近的，只有全局搜索完毕，才能从所有解中找出离根的最近的解。
+
+2. **DFS是空间效率高**，DFS不需要保存搜索过程中的状态(在heap中纵向)，而BFS在搜索过程中需要保存搜索过的状态(横向level)，而且一般情况需要一个队列来记录。详细来说的话取决于树(图)的形状，扁的还是长条形。
+
+3. DFS适合搜索全部的解，因为要搜索全部的解，那么BFS搜索过程中，遇到离根最近的解，并没有什么用，也必须遍历完整棵搜索树，DFS搜索也会搜索全部，但是相比DFS不用记录过多信息(Java heap帮你保存了，除非overflow需要自己外部开一个空间做stack, 我们在dfs篇章的ppt会去讲)，所以搜素全部解的问题，DFS显然更加合适，一般情况下，DFS也需要高效的剪枝操作(memo cache)
+
+4. 可以双向，多向 BFS优化搜索的速度，进阶还会有A*算法。
+
 
 伪代码模板:
 
@@ -274,7 +287,9 @@ class Solution {
 }
 ```
 
-## 迷宫II (leetcode-505)
+## 最短路径
+
+### 迷宫II (leetcode-505)
 
 490变体，需要求最短路径长度，典型的单源最短路径，可使用堆优化的dijkstra；以下算法使用普通BFS+distance数组，关键在于: 后访问的路径长度可能小于先访问的,所以不设seen数组.
 
@@ -322,8 +337,6 @@ class Solution {
     }
 }
 ```
-
-## 最短路径
 
 ### K 站中转内最便宜的航班 (leetcode-787)
 
@@ -498,4 +511,52 @@ class Solution {
     }
 }
 ```
+
+## BFS在拓扑排序中的使用
+
+### 课程表 (leetcode-207)
+
+首先建图, 将入度为0的课程放入队列；然后不断出队，更新依赖该课程的其他课程的入度，等再次入度为0时，加入队列，直到队列为空，看能学到的课程个数是多少。类似题目还有 leetcode-210
+
+```swift
+class Solution {
+    func canFinish(_ numCourses: Int, _ prerequisites: [[Int]]) -> Bool {
+        var indegree = Counter().inDegree(prerequisites)
+        let outdegree = Counter().outDegree(prerequisites)
+        
+        var queue: [Int] = []
+        
+        for i in 0..<numCourses {
+            if indegree[i] == nil {
+                queue.append(i)
+            }
+        }
+        
+        var coursesCanTake = queue.count
+        
+        if coursesCanTake == 0 {
+            return false
+        }
+        
+        while queue.count > 0 {
+            let index = queue.removeLast()
+            let outs = outdegree[index]
+            
+            if let outs = outs {
+                for out in outs {
+                    if indegree[out]!.count == 1 {
+                        queue.append(out)
+                        coursesCanTake += 1
+                    } else if indegree[out]!.count > 1 {
+                        indegree[out]?.remove(object: index)
+                    }
+                }
+            }
+        }
+        
+        return coursesCanTake == numCourses
+    }
+}
+```
+
 
