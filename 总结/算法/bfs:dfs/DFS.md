@@ -1,6 +1,6 @@
 # DFS总结
 
-深度优先搜索, 常用来解决可达性问题.
+深度优先搜索, 常用来解决可达性问题:
 
 1. 用递归栈存节点信息，按需pop
 2. 类似BFS，做标记
@@ -43,107 +43,8 @@ while([stack count] > 0) {
 }
 ```
 
-## 标记
-
-### 岛屿的最大面积 (leetcode-695)
-类似题目还有130, 200, 547, 417
-
-伪代码模板:
+## 子集 (Leetcode-78)
 
 ```swift
-forLoop:
-   dfs()
-```
 
-```swift
-class Solution {
-    var area = 0
-    var result = 0
-
-    func maxAreaOfIsland(_ grid: [[Int]]) -> Int {
-        var grid = grid
-
-        let m = grid.count
-        let n = grid[0].count
-
-        for i in 0..<m {
-            for j in 0..<n {
-                if grid[i][j] == 1 {
-                    area = 0
-                    dfs(i,j, &grid)
-                    result = max(result, area)
-                }
-            }
-        }
-
-        return result
-    }
-
-    private func dfs(_ i: Int, _ j: Int, _ grid: inout [[Int]]) {
-        let directions = [[0,-1],[0,1],[1,0],[-1,0]]
-
-        grid[i][j] = 0
-        area += 1
-
-        for direction in directions {
-            let x = i + direction[0]
-            let y = j + direction[1]
-
-            if x >= 0 && x < grid.count && y >= 0 && y < grid[0].count && grid[x][y] == 1 {
-                dfs(x,y,&grid)
-            }
-        }
-    }
-}
-
-```
-### 被围绕的区域 (leetcode-130)
-
-```swift
-class Solution {
-    func solve(_ board: inout [[Character]]) {
-        guard board.count > 0 else {
-            return 
-        }
-
-        for i in 0..<board.count {
-            for j in 0..<board[0].count {
-                var isEdge = i == 0 || j == 0 || i == board.count - 1 || j == board[0].count - 1 
-                if isEdge && board[i][j] == "O" {
-                    dfs(&board, i, j)
-                }
-            }
-        }
-
-        for i in 0..<board.count {
-            for j in 0..<board[0].count {
-
-                if board[i][j] == "O" {
-                    board[i][j] = "X"
-                }
-
-                if board[i][j] == "#" {
-                    board[i][j] = "O"
-                }
-            }
-        }
-    }
-
-    func dfs(_ board: inout [[Character]], _ i: Int, _ j: Int) {
-
-        if i >= board.count || j >= board[0].count || i < 0 || j < 0 {
-            return
-        }
-
-        if board[i][j] == "X" || board[i][j] == "#" {
-            return
-        }
-
-        board[i][j] = "#"
-        dfs(&board, i + 1, j)
-        dfs(&board, i - 1, j)
-        dfs(&board, i, j + 1)
-        dfs(&board, i, j - 1)
-    }
-}
 ```
