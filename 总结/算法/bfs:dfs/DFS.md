@@ -1,14 +1,3 @@
-- [DFS总结](#dfs%E6%80%BB%E7%BB%93)
-  - [递归栈](#%E9%80%92%E5%BD%92%E6%A0%88)
-  - [子集 (Leetcode-78)](#%E5%AD%90%E9%9B%86-leetcode-78)
-  - [子集II (Leetcode-90)](#%E5%AD%90%E9%9B%86ii-leetcode-90)
-  - [全排列 (Leetcode-46)](#%E5%85%A8%E6%8E%92%E5%88%97-leetcode-46)
-  - [全排列II (Leetcode-47)](#%E5%85%A8%E6%8E%92%E5%88%97ii-leetcode-47)
-  - [组合 (Leetcode-77)](#%E7%BB%84%E5%90%88-leetcode-77)
-  - [数独 (Leetcode-37)](#%E6%95%B0%E7%8B%AC-leetcode-37)
-  - [N皇后 (Leetcode-51)](#n%E7%9A%87%E5%90%8E-leetcode-51)
-- [总结](#%E6%80%BB%E7%BB%93)
-
 # DFS总结
 
 深度优先搜索, 常用来解决可达性问题. 
@@ -213,45 +202,6 @@ class Solution {
 }
 ```
 
-## 全排列II (Leetcode-47)
-和46类似，加排序去重
-
-```swift
-class Solution {
-    var visited: [Int] = []
-    var res: [[Int]] = []
-
-    func permuteUnique(_ nums: [Int]) -> [[Int]] {
-        visited = Array(repeating: 0, count: nums.count)
-        var nums = nums.sorted()
-
-        dfs(nums, nums.count, [])
-
-        return res
-    }
-
-    private func dfs(_ list: [Int], _ n : Int, _ temp: [Int]) {
-        if temp.count == n {
-            res.append(temp)
-            return
-        }
-        
-        for i in 0..<n {
-            if visited[i] == 1 { continue }
-				
-			  // 去重关键
-            if i > 0 && list[i-1] == list[i] && visited[i-1] == 0 {
-                continue
-            }
-
-            visited[i] = 1
-            dfs(list, n, temp + [list[i]])
-            visited[i] = 0
-        }
-    }
-}
-```
-
 ## 组合 (Leetcode-77)
 类似子集模板，区别就是停止条件: 这里是选购K个即可停止.
 
@@ -288,63 +238,58 @@ class Solution {
 ## 数独 (Leetcode-37)
 暴力解，遍历每行，每列，每个3X3的矩阵:
 
+无优化版本，不做cache记录(136ms):
+
 ```swift
 class Solution {
-    let choiceCharacter: [Character] = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
-    
-    //  把每行每列每个格子已经填充的数保存起来
-    var rows = Array.init(repeating: Array(repeating: 0, count: 10), count: 9)
-    var cols = Array.init(repeating: Array(repeating: 0, count: 10), count: 9)
-    var grides = Array.init(repeating: Array(repeating: 0, count: 10), count: 9)
-    var spaces = [(Int, Int)]()
-    
     func solveSudoku(_ board: inout [[Character]]) {
-        // 数据预处理
-        for i in 0..<9 {
-            for j in 0..<9 {
-                let c = board[i][j]
-                if c == "." {
-                    spaces.append((i, j))
-                } else {
-                    let intC = Int(String(c))!
-                    rows[i][intC] = 1
-                    cols[j][intC] = 1
-                    grides[i / 3 * 3 + j / 3][intC] = 1
+        _ = solve(&board)
+    }
+    
+    private func solve(_ board: inout [[Character]]) -> Bool {
+        for i in 0..<board.count {
+            for j in 0..<board[0].count {
+                if board[i][j] == Character(".") {
+                    for value in 1...9 {
+                        if isValid(value, board, i, j) {
+                            board[i][j] = Character("\(value)")
+                            
+                            if solve(&board) { return true }
+                            else { board[i][j] = Character(".") }
+                        }
+                    }
+
+                    return false
                 }
             }
         }
-        dfs(&board, index: 0)
+        
+        return true
     }
     
-    func dfs(_ board: inout [[Character]], index: Int) -> Bool {
-        guard index < spaces.count else {
-            return true
+    private func isValid(_ ch: Int, _ board: [[Character]], _ i: Int, _ j: Int) -> Bool {
+        
+        for row in 0..<9 {
+            if board[row][j].isWholeNumber && board[row][j].wholeNumberValue! == ch {
+                return false
+            }
         }
         
-        let (i , j) = spaces[index]
-        let grid = i / 3 * 3 + j / 3
-        
-        for choice in 1...9 {
-            //  填充的数已经存在
-            if rows[i][choice] == 1 || cols[j][choice] == 1 || grides[grid][choice] == 1  {
-                continue
+        for col in 0..<9 {
+            if board[i][col].isWholeNumber && board[i][col].wholeNumberValue! == ch {
+                return false
             }
-            board[i][j] = choiceCharacter[choice]
-            rows[i][choice] = 1
-            cols[j][choice] = 1
-            grides[i / 3 * 3 + j / 3][choice] = 1
-            
-            if (dfs(&board, index: index + 1)) {
-                return true
-            }
-            
-            board[i][j] = "."
-            rows[i][choice] = 0
-            cols[j][choice] = 0
-            grides[i / 3 * 3 + j / 3][choice] = 0
-            
         }
-        return false
+        
+        for row in (i/3)*3..<(i/3)*3+3 {
+            for col in (j/3)*3..<(j/3)*3+3 {
+                if board[row][col].isWholeNumber && board[row][col].wholeNumberValue! == ch {
+                    return false
+                }
+            }
+        }
+        
+        return true
     }
 }
 ```
@@ -427,6 +372,113 @@ final class Solution {
         }
 
          result2.append(s)
+    }
+}
+```
+
+# DFS剪枝优化
+
+todo:
+
+## 全排列II (Leetcode-47)
+和46类似，加排序去重:
+
+```swift
+class Solution {
+    var visited: [Int] = []
+    var res: [[Int]] = []
+
+    func permuteUnique(_ nums: [Int]) -> [[Int]] {
+        visited = Array(repeating: 0, count: nums.count)
+        var nums = nums.sorted()
+
+        dfs(nums, nums.count, [])
+
+        return res
+    }
+
+    private func dfs(_ list: [Int], _ n : Int, _ temp: [Int]) {
+        if temp.count == n {
+            res.append(temp)
+            return
+        }
+        
+        for i in 0..<n {
+            if visited[i] == 1 { continue }
+				
+			  // 去重关键
+            if i > 0 && list[i-1] == list[i] && visited[i-1] == 0 {
+                continue
+            }
+
+            visited[i] = 1
+            dfs(list, n, temp + [list[i]])
+            visited[i] = 0
+        }
+    }
+}
+```
+
+## 数独 (Leetcode-37)
+优化版本，有cache记录(20ms): 分别记录该数字在行，列，九宫格的存在与否:
+
+```swift
+class Solution {
+    let choiceCharacter: [Character] = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
+    
+    //  把每行每列每个格子已经填充的数保存起来
+    var rows = Array.init(repeating: Array(repeating: 0, count: 10), count: 9)
+    var cols = Array.init(repeating: Array(repeating: 0, count: 10), count: 9)
+    var grides = Array.init(repeating: Array(repeating: 0, count: 10), count: 9)
+    var spaces = [(Int, Int)]()
+    
+    func solveSudoku(_ board: inout [[Character]]) {
+        // 数据预处理
+        for i in 0..<9 {
+            for j in 0..<9 {
+                let c = board[i][j]
+                if c == "." {
+                    spaces.append((i, j))
+                } else {
+                    let intC = Int(String(c))!
+                    rows[i][intC] = 1
+                    cols[j][intC] = 1
+                    grides[i / 3 * 3 + j / 3][intC] = 1
+                }
+            }
+        }
+        dfs(&board, index: 0)
+    }
+    
+    func dfs(_ board: inout [[Character]], index: Int) -> Bool {
+        guard index < spaces.count else {
+            return true
+        }
+        
+        let (i , j) = spaces[index]
+        let grid = i / 3 * 3 + j / 3
+        
+        for choice in 1...9 {
+            //  填充的数已经存在
+            if rows[i][choice] == 1 || cols[j][choice] == 1 || grides[grid][choice] == 1  {
+                continue
+            }
+            board[i][j] = choiceCharacter[choice]
+            rows[i][choice] = 1
+            cols[j][choice] = 1
+            grides[i / 3 * 3 + j / 3][choice] = 1
+            
+            if (dfs(&board, index: index + 1)) {
+                return true
+            }
+            
+            board[i][j] = "."
+            rows[i][choice] = 0
+            cols[j][choice] = 0
+            grides[i / 3 * 3 + j / 3][choice] = 0
+            
+        }
+        return false
     }
 }
 ```
