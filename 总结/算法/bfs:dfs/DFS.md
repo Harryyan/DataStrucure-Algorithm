@@ -483,6 +483,75 @@ class Solution {
 }
 ```
 
+## 完成所有工作的最短时间 (Leetcode-1723)
+这道题是dfs和二分结合题，这里主要讨论dfs剪枝策略:
+
+1. 对数组排序，从大的那头开始遍历，让循环结束快点
+2. 如果result > max, 跳过
+3. 如果撤销选择后，值为0，直接跳出循环(相当于又来一遍)
+
+```swift
+class Solution {
+    func minimumTimeRequired(_ jobs: [Int], _ k: Int) -> Int {
+        var left = jobs.max()!
+        var right = jobs.reduce(.zero, +)
+        var jobs = jobs.sorted()
+
+        while left < right {
+            let mid = left + (right - left) / 2
+
+            if valid(k,mid,jobs) {
+                right = mid
+            } else {    
+                left = mid + 1
+            }
+        }
+
+        return left
+    }
+
+    private func valid(_ k: Int, _ limit: Int, _ jobs: [Int])-> Bool {
+        var groups = Array(repeating: 0, count: k)
+
+        if dfs(jobs, k, limit, groups) {
+            return true
+        } else {
+            return false
+        }
+    }
+
+    private func dfs(_ jobs: [Int], _ k: Int, _ limit: Int, _ groups: [Int]) -> Bool {
+        guard jobs.count > 0 else { return true }
+
+        var jobs = jobs
+        var groups = groups
+        let cur = jobs.removeLast()
+
+        for i in 0..<k {
+            if groups[i] + cur <= limit {
+                groups[i] += cur
+
+                if dfs(jobs, k, limit, groups) {
+                    return true
+                }
+
+                groups[i] -= cur
+
+                if groups[i] == 0 {
+                    break
+                }
+            }
+        }
+
+        return false
+    }
+}
+```
+
+## 完成所有工作的最短时间 (Leetcode-1723)
+
+## 完成所有工作的最短时间 (Leetcode-1723)
+
 # 总结
 BFS:对于解决最短或最少问题特别有效，而且寻找深度小，但缺点是内存耗费量大（需要开大量的数组单元用来存储状态）。
 
