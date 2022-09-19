@@ -548,7 +548,67 @@ class Solution {
 }
 ```
 
-## 完成所有工作的最短时间 (Leetcode-1723)
+## 完成所有工作的最短时间 (Leetcode-1986)
+和1723类似，这里不能用贪心，例如[10,8,7,4,3], sessionTime = 12; 贪心无法保证正确分配; 得使用dfs遍历所有情况，有一个返回true，即可:
+
+```swift
+class Solution {
+    var tasks: [Int] = []
+
+    // tc: O(bucket ^ n)
+    func minSessions(_ tasks: [Int], _ sessionTime: Int) -> Int {
+        var left = 1
+        var right = 0
+
+        for task in tasks {
+            right += (task + sessionTime - 1) / sessionTime
+        }
+
+        self.tasks = tasks.sorted(by: >)
+
+        while left < right {
+            let mid = left + (right - left) / 2
+
+            // 放得下
+            if !check(mid, sessionTime) {
+                left = mid + 1
+            } else {
+                right = mid
+            }
+        } 
+
+        return left
+    }
+
+    private func check(_ mid: Int, _ sessionTime: Int) -> Bool {
+        // Session buckets
+        var groups = Array(repeating: 0, count: mid)
+        return dfs(mid, &groups, sessionTime, 0)
+    }
+
+    private func dfs(_ mid: Int, _ bucket: inout [Int], _ sessionTime: Int, _ index: Int) -> Bool {
+        guard index < tasks.count else { return true }
+
+        for i in 0..<bucket.count {
+            if bucket[i] + tasks[index] <= sessionTime {
+                bucket[i] += tasks[index]
+
+                if dfs(mid, &bucket, sessionTime, index+1) {
+                    return true
+                }
+
+                bucket[i] -= tasks[index]
+
+                if bucket[i] == 0 {
+                    break
+                }
+            }
+        }
+
+        return false
+    }
+}
+```
 
 ## 完成所有工作的最短时间 (Leetcode-1723)
 
