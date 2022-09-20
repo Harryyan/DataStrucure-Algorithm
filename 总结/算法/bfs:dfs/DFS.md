@@ -397,7 +397,7 @@ final class Solution {
 1. 状压，memo和二分(该类别太大，有单独总结)
 2. sort倒序: 先从大的开始，容易退出循环
 3. 排序，跳过重复元素，例如permutation
-4. 对于工人，工作或者帽子，对于这类问题，外层遍历使用多的那个, 里面的for用少的
+4. 对于工人，工作或者帽子，对于这类问题，外层遍历使用多的那个, 里面的for用少的(决策树，外层循环就是深度，内层就是广度，虽说深度大，但是我们有剪枝，越多越容易剪)
 
 ![](https://res.cloudinary.com/dwpjzbyux/image/upload/v1663704540/algorithm/DFS/Screen_Shot_2022-09-21_at_08.07.22_ua0yya.png)
 
