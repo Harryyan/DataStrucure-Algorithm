@@ -1,3 +1,19 @@
+- [DFS总结](#dfs%E6%80%BB%E7%BB%93)
+  - [递归栈](#%E9%80%92%E5%BD%92%E6%A0%88)
+  - [子集 (Leetcode-78)](#%E5%AD%90%E9%9B%86-leetcode-78)
+  - [子集II (Leetcode-90)](#%E5%AD%90%E9%9B%86ii-leetcode-90)
+  - [全排列 (Leetcode-46)](#%E5%85%A8%E6%8E%92%E5%88%97-leetcode-46)
+  - [组合 (Leetcode-77)](#%E7%BB%84%E5%90%88-leetcode-77)
+  - [数独 (Leetcode-37)](#%E6%95%B0%E7%8B%AC-leetcode-37)
+  - [N皇后 (Leetcode-51)](#n%E7%9A%87%E5%90%8E-leetcode-51)
+- [DFS剪枝优化](#dfs%E5%89%AA%E6%9E%9D%E4%BC%98%E5%8C%96)
+  - [全排列II (Leetcode-47)](#%E5%85%A8%E6%8E%92%E5%88%97ii-leetcode-47)
+  - [数独 (Leetcode-37)](#%E6%95%B0%E7%8B%AC-leetcode-37-1)
+  - [完成所有工作的最短时间 (Leetcode-1723)](#%E5%AE%8C%E6%88%90%E6%89%80%E6%9C%89%E5%B7%A5%E4%BD%9C%E7%9A%84%E6%9C%80%E7%9F%AD%E6%97%B6%E9%97%B4-leetcode-1723)
+  - [完成所有工作的最短时间 (Leetcode-1986)](#%E5%AE%8C%E6%88%90%E6%89%80%E6%9C%89%E5%B7%A5%E4%BD%9C%E7%9A%84%E6%9C%80%E7%9F%AD%E6%97%B6%E9%97%B4-leetcode-1986)
+  - [公平分发饼干 (Leetcode-2305)](#%E5%85%AC%E5%B9%B3%E5%88%86%E5%8F%91%E9%A5%BC%E5%B9%B2-leetcode-2305)
+- [总结](#%E6%80%BB%E7%BB%93)
+
 # DFS总结
 
 深度优先搜索, 常用来解决可达性问题. 
@@ -378,7 +394,12 @@ final class Solution {
 
 # DFS剪枝优化
 
-todo:
+1. 状压，memo和二分(该类别太大，有单独总结)
+2. sort倒序: 先从大的开始，容易退出循环
+3. 排序，跳过重复元素，例如permutation
+4. 对于工人，工作或者帽子，对于这类问题，外层遍历使用多的那个, 里面的for用少的
+
+![](https://res.cloudinary.com/dwpjzbyux/image/upload/v1663704540/algorithm/DFS/Screen_Shot_2022-09-21_at_08.07.22_ua0yya.png)
 
 ## 全排列II (Leetcode-47)
 和46类似，加排序去重:
@@ -610,7 +631,35 @@ class Solution {
 }
 ```
 
-## 完成所有工作的最短时间 (Leetcode-1723)
+## 公平分发饼干 (Leetcode-2305)
+和1723,1986类似. 可以作为模板.
+
+```swift
+class Solution {
+    var bucket: [Int] = []
+    var ans = Int.max
+
+    func distributeCookies(_ cookies: [Int], _ k: Int) -> Int {
+        bucket = Array(repeating: 0, count:k)
+        dfs(0,k,cookies)
+
+        return ans
+    }
+
+    func dfs(_ index: Int, _ k: Int, _ cookies: [Int]) {
+        guard index < cookies.count else {
+            ans = min(ans, bucket.max()!)
+            return
+        }
+
+        for i in 0..<k {
+            bucket[i] += cookies[index]
+            dfs(index+1, k, cookies)
+            bucket[i] -= cookies[index]
+        }
+    }
+}
+```
 
 # 总结
 BFS:对于解决最短或最少问题特别有效，而且寻找深度小，但缺点是内存耗费量大（需要开大量的数组单元用来存储状态）。
