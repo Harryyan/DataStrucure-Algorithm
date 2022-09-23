@@ -661,6 +661,43 @@ class Solution {
 }
 ```
 
+## 最小的必要团队 (Leetcode-1125)
+不剪枝swift超时，预处理在swift上不work，应该是语言拉胯；最优解法应该是状压DP.
+
+```swift
+class Solution {
+    var res: [Int] = []
+    var shouldRemove: Set<Int> = []
+
+    func smallestSufficientTeam(_ req_skills: [String], _ people: [[String]]) -> [Int] {
+        dfs(0, people, req_skills, [], [])
+
+        return res
+    }
+
+    private func dfs(_ index: Int, _ people: [[String]], _ req_skills: [String], _ list: Set<String>, _ idx: [Int]) {
+        guard index < people.count else { return }
+
+        if list.count == req_skills.count {
+            if res.count == 0 { res = idx }
+            else { res = res.count > idx.count ? idx : res }
+            return
+        }
+        
+        for i in index..<people.count {
+            let skills = people[i]
+            var set = Set<String>(list)
+
+            for skill in skills {
+                set.insert(skill)
+            }
+
+            dfs(index+1, people, req_skills, set, idx+[i])
+        }
+    }
+}
+```
+
 # 总结
 BFS:对于解决最短或最少问题特别有效，而且寻找深度小，但缺点是内存耗费量大（需要开大量的数组单元用来存储状态）。
 
