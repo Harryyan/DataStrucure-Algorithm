@@ -13,6 +13,7 @@
   - [完成所有工作的最短时间 (Leetcode-1986)](#%E5%AE%8C%E6%88%90%E6%89%80%E6%9C%89%E5%B7%A5%E4%BD%9C%E7%9A%84%E6%9C%80%E7%9F%AD%E6%97%B6%E9%97%B4-leetcode-1986)
   - [公平分发饼干 (Leetcode-2305)](#%E5%85%AC%E5%B9%B3%E5%88%86%E5%8F%91%E9%A5%BC%E5%B9%B2-leetcode-2305)
   - [最小的必要团队 (Leetcode-1125)](#%E6%9C%80%E5%B0%8F%E7%9A%84%E5%BF%85%E8%A6%81%E5%9B%A2%E9%98%9F-leetcode-1125)
+  - [每个人戴不同帽子的方案数 (Leetcode-1434)](#%E6%AF%8F%E4%B8%AA%E4%BA%BA%E6%88%B4%E4%B8%8D%E5%90%8C%E5%B8%BD%E5%AD%90%E7%9A%84%E6%96%B9%E6%A1%88%E6%95%B0-leetcode-1434)
 - [总结](#%E6%80%BB%E7%BB%93)
 
 # DFS总结
@@ -695,6 +696,37 @@ class Solution {
 
             dfs(index+1, people, req_skills, set, idx+[i])
         }
+    }
+}
+```
+
+## 每个人戴不同帽子的方案数 (Leetcode-1434)
+超时，dfs整体思路不难，难点在于如何通过hats[i]长度一致，且数字一致: [[1,2,3,4,5,6,7], [1,2,3,4,5,6,7], ...]; dfs深度是人数，广度是帽子数。时间复杂度40 ^ 10, 太高了。该题得用状压dp解决。
+
+```swift
+class Solution {
+    var selected: Set<Int> = []
+    let MOD = 10000007
+
+    func numberWays(_ hats: [[Int]]) -> Int {
+        return dfs(0, hats)
+    }
+
+    private func dfs(_ index: Int, _ hats: [[Int]]) -> Int {
+        if index == hats.count {
+            return 1
+        }
+
+        var cnt = 0
+        for i in 0..<hats[index].count {
+            if !selected.contains(hats[index][i]) {
+                selected.insert(hats[index][i])
+                cnt += dfs(index+1, hats) % MOD
+                selected.remove(hats[index][i])
+            }
+        }
+
+        return cnt
     }
 }
 ```
