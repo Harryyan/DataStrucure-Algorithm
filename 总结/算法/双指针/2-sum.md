@@ -34,3 +34,32 @@ class Solution {
     }
 }
 ```
+
+## Two Sum II (LC-167)
+和第一题类似，不过要求常熟空间，意味着我们不能使用HashMap, 双指针是不二首选:
+
+```swift
+class Solution {
+    // tc: O(n)
+    // sc: O(1)
+    func twoSum(_ nums: [Int], _ target: Int) -> [Int] {
+            var i: Int = 0
+            var j: Int = nums.count - 1
+
+            while i < j {
+                if nums[i] + nums[j] > target {
+                    j = j - 1
+                } else if nums[i] + nums[j] < target {
+                    i = i + 1
+                } else {
+                    break
+                }
+            }
+
+            let left =  nums.firstIndex(of: nums[i]) ?? 0
+            let right = nums.lastIndex(of: nums[j]) ?? 0
+
+            return [left+1,right+1]  // index starts from 1
+        }
+}
+```
