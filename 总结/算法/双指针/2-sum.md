@@ -1,4 +1,4 @@
-# 2 Sum系列
+# 2Sum系列
 
 2 sum是一类题型，还有3 sum, 4 sum 以及 k sum。
 
@@ -117,6 +117,84 @@ class TwoSum {
         }
 
         return false
+    }
+}
+```
+
+## 两数之和 IV - 输入二叉搜索树 (LC-653)
+这题主要考察最优空间复杂度，O(n)空间复杂度不是我们追求的，最优的空间复杂度是O(h), h是输的高度. 这题我们需要引入一个概念，那就是**BSTIterator**, 可以以O(h)的空间复杂度解决这个问题. 类似的，以后遇到BST的题目，掌握**BSTIterator**是优化空间复杂度的一个手段:
+
+```swift
+class Solution {
+    // tc: O(n)
+    // sc: O(h) - The height of tree, best solution
+    func findTarget(_ root: TreeNode?, _ k: Int) -> Bool {
+        // left and right pointer of BST
+        let left = BSTIterator(root, true)
+        let right = BSTIterator(root, false)
+
+        while left.hasNext() && right.hasNext() {
+            let vl = left.peek()
+            let vr = right.peek()
+
+            guard vl < vr else { return false }
+
+            if vl + vr == k { return true }
+            else if vl + vr < k { left.next() }   // update value, but not use it
+            else { right.next() }
+        }
+
+        return false
+    }
+}
+```
+我们需要左右两个iterator，类似一维数组的左右指针，分别指向最小的和最大的节点. 之后就和普通二分一样，分别根据规则移动左右指针.
+
+```swift
+final class BSTIterator {
+    private var stack: [TreeNode?] = []
+    private let forward: Bool
+    private let invalidValue = ~0
+    
+    init(_ root: TreeNode?, _ forward: Bool) {
+        let node = root
+        self.forward = forward
+        
+        forward ? pushLeftNodes(of: node) : pushRightNodes(of: node)
+    }
+    
+    func hasNext() -> Bool {
+        return stack.count > 0
+    }
+    
+    func next() -> Int {
+        let node: TreeNode? = stack.removeLast()
+        
+        forward ? pushLeftNodes(of: node?.right) : pushRightNodes(of: node?.left)
+        
+        return node?.val ?? invalidValue
+    }
+    
+    func pushLeftNodes(of root: TreeNode?) {
+        var node: TreeNode? = root
+        
+        while node != nil {
+            stack.append(node)
+            node = node?.left
+        }
+    }
+    
+    func pushRightNodes(of root: TreeNode?) {
+        var node: TreeNode? = root
+        
+        while node != nil {
+            stack.append(node)
+            node = node?.right
+        }
+    }
+    
+    func peek() -> Int {
+        return stack.last??.val ?? invalidValue
     }
 }
 ```
