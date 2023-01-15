@@ -198,3 +198,52 @@ final class BSTIterator {
     }
 }
 ```
+
+## 三数之和 (LC-15)
+和两数之和类似，但要多一层for循环，for循环内部还是两数之和, 注意去重:
+
+```swift
+class Solution {
+    // tc: O(n^2)
+    // sc: O(logn)
+    func threeSum(_ nums: [Int]) -> [[Int]] {
+        var res = [[Int]]()
+        var sorted = nums
+        sorted.sort()
+
+        for i in 0 ..< sorted.count {
+            guard sorted[i] <= 0 else { return res }
+
+            // skip duplicated elements
+            if i > 0 && sorted[i] == sorted[i - 1] { continue }
+            var left = i + 1
+            var right = sorted.count - 1
+
+            // two sum 
+            while left < right {
+                let sum = sorted[i] + sorted[left] + sorted[right]
+                if sum < 0 {
+                    left += 1
+                } else if sum > 0 {
+                    right -= 1
+                } else {
+                    res.append([sorted[i], sorted[left], sorted[right]])
+                    
+                    // skip duplicated elements
+                    while left < right && sorted[left] == sorted[left + 1] {
+                        left += 1
+                    }
+                    // skip duplicated elements
+                    while left < right && sorted[right] == sorted[right - 1] {
+                        right -= 1
+                    }
+                    
+                    left += 1
+                    right -= 1
+                }
+            }
+        }
+        return res
+    }
+}
+```
