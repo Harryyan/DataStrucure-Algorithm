@@ -7,7 +7,7 @@
 
 import Foundation
 
-// iteration
+// Iteration
 func greatestCommonDivisor(m: Int, n: Int) -> Int {
     var min = min(m, n)
     var max = max(m, n)
@@ -22,7 +22,7 @@ func greatestCommonDivisor(m: Int, n: Int) -> Int {
     return min
 }
 
-// recursion
+// Recursion
 func gcd(_ a: Int, _ b: Int) -> Int {
     let r = a % b
     
