@@ -10,6 +10,11 @@ final class DSU {
     // Find root parent node
     // 配合路径压缩
     func find(_ a: Int) -> Int {
+        guard dict[a] != nil else {
+            dict[a] = a
+            return a
+        }
+        
         if dict[a] == a {
             return a
         }
