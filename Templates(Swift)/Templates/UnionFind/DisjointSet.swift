@@ -1,4 +1,4 @@
-final class UnionFind {
+final class DSU {
     var dict: [Int:Int] = [:]
     
     init(n: Int) {
