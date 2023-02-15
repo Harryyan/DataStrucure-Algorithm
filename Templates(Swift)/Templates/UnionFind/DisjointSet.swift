@@ -1,7 +1,7 @@
 final class DSU {
     var dict: [Int:Int] = [:]
     
-    init(n: Int) {
+    init(_ n: Int) {
         for i in 0..<n {
             dict[i] = i
         }
