@@ -1,10 +1,15 @@
 final class DSU {
     var dict: [Int:Int] = [:]
+    var size = 0
+    var setCount = 0  //
     
     init(_ n: Int) {
         for i in 0..<n {
             dict[i] = i
         }
+        
+        self.size = n
+        self.setCount = n // 当前连通分量数目
     }
     
     // Find root parent node
@@ -37,6 +42,8 @@ final class DSU {
         }
         
         dict[parent_b] = parent_a
+        
+        self.setCount -= 1
     }
     
     func isConnected(a: Int, b: Int) -> Bool {
