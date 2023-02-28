@@ -1,7 +1,7 @@
 final class DSU {
     var dict: [Int:Int] = [:]
     var size = 0
-    var setCount = 0  //
+    var setCount = 0 
     
     init(_ n: Int) {
         for i in 0..<n {
