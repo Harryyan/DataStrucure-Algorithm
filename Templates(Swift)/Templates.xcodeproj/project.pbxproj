@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6D056D9028EC3239001875E3 /* MonotonicStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D056D8F28EC3239001875E3 /* MonotonicStack.swift */; };
+		6D2C0ED629B3D6F4004A2B6A /* DoublyLinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D2C0ED529B3D6F4004A2B6A /* DoublyLinkedList.swift */; };
 		6D419E77290638B400C00BD5 /* Algorithms in Frameworks */ = {isa = PBXBuildFile; productRef = 6D419E76290638B400C00BD5 /* Algorithms */; };
 		6D419E7A2906395A00C00BD5 /* Collections in Frameworks */ = {isa = PBXBuildFile; productRef = 6D419E792906395A00C00BD5 /* Collections */; };
 		6D419E7C2906395A00C00BD5 /* DequeModule in Frameworks */ = {isa = PBXBuildFile; productRef = 6D419E7B2906395A00C00BD5 /* DequeModule */; };
@@ -45,6 +46,7 @@
 
 /* Begin PBXFileReference section */
 		6D056D8F28EC3239001875E3 /* MonotonicStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonotonicStack.swift; sourceTree = "<group>"; };
+		6D2C0ED529B3D6F4004A2B6A /* DoublyLinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoublyLinkedList.swift; sourceTree = "<group>"; };
 		6D419E7F29063FB900C00BD5 /* MonotonicQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonotonicQueue.swift; sourceTree = "<group>"; };
 		6D4238AE28FF4C3D00650D05 /* EventManager_Simple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventManager_Simple.swift; sourceTree = "<group>"; };
 		6D5E44C6295E051900D89EF9 /* BSIterator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSIterator.swift; sourceTree = "<group>"; };
@@ -86,6 +88,14 @@
 				6D056D8F28EC3239001875E3 /* MonotonicStack.swift */,
 			);
 			path = Stack;
+			sourceTree = "<group>";
+		};
+		6D2C0ED429B3D6D4004A2B6A /* LinkedList */ = {
+			isa = PBXGroup;
+			children = (
+				6D2C0ED529B3D6F4004A2B6A /* DoublyLinkedList.swift */,
+			);
+			path = LinkedList;
 			sourceTree = "<group>";
 		};
 		6D419E812906707900C00BD5 /* Queue */ = {
@@ -192,6 +202,7 @@
 		6DE03D7928C5A9930064F1BB /* Templates */ = {
 			isa = PBXGroup;
 			children = (
+				6D2C0ED429B3D6D4004A2B6A /* LinkedList */,
 				6D5E44CC295F606C00D89EF9 /* Heap */,
 				6D5E44C5295E050E00D89EF9 /* Tree */,
 				6D854F5C290DB398006CEC20 /* Deque */,
@@ -303,6 +314,7 @@
 				6DBE095428FB6B2300D2B55B /* HYNotification.swift in Sources */,
 				6D854F5E290DB3A6006CEC20 /* Deque.swift in Sources */,
 				6D5E44CE295F607200D89EF9 /* Heap.swift in Sources */,
+				6D2C0ED629B3D6F4004A2B6A /* DoublyLinkedList.swift in Sources */,
 				6D419E8029063FB900C00BD5 /* MonotonicQueue.swift in Sources */,
 				6D603A8128CC4A1B00AB79E4 /* BinarySearch_Template.swift in Sources */,
 				6DBE094E28FB42D800D2B55B /* HYNotificationCenter.swift in Sources */,
