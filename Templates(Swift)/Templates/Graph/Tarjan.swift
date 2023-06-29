@@ -12,8 +12,8 @@ import Foundation
 
 var graph: [Int: [Int]] = [:]
 let n = 10
-var dfn = Array(repeating:-1, count: n) // x被访问到的时间戳
-var low = Array(repeating:-1, count: n) // x周围能访问到的最早时间
+var dfn = Array(repeating: -1, count: n) // x被访问到的时间戳
+var low = Array(repeating: -1, count: n) // x周围能访问到的最早时间
 var result: [[Int]] = []
 
 private func tarjan(_ node: Int, _ parent: Int, _ depth: Int) {
