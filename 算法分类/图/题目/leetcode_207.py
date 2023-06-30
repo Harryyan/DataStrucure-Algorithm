@@ -37,8 +37,6 @@ class Solution:
         while queue:
             item = queue.pop(0)
             outs = outDeg[item]
-            
-            print(item, end="\t")
 
             for out in outs:
                 if len(inDeg[out]) == 1:
