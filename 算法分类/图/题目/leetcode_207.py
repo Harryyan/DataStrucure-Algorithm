@@ -9,6 +9,32 @@
 from typing import DefaultDict, List
 from collections import deque
 
+class Solution_DFS:
+    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+        if not prerequisites: return True
+
+        def dfs(root, graph, colors):
+            if colors[root] == 1: return True
+            if colors[root] == 2: return False  # 提前退出, 2代表没有出度
+
+            colors[root] = 1
+
+            for item in graph[root]:
+                if dfs(item, graph, colors): return True
+
+            colors[root] = 2 # 访问完毕
+            return False
+
+        colors = [0 for _ in range(numCourses)]
+        graph = [[] for _ in range(numCourses)]
+        for cur, pre in prerequisites:
+            graph[pre].append(cur)
+
+        for i in range(numCourses):
+            if dfs(i, graph, colors): return False
+
+        return True
+
 class Solution_TopSort:
     def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
         if not prerequisites: return True
