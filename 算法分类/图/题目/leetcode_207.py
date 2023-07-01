@@ -7,48 +7,38 @@
 # 请你判断是否可能完成所有课程的学习？如果可以，返回 true ；否则，返回 false 。
 
 from typing import DefaultDict, List
+from collections import deque
 
-
-class Solution:
+class Solution_TopSort:
     def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
         if not prerequisites: return True
-        
-        finalNumbers = 0
 
-        # 我依赖谁
-        inDeg = DefaultDict(list)
-        # 谁依赖我
-        outDeg = DefaultDict(list)
+        inDegree = [0 for _ in range(numCourses)] #只需要存储入度个数即可
+        adj = DefaultDict(list)
 
-        for item in prerequisites:
-            inDeg[item[0]].append(item[1])
-            outDeg[item[1]].append(item[0])
-        
-        queue = []
-        for item in range(0, numCourses):
-            if len(inDeg[item]) == 0:
-                queue.append(item)
-        
-        finalNumbers += len(queue)
-        
-        if len(queue) == 0:
-            return False
-        
+        for pre in prerequisites:
+            inDegree[pre[0]] += 1
+            adj[pre[1]].append(pre[0])
+
+        queue = deque()
+
+        for i in range(len(inDegree)):
+            if not inDegree[i]:
+                queue.append(i)
+
         while queue:
-            item = queue.pop(0)
-            outs = outDeg[item]
+            node = queue.popleft()
+            numCourses -= 1
 
-            for out in outs:
-                if len(inDeg[out]) == 1:
-                    queue.append(out)
-                    finalNumbers += 1
-                elif len(inDeg[out]) > 1:
-                    inDeg[out].remove(item)
-                  
-        return finalNumbers == numCourses
+            for item in adj[node]:
+                inDegree[item] -= 1
 
+                if inDegree[item] == 0:
+                    queue.append(item)
 
-so = Solution()
+        return not numCourses
+    
+so = Solution_TopSort()
 
 result = so.canFinish(4, [[1,0],[2,0],[3,1],[3,2]])
 print(result)
