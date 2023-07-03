@@ -68,6 +68,3 @@ so = Solution_TopSort()
 
 result = so.canFinish(4, [[1,0],[2,0],[3,1],[3,2]])
 print(result)
-
-
-print(11 ^ 0)
