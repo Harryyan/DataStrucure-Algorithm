@@ -4,6 +4,7 @@
 # 可能会有多个正确的顺序，你只要返回一种就可以了。如果不可能完成所有课程，返回一个空数组。
 
 from typing import DefaultDict, List
+from collections import deque
 
 # leetcode - 210
 # 图 | 邻接表 | bfs
@@ -11,42 +12,33 @@ class Solution:
     # 时间复杂度: O(V*E)
     # 空间复杂度: O(V*E)
     def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
-        if not prerequisites: 
-            return [i for i in range(0, numCourses)]
+        if not prerequisites: return [i for i in range(numCourses)]
 
-        # 我依赖谁 | 入度表
-        inDeg = DefaultDict(list)
-        # 谁依赖我 | 出度表
-        outDeg = DefaultDict(list)
+        inDegree = [0 for _ in range(numCourses)]
+        adj = DefaultDict(list)
 
-        for item in prerequisites:
-            inDeg[item[0]].append(item[1])
-            outDeg[item[1]].append(item[0])
-        
-        queue = []
+        for pre in prerequisites:
+            inDegree[pre[0]] += 1
+            adj[pre[1]].append(pre[0])
+
+        queue = deque()
+
+        for i in range(len(inDegree)):
+            if not inDegree[i]:
+                queue.append(i)
+
         result = []
 
-        # 搜索无依赖课程
-        for item in range(numCourses):
-            if len(inDeg[item]) == 0:
-                queue.append(item)
-        
-        # 有环 - 返回空
-        if len(queue) == 0:
-            return []
-        
         while queue:
-            item = queue.pop(0)
-            result.append(item)
-            outs = outDeg[item]
+            node = queue.popleft()
+            result.append(node)
 
-            # 更新队列
-            for out in outs:
-                if len(inDeg[out]) == 1:
-                    queue.append(out)
-                elif len(inDeg[out]) > 1:
-                    inDeg[out].remove(item)
-                   
+            for item in adj[node]:
+                inDegree[item] -= 1
+
+                if inDegree[item] == 0:
+                    queue.append(item)
+
         return result if len(result) == numCourses else []
     
 so = Solution()
