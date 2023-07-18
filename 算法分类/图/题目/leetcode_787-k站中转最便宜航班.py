@@ -1,5 +1,31 @@
 from typing import List
 from collections import defaultdict, deque
+import heapq
+
+class Solution_Dijkstra:
+    def findCheapestPrice(self, n: int, flights: List[List[int]], src: int, dst: int, k: int) -> int:
+        INF = 10 ** 5
+        graph = defaultdict(dict)
+        visit = [n+1]*n
+
+        for u,v,w in flights:
+            graph[u][v] = w
+
+        pq = [[0, src, 0]] # [price, node, count]
+        heapq.heapify(pq)
+
+        while pq:
+            price,u,count = heapq.heappop(pq)
+
+            if u == dst: return price
+            if count > k or visit[u] <= count: # 使用最小堆需要记录当前节点访问次数
+                continue
+
+            visit[u] = count
+            for v in graph[u]:
+                # 无需判断是否小于当前prices[v]
+                heapq.heappush(pq,[price + graph[u][v],v,count+1])
+        return -1
 
 # leetcode - 787
 # SPFA
@@ -21,14 +47,13 @@ class Solution:
 
         while queue:
             node_info = queue.popleft()
-            u = node_info[0]
-            count = node_info[1]
-            price = node_info[2]
+            u, count, price = node_info
 
             if count > k - 1:
                 break
 
             for v in graph[u]:
+                # 需判断是否小于当前prices[v]
                 if price + graph[u][v] < prices[v]:
                     prices[v] = price+graph[u][v]
                     queue.append([v,count+1,prices[v]])
