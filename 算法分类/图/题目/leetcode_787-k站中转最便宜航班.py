@@ -1,5 +1,5 @@
 from typing import List
-import collections
+from collections import defaultdict, deque
 
 # leetcode - 787
 # SPFA
@@ -9,31 +9,31 @@ class Solution:
     # sc: O(n)
     def findCheapestPrice(self, n: int, flights: List[List[int]], src: int, dst: int, k: int) -> int:
         INF = 10 ** 5
-        dist = [INF] * n
-        dist[src] = 0
-        weight = collections.defaultdict(dict)
+        prices = [INF] * n
+        prices[src] = 0
+        graph = defaultdict(dict)  # 二维字典
 
         for u, v, w in flights:
-            weight[u][v] = w
+            graph[u][v] = w
 
-        queue = collections.deque()
-        queue.append([src, -1, 0])
-        
+        queue = deque()
+        queue.append([src,-1,0])  # [node, count, price]
+
         while queue:
-            temp = queue.popleft()
-            u = temp[0]
-            count = temp[1]
-            price = temp[2]
+            node_info = queue.popleft()
+            u = node_info[0]
+            count = node_info[1]
+            price = node_info[2]
 
-            if count + 1 > k:
+            if count > k - 1:
                 break
 
-            for v in weight[u]:
-                if price + weight[u][v] < dist[v]:
-                    dist[v] = price + weight[u][v]
-                    queue.append([v, count+1, dist[v]])
+            for v in graph[u]:
+                if price + graph[u][v] < prices[v]:
+                    prices[v] = price+graph[u][v]
+                    queue.append([v,count+1,prices[v]])
 
-        return dist[dst] if dist[dst] < INF else -1
+        return prices[dst] if prices[dst] < INF else -1
 
 s = Solution()
 n = 4
