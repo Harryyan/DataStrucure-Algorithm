@@ -1,8 +1,3 @@
 {
-    "app_name": "CryptoSquare",
-    "new_app_version": "1.4.0",
-    "new_app_code": "1",
-    "android_package": "org.cryptosquare.app",
-    "ios_package": "org.cryptosquare.app",
-    "ios_app_id": "1668949347"
+    "version": "1.3.9"
 }
